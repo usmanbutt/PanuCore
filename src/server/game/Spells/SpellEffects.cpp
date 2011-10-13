@@ -5646,9 +5646,9 @@ void Spell::EffectStuck(SpellEffIndex /*effIndex*/)
     Player* target = (Player*)m_caster;
 
     // Prevent players from trying to unstuck themselves in the Jail box.
-    if (pTarget->GetMapId() == 13 && pTarget->GetSession()->GetSecurity() == SEC_PLAYER)
+    if (target->GetMapId() == 13 && target->GetSession()->GetSecurity() == SEC_PLAYER)
     {
-        sLog->outError("Player %s (guid %u) tried to use unstuck in Jail box.", pTarget->GetName(), pTarget->GetGUIDLow());
+        sLog->outError("Player %s (guid %u) tried to use unstuck in Jail box.", target->GetName(), target->GetGUIDLow());
         return;
     }
 
