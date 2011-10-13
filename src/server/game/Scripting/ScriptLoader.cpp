@@ -593,6 +593,7 @@ void AddSC_outdoorpvp_si();
 void AddSC_outdoorpvp_tf();
 void AddSC_outdoorpvp_zm();
 void AddSC_outdoorpvp_wg();
+void AddSC_outdoorpvp_gh();
 void AddSC_wintergrasp();
 
 // player
@@ -1219,6 +1220,7 @@ void AddOutdoorPvPScripts()
     AddSC_outdoorpvp_tf();
     AddSC_outdoorpvp_zm();
     AddSC_outdoorpvp_wg();
+	AddSC_outdoorpvp_gh();
 #endif
 }
 

@@ -1208,6 +1208,10 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_CONFIG_OUTDOORPVP_WINTERGRASP_ANTIFARM_ATK]  = ConfigMgr::GetIntDefault("OutdoorPvP.Wintergrasp.Antifarm.Atk", 5);
     m_int_configs[CONFIG_CONFIG_OUTDOORPVP_WINTERGRASP_ANTIFARM_DEF]  = ConfigMgr::GetIntDefault("OutdoorPvP.Wintergrasp.Antifarm.Def", 5);
 
+    // Prevent players from accessing GM Island
+    m_bool_configs[CONFIG_GMISLAND_PLAYERS_NOACCESS_ENABLE] = ConfigMgr::GetBoolDefault("GMIsland.PlayersNoAccess.Enable", true);
+    m_bool_configs[CONFIG_GMISLAND_BAN_ENABLE] = ConfigMgr::GetBoolDefault("GMIsland.Ban.Enable", false);
+
     sScriptMgr->OnConfigLoad(reload);
 }
 
