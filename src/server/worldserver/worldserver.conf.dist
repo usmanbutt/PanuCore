@@ -1314,7 +1314,7 @@ MailDeliveryDelay = 3600
 ExternalMail = 1
 
 #
-#ExternalMailInterval
+#    ExternalMailInterval
 #        Description: Mail delivery delay time for item sending from mail_external table, in minutes.
 #        Default: 1 (minute)
 
@@ -2055,14 +2055,23 @@ Rate.Drop.Item.ReferencedAmount = 1
 #    Rate.XP.Kill
 #    Rate.XP.Quest
 #    Rate.XP.Explore
+#    Rate.XP.Kill.Premium
+#    Rate.XP.Quest.Premium
+#    Rate.XP.Explore.Premium
 #        Description: Experience rates.
 #        Default:     1 - (Rate.XP.Kill)
 #                     1 - (Rate.XP.Quest)
 #                     1 - (Rate.XP.Explore)
+#                     1 - (Rate.XP.Kill.Premium)
+#                     1 - (Rate.XP.Quest.Premium)
+#                     1 - (Rate.XP.Explore.Premium)
 
 Rate.XP.Kill    = 1
 Rate.XP.Quest   = 1
 Rate.XP.Explore = 1
+Rate.XP.Kill.Premium    = 1
+Rate.XP.Quest.Premium   = 1
+Rate.XP.Explore.Premium = 1
 
 #
 #    Rate.RepairCost
@@ -2531,7 +2540,7 @@ Network.TcpNodelay = 1
 #
 ###################################################################################################
 
-###############################################################################
+###################################################################################################
 # AUCTION HOUSE BOT SETTINGS
 #
 #    AuctionHouseBot.DEBUG
@@ -2570,7 +2579,7 @@ Network.TcpNodelay = 1
 #        Number of Items to Add/Remove from the AH during mass operations
 #    Default 200
 #
-###############################################################################
+###################################################################################################
 
 AuctionHouseBot.DEBUG = 0
 AuctionHouseBot.DEBUG_FILTERS = 0
@@ -2582,7 +2591,7 @@ AuctionHouseBot.Account = 0
 AuctionHouseBot.GUID = 0
 AuctionHouseBot.ItemsPerCycle = 200
 
-###############################################################################
+###################################################################################################
 # AUCTION HOUSE BOT FILTERS PART 1
 #
 #    AuctionHouseBot.VendorItems
@@ -2665,7 +2674,7 @@ AuctionHouseBot.ItemsPerCycle = 200
 #        (May need further refinement)
 #    Default 0 (False)
 #
-###############################################################################
+###################################################################################################
 
 AuctionHouseBot.VendorItems = 0
 AuctionHouseBot.VendorTradeGoods = 0
@@ -2689,7 +2698,7 @@ AuctionHouseBot.DisableKeys = 0
 AuctionHouseBot.DisableDuration = 0
 AuctionHouseBot.DisableBOP_Or_Quest_NoReqLevel = 0
 
-###############################################################################
+###################################################################################################
 # AUCTION HOUSE BOT FILTERS PART 2
 #
 #     These Filters are boolean (0 or 1) and will disable items that are
@@ -2697,7 +2706,7 @@ AuctionHouseBot.DisableBOP_Or_Quest_NoReqLevel = 0
 #     (UnusedClass is Class 10, which was skipped for some reason)
 #     Default 0 (allowed)
 #
-###############################################################################
+###################################################################################################
 
 AuctionHouseBot.DisableWarriorItems = 0
 AuctionHouseBot.DisablePaladinItems = 0
@@ -2711,7 +2720,7 @@ AuctionHouseBot.DisableWarlockItems = 0
 AuctionHouseBot.DisableUnusedClassItems = 0
 AuctionHouseBot.DisableDruidItems = 0
 
-###############################################################################
+###################################################################################################
 # AUCTION HOUSE BOT FILTERS PART 3
 #
 #    AuctionHouseBot.DisableItemsBelowLevel
@@ -2778,7 +2787,7 @@ AuctionHouseBot.DisableDruidItems = 0
 #        Prevent Seller from listing Trade Goods above this Required Skill Rank
 #    Default 0 (Off)
 #
-###############################################################################
+###################################################################################################
 
 AuctionHouseBot.DisableItemsBelowLevel = 0
 AuctionHouseBot.DisableItemsAboveLevel = 0
@@ -2996,7 +3005,7 @@ Guild.AllowMultipleGuildMaster = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ShowKickInWorld = 0
+ShowKickInWorld = 1
 
 #
 #     RecordUpdateTimeDiffInterval
@@ -3100,6 +3109,7 @@ Anticheat.DetectionsEnabled = 31
 
 Anticheat.MaxReportsForDailyReport = 70
 
+#
 #     Anticheat.Ban
 #        Description: Make anticheat active (Ban cheaters character for 1 hour.)
 #        Default:     1 - (Enabled)
@@ -3107,7 +3117,6 @@ Anticheat.MaxReportsForDailyReport = 70
 
 Anticheat.Ban = 1
 
-#
 #
 #      GMIsland.PlayersNoAccess.Enable
 #        Prevent access for players to gm island
@@ -3131,6 +3140,7 @@ GMIsland.Ban.Enable = 0
 #                0 = Disable
 
 OutdoorPvP.Wintergrasp.Enabled = 1
+
 #
 #   OutdoorPvP.Wintergrasp.SaveState.Period
 #      Interval (in milliseconds) of Save Wintergrasp State Data to restore it after crash/shutdown/restart
@@ -3139,24 +3149,28 @@ OutdoorPvP.Wintergrasp.Enabled = 1
 
 OutdoorPvP.Wintergrasp.SaveState.Period = 60000
 
+#
 #   OutdoorPvP.Wintergrasp.StartTime
 #       The start time of the first battle after server starts (in minutes)
 #       Default: 30
 
 OutdoorPvP.Wintergrasp.StartTime = 30
 
+#
 #   OutdoorPvP.Wintergrasp.BattleTime
 #       Time limit of a battle (in minutes)
 #       Default: 30
 
 OutdoorPvP.Wintergrasp.BattleTime = 30
 
+#
 #   OutdoorPvP.Wintergrasp.Interval
 #       Interval between battles (in minutes)
 #       Default: 150
 
 OutdoorPvP.Wintergrasp.Interval = 150
 
+#
 #   OutdoorPvP.Wintergrasp.CustomHonorRewards
 #       Defines whether custom honor rewards should be given to player
 #        for partaking in the Wintergrasp Battle.
@@ -3165,6 +3179,7 @@ OutdoorPvP.Wintergrasp.Interval = 150
 
 OutdoorPvP.Wintergrasp.CustomHonorRewards = 0
 
+#
 #   OutdoorPvP.Wintergrasp.CustomHonorBattleWin
 #       Defines the amount of honor points that should be given to the
 #        team winning the Wintergrasp Battle.
@@ -3173,6 +3188,7 @@ OutdoorPvP.Wintergrasp.CustomHonorRewards = 0
 
 OutdoorPvP.Wintergrasp.CustomHonorBattleWin = 3000
 
+#
 #   OutdoorPvP.Wintergrasp.CustomHonorBattleLose
 #       Defines the amount of honor points that should be given to the
 #        team losing the Wintergrasp Battle.
@@ -3189,6 +3205,7 @@ OutdoorPvP.Wintergrasp.CustomHonorBattleLose = 1250
 
 OutdoorPvP.Wintergrasp.CustomHonorDamageTower = 750
 
+#
 #   OutdoorPvP.Wintergrasp.CustomHonorDestroyedTower
 #       Defines the amount of honor points that should be given to the
 #        team for destroying a tower.
@@ -3197,6 +3214,7 @@ OutdoorPvP.Wintergrasp.CustomHonorDamageTower = 750
 
 OutdoorPvP.Wintergrasp.CustomHonorDestroyedTower = 750
 
+#
 #   OutdoorPvP.Wintergrasp.CustomHonorDamagedBuilding
 #       Defines the amount of honor points that should be given to the
 #        team for damaged buildings after the battle.
@@ -3205,6 +3223,7 @@ OutdoorPvP.Wintergrasp.CustomHonorDestroyedTower = 750
 
 OutdoorPvP.Wintergrasp.CustomHonorDamagedBuilding = 750
 
+#
 #   OutdoorPvP.Wintergrasp.CustomHonorIntactBuilding
 #      Defines the amount of honor points that should be given to the
 #        team for intact buildings after the battle.
@@ -3213,6 +3232,7 @@ OutdoorPvP.Wintergrasp.CustomHonorDamagedBuilding = 750
 
 OutdoorPvP.Wintergrasp.CustomHonorIntactBuilding = 1500
 
+#
 #   OutdoorPvP.Wintergrasp.Antifarm.Enable
 #		Enable or Disable antifarm system
 #       Prevents start WG battle event if there are too low players (see options bellow)
@@ -3221,12 +3241,14 @@ OutdoorPvP.Wintergrasp.CustomHonorIntactBuilding = 1500
 
 OutdoorPvP.Wintergrasp.Antifarm.Enable = 0
 
+#
 #   OutdoorPvP.Wintergrasp.Antifarm.Atk
 #		Min count of attackers for antifarm
 #              (Default: 5)
 
 OutdoorPvP.Wintergrasp.Antifarm.Atk = 5
 
+#
 #   OutdoorPvP.Wintergrasp.Antifarm.Def
 #		Min count of defenders for antifarm
 #              (Default: 5)
