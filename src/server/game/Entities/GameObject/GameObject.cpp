@@ -607,10 +607,12 @@ void GameObject::Delete()
 {
     SetLootState(GO_NOT_READY);
     if (GetOwnerGUID())
+    {
         if (Unit* owner = GetOwner())
             owner->RemoveGameObject(this, false);
         else    //! Owner not in world anymore
             SetOwnerGUID(0);
+    }
 
     ASSERT (!GetOwnerGUID());
     SendObjectDeSpawnAnim(GetGUID());
@@ -934,7 +936,7 @@ void GameObject::TriggeringLinkedGameObject(uint32 trapEntry, Unit* target)
     GameObject* trapGO = NULL;
     {
         // using original GO distance
-        CellPair p(Trinity::ComputeCellPair(GetPositionX(), GetPositionY()));
+        CellCoord p(Trinity::ComputeCellCoord(GetPositionX(), GetPositionY()));
         Cell cell(p);
         cell.data.Part.reserved = ALL_DISTRICT;
 
@@ -954,7 +956,7 @@ GameObject* GameObject::LookupFishingHoleAround(float range)
 {
     GameObject* ok = NULL;
 
-    CellPair p(Trinity::ComputeCellPair(GetPositionX(), GetPositionY()));
+    CellCoord p(Trinity::ComputeCellCoord(GetPositionX(), GetPositionY()));
     Cell cell(p);
     cell.data.Part.reserved = ALL_DISTRICT;
     Trinity::NearestGameObjectFishingHole u_check(*this, range);
