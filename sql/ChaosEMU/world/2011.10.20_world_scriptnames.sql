@@ -79,3 +79,4 @@ VALUES
 (66588,'spell_flaming_spear_targeting');
 UPDATE `creature_template` SET `ScriptName`='npc_quest_12851' WHERE `entry`=29358;
 UPDATE `creature_template` SET `ScriptName`='npc_quest_12851' WHERE `entry`=29351;
+UPDATE creature_template SET ScriptName='npc_q11796_trigger' WHERE entry IN (25845,25846,25847);
