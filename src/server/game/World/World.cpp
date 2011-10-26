@@ -77,6 +77,8 @@
 #include "SmartAI.h"
 #include "Channel.h"
 #include "OutdoorPvPWG.h"
+#include "MemoryManagement.h"
+#include "PathFactory.h"
 
 volatile bool World::m_stopEvent = false;
 uint8 World::m_ExitCode = SHUTDOWN_EXIT_CODE;
@@ -134,6 +136,7 @@ World::~World()
         delete command;
 
     VMAP::VMapFactory::clear();
+    MMAP::MMapFactory::clear();
 
     //TODO free addSessQueue
 }
@@ -1131,16 +1134,24 @@ void World::LoadConfigSettings(bool reload)
     bool enableLOS = ConfigMgr::GetBoolDefault("vmap.enableLOS", true);
     bool enableHeight = ConfigMgr::GetBoolDefault("vmap.enableHeight", true);
     bool enablePetLOS = ConfigMgr::GetBoolDefault("vmap.petLOS", true);
+    bool enablePathfinding = ConfigMgr::GetBoolDefault("pathfinding.activated", true);
     std::string ignoreSpellIds = ConfigMgr::GetStringDefault("vmap.ignoreSpellIds", "");
+    std::string ignoreMapIds = ConfigMgr::GetStringDefault("pathfinding.ignoreMapsIds", "");
 
     if (!enableHeight)
         sLog->outError("VMap height checking disabled! Creatures movements and other various things WILL be broken! Expect no support.");
 
+    if (!enablePathfinding)
+        sLog->outError("Pathfinding System ist disabled, this can produce false issues");
+
     VMAP::VMapFactory::createOrGetVMapManager()->setEnableLineOfSightCalc(enableLOS);
     VMAP::VMapFactory::createOrGetVMapManager()->setEnableHeightCalc(enableHeight);
+    MMAP::MMapFactory::preventPathfindingOnMaps(ignoreMapIds.c_str());
     VMAP::VMapFactory::preventSpellsFromBeingTestedForLoS(ignoreSpellIds.c_str());
-    sLog->outString("WORLD: VMap support included. LineOfSight:%i, getHeight:%i, indoorCheck:%i PetLOS:%i", enableLOS, enableHeight, enableIndoor, enablePetLOS);
+    sLog->outString("WORLD: VMap support included. LineOfSight:%i, getHeight:%i, indoorCheck:%i, PetLOS:%i, Pathfinding:%i", enableLOS, enableHeight, enableIndoor, enablePetLOS, enablePathfinding);
     sLog->outString("WORLD: VMap data directory is: %svmaps", m_dataPath.c_str());
+    sLog->outString("WORLD: Pathfinding %sabled", enablePathfinding ? "en" : "dis");
+ 
 
     m_int_configs[CONFIG_MAX_WHO] = ConfigMgr::GetIntDefault("MaxWhoListReturns", 49);
     m_bool_configs[CONFIG_PET_LOS] = ConfigMgr::GetBoolDefault("vmap.petLOS", true);
@@ -1236,6 +1247,9 @@ void World::SetInitialWorldSettings()
 
     ///- Initialize the random number generator
     srand((unsigned int)time(NULL));
+
+    ///- Initialize detour memory management
+    dtAllocSetCustom(dtCustomAlloc, dtCustomFree);
 
     ///- Initialize config settings
     LoadConfigSettings();

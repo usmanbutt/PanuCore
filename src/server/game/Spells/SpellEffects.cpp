@@ -6212,7 +6212,7 @@ void Spell::EffectCharge(SpellEffIndex /*effIndex*/)
 
         float x, y, z;
         unitTarget->GetContactPoint(m_caster, x, y, z);
-        m_caster->GetMotionMaster()->MoveCharge(x, y, z);
+        m_caster->MonsterMoveByPath(x, y, z, 25, false);
     }
 
     if (effectHandleMode == SPELL_EFFECT_HANDLE_HIT_TARGET)
@@ -6238,7 +6238,7 @@ void Spell::EffectChargeDest(SpellEffIndex /*effIndex*/)
 
         float x, y, z;
         m_targets.GetDst()->GetPosition(x, y, z);
-        m_caster->GetMotionMaster()->MoveCharge(x, y, z);
+        m_caster->MonsterMoveByPath(x, y, z, 25, false);
     }
 }
 

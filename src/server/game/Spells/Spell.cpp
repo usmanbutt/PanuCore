@@ -4729,11 +4729,11 @@ SpellCastResult Spell::CheckCast(bool strict)
         if (target != m_caster)
         {
             // Must be behind the target
-            if ((m_spellInfo->AttributesCu & SPELL_ATTR0_CU_REQ_CASTER_BEHIND_TARGET) && target->HasInArc(static_cast<float>(M_PI), m_caster))
+            if ((m_spellInfo->AttributesCu & SPELL_ATTR0_CU_REQ_CASTER_BEHIND_TARGET) && target->HasInArc(static_cast<float>(M_PI), m_caster->GetPositionX(), m_caster->GetPositionY()))
                 return SPELL_FAILED_NOT_BEHIND;
 
             // Target must be facing you
-            if ((m_spellInfo->AttributesCu & SPELL_ATTR0_CU_REQ_TARGET_FACING_CASTER) && !target->HasInArc(static_cast<float>(M_PI), m_caster))
+            if ((m_spellInfo->AttributesCu & SPELL_ATTR0_CU_REQ_TARGET_FACING_CASTER) && !target->HasInArc(static_cast<float>(M_PI), m_caster->GetPositionX(), m_caster->GetPositionY()))
                 return SPELL_FAILED_NOT_INFRONT;
 
             if (!(m_spellInfo->AttributesEx2 & SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS) && VMAP::VMapFactory::checkSpellForLoS(m_spellInfo->Id) && !m_caster->IsWithinLOSInMap(target))
@@ -4854,7 +4854,7 @@ SpellCastResult Spell::CheckCast(bool strict)
                 {
                     // spell different for friends and enemies
                     // hurt version required facing
-                    if (m_targets.GetUnitTarget() && !m_caster->IsFriendlyTo(m_targets.GetUnitTarget()) && !m_caster->HasInArc(static_cast<float>(M_PI), m_targets.GetUnitTarget()))
+                    if (m_targets.GetUnitTarget() && !m_caster->IsFriendlyTo(m_targets.GetUnitTarget()) && !m_caster->HasInArc(static_cast<float>(M_PI), m_targets.GetUnitTarget()->GetPositionX(), m_targets.GetUnitTarget()->GetPositionY()))
                         return SPELL_FAILED_UNIT_NOT_INFRONT;
                 }
                 else if (m_spellInfo->SpellFamilyName == SPELLFAMILY_DEATHKNIGHT && m_spellInfo->SpellFamilyFlags[0] == 0x2000) // Death Coil (DeathKnight)
@@ -5686,7 +5686,7 @@ SpellCastResult Spell::CheckRange(bool strict)
             return !(_triggeredCastFlags & TRIGGERED_DONT_REPORT_CAST_ERROR) ? SPELL_FAILED_TOO_CLOSE : SPELL_FAILED_DONT_REPORT;
 
         if (m_caster->GetTypeId() == TYPEID_PLAYER &&
-            (m_spellInfo->FacingCasterFlags & SPELL_FACING_FLAG_INFRONT) && !m_caster->HasInArc(static_cast<float>(M_PI), target))
+            (m_spellInfo->FacingCasterFlags & SPELL_FACING_FLAG_INFRONT) && !m_caster->HasInArc(static_cast<float>(M_PI), target->GetPositionX(), target->GetPositionY()))
             return !(_triggeredCastFlags & TRIGGERED_DONT_REPORT_CAST_ERROR) ? SPELL_FAILED_UNIT_NOT_INFRONT : SPELL_FAILED_DONT_REPORT;
     }
 

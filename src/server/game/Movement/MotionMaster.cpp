@@ -276,20 +276,22 @@ void MotionMaster::MoveFollow(Unit* target, float dist, float angle, MovementSlo
 
 void MotionMaster::MovePoint(uint32 id, float x, float y, float z)
 {
+    bool usePathfinding = true;
+
     if (i_owner->GetTypeId() == TYPEID_PLAYER)
     {
         sLog->outStaticDebug("Player (GUID: %u) targeted point (Id: %u X: %f Y: %f Z: %f)", i_owner->GetGUIDLow(), id, x, y, z);
-        Mutate(new PointMovementGenerator<Player>(id, x, y, z), MOTION_SLOT_ACTIVE);
+        Mutate(new PointMovementGenerator<Player>(id, x, y, z, usePathfinding), MOTION_SLOT_ACTIVE);
     }
     else
     {
         sLog->outStaticDebug("Creature (Entry: %u GUID: %u) targeted point (ID: %u X: %f Y: %f Z: %f)",
             i_owner->GetEntry(), i_owner->GetGUIDLow(), id, x, y, z);
-        Mutate(new PointMovementGenerator<Creature>(id, x, y, z), MOTION_SLOT_ACTIVE);
+        Mutate(new PointMovementGenerator<Player>(id, x, y, z, usePathfinding), MOTION_SLOT_ACTIVE);
     }
 }
 
-void MotionMaster::MoveLand(uint32 id, Position const& pos, float speed)
+void MotionMaster::MoveLand(uint32 id, Position const& pos, float speed, bool usePathfinding)
 {
     if (i_owner->GetTypeId() != TYPEID_UNIT)
         return;
@@ -304,7 +306,7 @@ void MotionMaster::MoveLand(uint32 id, Position const& pos, float speed)
     float x, y, z;
     pos.GetPosition(x, y, z);
     sLog->outStaticDebug("Creature (Entry: %u) landing point (ID: %u X: %f Y: %f Z: %f)", i_owner->GetEntry(), id, x, y, z);
-    Mutate(new PointMovementGenerator<Creature>(id, x, y, z), MOTION_SLOT_ACTIVE);
+    Mutate(new PointMovementGenerator<Creature>(id, x, y, z,usePathfinding), MOTION_SLOT_ACTIVE);
 
     MonsterMoveData data;
     data.DestLocation.Relocate(pos);
@@ -315,7 +317,7 @@ void MotionMaster::MoveLand(uint32 id, Position const& pos, float speed)
     i_owner->SendMonsterMove(data);
 }
 
-void MotionMaster::MoveTakeoff(uint32 id, Position const& pos, float speed)
+void MotionMaster::MoveTakeoff(uint32 id, Position const& pos, float speed, bool usePathfinding)
 {
     if (i_owner->GetTypeId() != TYPEID_UNIT)
         return;
@@ -330,7 +332,7 @@ void MotionMaster::MoveTakeoff(uint32 id, Position const& pos, float speed)
     float x, y, z;
     pos.GetPosition(x, y, z);
     sLog->outStaticDebug("Creature (Entry: %u) landing point (ID: %u X: %f Y: %f Z: %f)", i_owner->GetEntry(), id, x, y, z);
-    Mutate(new PointMovementGenerator<Creature>(id, x, y, z), MOTION_SLOT_ACTIVE);
+    Mutate(new PointMovementGenerator<Creature>(id, x, y, z,usePathfinding), MOTION_SLOT_ACTIVE);
 
     MonsterMoveData data;
     data.DestLocation.Relocate(pos);
@@ -369,6 +371,7 @@ void MotionMaster::MoveJump(float x, float y, float z, float speedXY, float spee
 {
     uint32 moveFlag = SPLINEFLAG_TRAJECTORY | SPLINEFLAG_WALKING;
     uint32 time = uint32(speedZ * 100);
+    bool usePathfinding = true;
 
     // Instantly interrupt non melee spells being casted
     if (i_owner->IsNonMeleeSpellCasted(true))
@@ -379,19 +382,19 @@ void MotionMaster::MoveJump(float x, float y, float z, float speedXY, float spee
     if (i_owner->GetTypeId() == TYPEID_PLAYER)
     {
         sLog->outStaticDebug("Player (GUID: %u) jump to point (X: %f Y: %f Z: %f)", i_owner->GetGUIDLow(), x, y, z);
-        Mutate(new PointMovementGenerator<Player>(0, x, y, z), MOTION_SLOT_CONTROLLED);
+        Mutate(new PointMovementGenerator<Player>(0, x, y, z, usePathfinding), MOTION_SLOT_CONTROLLED);
     }
     else
     {
         sLog->outStaticDebug("Creature (Entry: %u GUID: %u) jump to point (X: %f Y: %f Z: %f)",
             i_owner->GetEntry(), i_owner->GetGUIDLow(), x, y, z);
-        Mutate(new PointMovementGenerator<Creature>(0, x, y, z), MOTION_SLOT_CONTROLLED);
+        Mutate(new PointMovementGenerator<Creature>(0, x, y, z, usePathfinding), MOTION_SLOT_CONTROLLED);
     }
 
     i_owner->SendMonsterMove(x, y, z, moveFlag, time, speedZ);
 }
 
-void MotionMaster::MoveCharge(float x, float y, float z, float speed, uint32 id)
+void MotionMaster::MoveCharge(float x, float y, float z, float speed, uint32 id, bool usePathfinding)
 {
     if (Impl[MOTION_SLOT_CONTROLLED] && Impl[MOTION_SLOT_CONTROLLED]->GetMovementGeneratorType() != DISTRACT_MOTION_TYPE)
         return;
@@ -401,13 +404,13 @@ void MotionMaster::MoveCharge(float x, float y, float z, float speed, uint32 id)
     if (i_owner->GetTypeId() == TYPEID_PLAYER)
     {
         sLog->outStaticDebug("Player (GUID: %u) charge point (X: %f Y: %f Z: %f)", i_owner->GetGUIDLow(), x, y, z);
-        Mutate(new PointMovementGenerator<Player>(id, x, y, z), MOTION_SLOT_CONTROLLED);
+        Mutate(new PointMovementGenerator<Player>(id, x, y, z, usePathfinding), MOTION_SLOT_CONTROLLED);
     }
     else
     {
         sLog->outStaticDebug("Creature (Entry: %u GUID: %u) charge point (X: %f Y: %f Z: %f)",
             i_owner->GetEntry(), i_owner->GetGUIDLow(), x, y, z);
-        Mutate(new PointMovementGenerator<Creature>(id, x, y, z), MOTION_SLOT_CONTROLLED);
+        Mutate(new PointMovementGenerator<Player>(id, x, y, z, usePathfinding), MOTION_SLOT_CONTROLLED);
     }
 }
 
