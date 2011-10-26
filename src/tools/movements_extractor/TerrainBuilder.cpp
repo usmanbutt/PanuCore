@@ -81,7 +81,7 @@ namespace Pathfinding
        map_fileheader fheader;
        fread(&fheader, sizeof(map_fileheader), 1, mapFile);
 
-       if (fheader.versionMagic != uint32(MMAP_VERSION_MAGIC))
+       if (fheader.versionMagic != uint32(MMAP_VERSION))
        {
            fclose(mapFile);
            printf("%s is the wrong version, please extract new .map files\n", mapFileName);
