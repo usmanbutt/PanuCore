@@ -15,7 +15,6 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src/server/shared/Debugging
   ${CMAKE_SOURCE_DIR}/src/server/collision/Maps
   ${CMAKE_SOURCE_DIR}/src/server/collision/Models
-  ${CMAKE_SOURCE_DIR}/src/server/collision/Pathfinding
   ${ACE_INCLUDE_DIR}
   ${ZLIB_INCLUDE_DIR}
 )

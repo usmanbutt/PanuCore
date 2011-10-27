@@ -243,7 +243,7 @@ class boss_high_astromancer_solarian : public CreatureScript
                         else
                         {
                             Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0);
-                            if (!me->HasInArc(2.5f, target->GetPositionX(), target->GetPositionY()))
+                            if (!me->HasInArc(2.5f, target))
                                 target = me->getVictim();
                             if (target)
                                 DoCast(target, SPELL_ARCANE_MISSILES);

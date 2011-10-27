@@ -33,7 +33,6 @@
 
 #include <bitset>
 #include <list>
-#include <set>
 
 class Unit;
 class WorldPacket;
@@ -75,8 +74,6 @@ struct map_fileheader
     uint32 heightMapSize;
     uint32 liquidMapOffset;
     uint32 liquidMapSize;
-    uint32 holesOffset;
-    uint32 holesSize;
 };
 
 #define MAP_AREA_NO_AREA      0x0001
@@ -336,7 +333,6 @@ class Map : public GridRefManager<NGridType>
         float GetWaterLevel(float x, float y) const;
         bool IsInWater(float x, float y, float z, LiquidData* data = 0) const;
         bool IsUnderWater(float x, float y, float z) const;
-        Position MoveToNextPositionOnPathLocation(const float startx, const float starty, const float startz, const float endx, const float endy, const float endz);
 
         static uint32 GetAreaIdByAreaFlag(uint16 areaflag, uint32 map_id);
         static uint32 GetZoneIdByAreaFlag(uint16 areaflag, uint32 map_id);

@@ -20,6 +20,7 @@
 #define _UTIL_H
 
 #include "Common.h"
+
 #include <string>
 #include <vector>
 
@@ -59,9 +60,6 @@ inline uint32 secsToTimeBitFields(time_t secs)
 /* Return a random number in the range min..max (inclusive). For reliable results, the difference
 * between max and min should be less than RAND32_MAX. */
  uint32 urand(uint32 min, uint32 max);
-
- /* Return a random number in the range min..max (inclusive). */
- float frand(float min, float max);
 
 /* Return a random number in the range 0 .. RAND32_MAX. */
  int32 rand32();

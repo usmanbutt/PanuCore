@@ -22,7 +22,6 @@
 #include "MovementGenerator.h"
 #include "DestinationHolder.h"
 #include "Traveller.h"
-#include "PathInfo.h"
 
 class Creature;
 
@@ -42,7 +41,7 @@ class HomeMovementGenerator<Creature>
         void Finalize(Creature &);
         void Reset(Creature &);
         bool Update(Creature &, const uint32);
-        void modifyTravelTime(uint32 travel_time) { i_travel_time = travel_time; }
+        void modifyTravelTime(uint32 travel_time) { i_travel_timer = travel_time; }
         MovementGeneratorType GetMovementGeneratorType() { return HOME_MOTION_TYPE; }
 
         bool GetDestination(float& x, float& y, float& z) const { i_destinationHolder.GetDestination(x, y, z); return true; }
@@ -52,7 +51,7 @@ class HomeMovementGenerator<Creature>
         DestinationHolder< Traveller<Creature> > i_destinationHolder;
 
         float ori;
-        uint32 i_travel_time;
+        uint32 i_travel_timer;
 };
 #endif
 

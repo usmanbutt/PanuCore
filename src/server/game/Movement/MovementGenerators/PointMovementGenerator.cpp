@@ -22,7 +22,6 @@
 #include "CreatureAI.h"
 #include "DestinationHolderImp.h"
 #include "World.h"
-#include "PathInfo.h"
 
 //----- Point Movement Generator
 template<class T>
@@ -32,17 +31,7 @@ void PointMovementGenerator<T>::Initialize(T &unit)
     Traveller<T> traveller(unit);
     // OLD: knockback effect has UNIT_STAT_JUMPING set, so if here we disable sentmonstermove there will be creature position sync problem between client and server
     // NEW: reactivated this check - UNIT_STAT_JUMPING is only used in MoveJump, which sends its own packet
-    i_destinationHolder.SetDestination(traveller, i_x, i_y, i_z, !m_usePathfinding);
-
-    if (m_usePathfinding)
-    {
-        PathInfo path(&unit, i_x, i_y, i_z);
-        PointPath pointPath = path.getFullPath();
-
-        float speed = traveller.Speed() * 0.001f; // in ms
-        uint32 traveltime = uint32(pointPath.GetTotalLength() / speed);
-        unit.SendMonsterMoveByPath(pointPath, 1, pointPath.size(), traveltime);
-    }
+    i_destinationHolder.SetDestination(traveller, i_x, i_y, i_z, /*true*/ !unit.HasUnitState(UNIT_STAT_JUMPING));
 }
 
 template<class T>
