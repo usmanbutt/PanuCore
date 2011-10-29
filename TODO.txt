@@ -20,4 +20,8 @@ Todolist for ChaosCore
 
 ---------------------------------[SQL]
 
+-(hallowsend) fix the horseman pumpkin spell display (this can be script too)
+
+-(or maybe scripts): add pumpkin respawn time in hallowsend event
+
 -move the SQL files to old folder if a new DB in the DB repo is released
