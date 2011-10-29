@@ -24,6 +24,7 @@ enum Entries
     NPC_HEAD                    = 23775,
     NPC_PULSING_PUMPKIN         = 23694,
     NPC_PUMPKIN_FIEND           = 23545,
+    NPC_SIR_THOMAS              = 23904,
     GO_PUMPKIN_SHRINE           = 186267
 };
 
@@ -38,11 +39,12 @@ enum Spells
     SPELL_CLEAVE                = 42587,
     SPELL_WHIRLWIND             = 43116,
     SPELL_CONFLAGRATION         = 42380,
+    SPELL_BURNING               = 42971,
 
     SPELL_FLYING_HEAD           = 42399, // flying head visual
     SPELL_HEAD                  = 42413, // horseman head visual
     SPELL_HEAD_LANDS            = 42400,
-    //SPELL_CREATE_PUMPKIN_TREATS = 42754,
+  //SPELL_CREATE_PUMPKIN_TREATS = 42754,
     SPELL_RHYME_BIG             = 42909,
 };
 
@@ -82,17 +84,6 @@ class boss_headless_horseman : public CreatureScript
             {
             }
 
-            SummonList _summons;
-            uint8 phase;
-            uint8 wpCount;
-            uint8 introCount;
-            uint32 introTimer;
-            uint32 laughTimer;
-            uint32 cleaveTimer;
-            uint32 summonTimer;
-            uint32 conflagTimer;
-            bool wpReached;
-
             void Reset()
             {
                 _summons.DespawnAll();
@@ -101,20 +92,23 @@ class boss_headless_horseman : public CreatureScript
                 me->SetReactState(REACT_PASSIVE);
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_DISABLE_MOVE | UNIT_FLAG_NOT_SELECTABLE);
 
-                me->AddUnitMovementFlag(MOVEMENTFLAG_ONTRANSPORT | MOVEMENTFLAG_LEVITATING);
+
+                me->SetUnitMovementFlags(MOVEMENTFLAG_NONE);
+                me->AddUnitMovementFlag(MOVEMENTFLAG_LEVITATING);
                 me->SetSpeed(MOVE_RUN, 2.0f, true);
-                me->SetCorpseDelay(60);
+                me->SetCorpseDelay(75);
 
-                wpCount = 0;
-                introCount = 0;
-                wpReached = false;
-                phase = 0;
+                _wpCount = 0;
+                _introCount = 0;
+                _wpReached = false;
+                _phase = 0;
 
-                introTimer = 1*IN_MILLISECONDS;
-                laughTimer = 5*IN_MILLISECONDS;
-                cleaveTimer = 3*IN_MILLISECONDS;
-                summonTimer = 1*IN_MILLISECONDS;
-                conflagTimer = 4*IN_MILLISECONDS;
+
+                _introTimer = 1*IN_MILLISECONDS;
+                _laughTimer = 5*IN_MILLISECONDS;
+                _cleaveTimer = 3*IN_MILLISECONDS;
+                _summonTimer = 1*IN_MILLISECONDS;
+                _conflagTimer = 4*IN_MILLISECONDS;
 
                 me->SummonGameObject(GO_PUMPKIN_SHRINE, 1776.27f, 1348.74f, 20.4116f, 0, 0, 0, 0.00518764f, -0.999987f, 0);
                 DoCast(me, SPELL_HEAD, true);
@@ -122,19 +116,19 @@ class boss_headless_horseman : public CreatureScript
 
             void MovementInform(uint32 type, uint32 id)
             {
-                if (type != POINT_MOTION_TYPE || id != wpCount)
+                if (type != POINT_MOTION_TYPE || id != _wpCount)
                     return;
 
                 if (id < 7)
                 {
-                    ++wpCount;
-                    wpReached = true;
+                    ++_wpCount;
+                    _wpReached = true;
                 }
                 else // start fighting
                 {
                     me->SetReactState(REACT_AGGRESSIVE);
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_DISABLE_MOVE | UNIT_FLAG_NOT_SELECTABLE);
-                    me->RemoveUnitMovementFlag(MOVEMENTFLAG_ONTRANSPORT | MOVEMENTFLAG_LEVITATING);
+                    me->RemoveUnitMovementFlag(MOVEMENTFLAG_LEVITATING);
                     DoZoneInCombat(me, 100.0f);
 
                     if (me->getVictim())
@@ -181,13 +175,22 @@ class boss_headless_horseman : public CreatureScript
                                 if (player->GetDistance(me) < 120.0f)
                                     sLFGMgr->RewardDungeonDoneFor(285, player);
                 }
+
+                DoCast(me, SPELL_BURNING, true);
+                me->SummonCreature(NPC_SIR_THOMAS, 1762.863f, 1345.217f, 17.9f, 0.0f, TEMPSUMMON_TIMED_DESPAWN, 60*IN_MILLISECONDS);
             }
 
             void DamageTaken(Unit* /*attacker*/, uint32 &damage)
             {
-                if (phase > 3)
+                if (_phase > 3)
                 {
                     me->RemoveAllAuras();
+                    return;
+                }
+
+                if (me->HasAura(SPELL_BODY_REGEN))
+                {
+                    damage = 0;
                     return;
                 }
 
@@ -204,9 +207,9 @@ class boss_headless_horseman : public CreatureScript
 
                     if (Creature* head = me->SummonCreature(NPC_HEAD, randomPos))
                     {
-                        head->AI()->SetData(0, phase);
+                        head->AI()->SetData(0, _phase);
 
-                        switch (phase)
+                        switch (_phase)
                         {
                             case 2: head->SetHealth(uint32(head->GetMaxHealth() * 2 / 3)); break;
                             case 3: head->SetHealth(uint32(head->GetMaxHealth() / 3)); break;
@@ -226,8 +229,8 @@ class boss_headless_horseman : public CreatureScript
                         DoCast(me, SPELL_HEAL_BODY, true);
                         DoCast(me, SPELL_HEAD, true);
 
-                        ++phase;
-                        if (phase > 3)
+                        ++_phase;
+                        if (_phase > 3)
                             me->DealDamage(me, me->GetHealth());
                         else
                             DoScriptText(SAY_REJOINED, me);
@@ -241,37 +244,37 @@ class boss_headless_horseman : public CreatureScript
                 if (!UpdateVictim())
                     return;
 
-                if (phase == 0)
+                if (_phase == 0)
                 {
-                    if (introTimer <= diff)
+                    if (_introTimer <= diff)
                     {
                         if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100.0f, true))
                         {
-                            if (introCount < 3)
-                                target->ToPlayer()->Say(Text[introCount], 0);
+                            if (_introCount < 3)
+                                target->ToPlayer()->Say(Text[_introCount], 0);
                             else
                             {
                                 DoCast(me, SPELL_RHYME_BIG, true);
-                                target->ToPlayer()->Say(Text[introCount], 0);
+                                target->ToPlayer()->Say(Text[_introCount], 0);
                                 target->HandleEmoteCommand(ANIM_EMOTE_SHOUT);
-                                phase = 1;
-                                wpReached = true;
+                                _phase = 1;
+                                _wpReached = true;
                                 me->SetVisible(true);
                             }
                         }
-                        introTimer = 3*IN_MILLISECONDS;
-                        ++introCount;
+                        _introTimer = 3*IN_MILLISECONDS;
+                        ++_introCount;
                     }
                     else
-                        introTimer -= diff;
+                        _introTimer -= diff;
 
                     return;
                 }
 
-                if (wpReached)
+                if (_wpReached)
                 {
-                    wpReached = false;
-                    me->GetMotionMaster()->MovePoint(wpCount, flightPos[wpCount]);
+                    _wpReached = false;
+                    me->GetMotionMaster()->MovePoint(_wpCount, flightPos[_wpCount]);
                 }
 
                 if (me->HasAura(SPELL_BODY_REGEN))
@@ -286,7 +289,7 @@ class boss_headless_horseman : public CreatureScript
                             head->SetFullHealth();
                             head->RemoveAllAuras();
                             head->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
-                            head->DespawnOrUnsummon(3000);
+                            head->DespawnOrUnsummon(3*IN_MILLISECONDS);
                             head->CastSpell(me, SPELL_FLYING_HEAD, true);
                         }
                     }
@@ -296,51 +299,63 @@ class boss_headless_horseman : public CreatureScript
                     return;
                 }
 
-                if (laughTimer <= diff)
+                if (_laughTimer <= diff)
                 {
                     me->MonsterTextEmote(EMOTE_LAUGH, 0);
                     DoPlaySoundToSet(me, randomLaugh[rand()%3]);
-                    laughTimer = urand(11, 22) *IN_MILLISECONDS;
+                    _laughTimer = urand(11, 22) *IN_MILLISECONDS;
                 }
                 else
-                    laughTimer -= diff;
+                    _laughTimer -= diff;
 
                 if (me->HasReactState(REACT_PASSIVE))
                     return;
 
-                if (cleaveTimer <= diff)
+                if (_cleaveTimer <= diff)
                 {
                     DoCastVictim(SPELL_CLEAVE);
-                    cleaveTimer = urand(2, 6) *IN_MILLISECONDS;
+                    _cleaveTimer = urand(2, 6) *IN_MILLISECONDS;
                 }
                 else
-                    cleaveTimer -= diff;
+                    _cleaveTimer -= diff;
 
-                switch (phase)
+                switch (_phase)
                 {
                     case 2:
-                        if (conflagTimer <= diff)
+                        if (_conflagTimer <= diff)
                         {
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 30.0f, true))
                                 DoCast(target, SPELL_CONFLAGRATION);
-                            conflagTimer = urand(8, 12) *IN_MILLISECONDS;
+                            _conflagTimer = urand(8, 12) *IN_MILLISECONDS;
                         }
                         else
-                            conflagTimer -= diff;
+                            _conflagTimer -= diff;
                         break;
                     case 3:
-                        if (summonTimer <= diff)
+                        if (_summonTimer <= diff)
                         {
                             DoCast(me, SPELL_SUMMON_PUMPKIN, true);
-                            summonTimer = 15*IN_MILLISECONDS;
+                            _summonTimer = 15*IN_MILLISECONDS;
                         }
                         else
-                            summonTimer -= diff;
+                            _summonTimer -= diff;
                         break;
                 }
 
                 DoMeleeAttackIfReady();
             }
+			
+        private:
+            SummonList _summons;
+            uint8 _phase;
+            uint8 _wpCount;
+            uint8 _introCount;
+            uint32 _introTimer;
+            uint32 _laughTimer;
+            uint32 _cleaveTimer;
+            uint32 _summonTimer;
+            uint32 _conflagTimer;
+            bool _wpReached;
         };
 
         CreatureAI* GetAI(Creature* creature) const
@@ -366,6 +381,7 @@ class npc_horseman_head : public CreatureScript
                 DoCast(me, SPELL_HEAD, true);
                 DoCast(me, SPELL_HEAD_LANDS, true);
                 DoScriptText(SAY_LOST_HEAD, me);
+                _despawn = false;
             }
 
             void SetData(uint32 /*type*/, uint32 data)
@@ -375,6 +391,12 @@ class npc_horseman_head : public CreatureScript
 
             void DamageTaken(Unit* /*attacker*/, uint32 &damage)
             {
+
+                if (_despawn)
+                {
+                    damage = 0;
+                    return;
+                }
                 int32 healthPct;
 
                 switch (_phase)
@@ -389,7 +411,8 @@ class npc_horseman_head : public CreatureScript
                     damage = 0;
                     me->RemoveAllAuras();
                     me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
-                    me->DespawnOrUnsummon(3000);
+                    me->DespawnOrUnsummon(3*IN_MILLISECONDS);
+                    _despawn = true;
 
                     if (me->ToTempSummon())
                         if (Unit* horseman = me->ToTempSummon()->GetSummoner())
@@ -403,6 +426,7 @@ class npc_horseman_head : public CreatureScript
 
         private:
             uint8 _phase;
+            bool _despawn;
         };
 
         CreatureAI* GetAI(Creature* creature) const
@@ -418,6 +442,9 @@ class go_pumpkin_shrine : public GameObjectScript
 
         bool OnGossipHello(Player* player, GameObject* go)
         {
+
+            if (go->GetGoType() == GAMEOBJECT_TYPE_QUESTGIVER)
+                player->PrepareQuestMenu(go->GetGUID());
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_OPTION, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
             player->SEND_GOSSIP_MENU(player->GetGossipTextId(go), go->GetGUID());
 
