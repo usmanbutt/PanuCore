@@ -2435,7 +2435,7 @@ void SmartScript::ProcessEvent(SmartScriptHolder& e, Unit* unit, uint32 var0, ui
 
                 if (Unit* victim = me->getVictim())
                 {
-                    if (!victim->HasInArc(static_cast<float>(M_PI),me->GetPositionX(), me->GetPositionY()))
+                    if (!victim->HasInArc(static_cast<float>(M_PI), me))
                     {
                         ProcessAction(e, victim);
                         RecalcTimer(e, e.event.behindTarget.cooldownMin, e.event.behindTarget.cooldownMax);

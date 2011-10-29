@@ -21,8 +21,8 @@ UPDATE `creature_template` SET `ScriptName`='npc_agent_skully' WHERE `entry`=273
 UPDATE `creature_template` SET `ScriptName`='npc_7th_legion_siege_engineer' WHERE `entry`=27163;
 UPDATE `creature_template` SET `ScriptName`='vehicle_alliance_steamtank' WHERE `entry`=27587;
 UPDATE `creature_template` SET `ScriptName`='mob_woodlands_walker' WHERE `entry`=26421;
-UPDATE `creature_template` SET `ScriptName`='npc_lake_frog' WHERE `entry`=33224;
-UPDATE `creature_template` SET `ScriptName`='npc_lake_frog' WHERE `entry`=33211;
+UPDATE `creature_template` SET `ScriptName`='npc_grizzly_lake_frog' WHERE `entry`=33224;
+UPDATE `creature_template` SET `ScriptName`='npc_grizzly_lake_frog' WHERE `entry`=33211;
 UPDATE `creature_template` SET `ScriptName`='npc_webbed_crusader' WHERE `entry`=30268;
 UPDATE `creature_template` SET `ScriptName`='npc_webbed_crusader' WHERE `entry`=30273;
 UPDATE `creature_template` SET `ScriptName`='npc_blessed_banner' WHERE `entry`=30891;

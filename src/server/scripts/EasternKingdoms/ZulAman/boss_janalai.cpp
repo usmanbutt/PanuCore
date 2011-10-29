@@ -185,7 +185,7 @@ class boss_janalai : public CreatureScript
             {
                 if (isFlameBreathing)
                 {
-                    if (!me->HasInArc(M_PI/6, target->GetPositionX(), target->GetPositionY()))
+                    if (!me->HasInArc(M_PI/6, target))
                         damage = 0;
                 }
             }

@@ -814,7 +814,7 @@ public:
 };
 
 /*####
-## npc_lake_frog
+## npc_grizzly_lake_frog
 ####*/
 
 enum eLakeFrog
@@ -832,14 +832,14 @@ enum eLakeFrog
 #define SAY_FREED               "Can it really be? Free after all these years?"
 #define GOSSIP_TEXT_GET_WEAPON  "Glad to help, my lady. I'm told you were once the guardian of a fabled sword. Do you know where I might find it?"
 
-class npc_lake_frog : public CreatureScript
+class npc_grizzly_lake_frog : public CreatureScript
 {
 public:
-    npc_lake_frog() : CreatureScript("npc_lake_frog") { }
+    npc_grizzly_lake_frog() : CreatureScript("npc_grizzly_lake_frog") { }
 
-    struct npc_lake_frogAI : public ScriptedAI
+    struct npc_grizzly_lake_frogAI : public ScriptedAI
     {
-        npc_lake_frogAI(Creature* c) : ScriptedAI(c) { alreadykissed = false;}
+        npc_grizzly_lake_frogAI(Creature* c) : ScriptedAI(c) { alreadykissed = false;}
 
         bool alreadykissed;
 
@@ -895,7 +895,7 @@ public:
 
     CreatureAI *GetAI(Creature* creature) const
     {
-        return new npc_lake_frogAI(creature);
+        return new npc_grizzly_lake_frogAI(creature);
     }
 };
 
@@ -910,5 +910,5 @@ void AddSC_grizzly_hills()
     new npc_wounded_skirmisher;
     new npc_lightning_sentry();
     new npc_venture_co_straggler();
-    new npc_lake_frog();
+    new npc_grizzly_lake_frog();
 }
