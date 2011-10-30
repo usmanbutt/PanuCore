@@ -145,12 +145,18 @@ public:
                 instance->SetData(DATA_SVALA_SORROWGRAVE_EVENT, NOT_STARTED);
         }
 
+        void SetGUID(uint64 guid, int32 /*id*/)
+        {
+            if (Player* player = me->GetPlayer(*me, guid))
+                MoveInLineOfSight(player);
+        }
+
         void MoveInLineOfSight(Unit* who)
         {
             if (!who)
                 return;
 
-            if (Phase == IDLE && me->IsValidAttackTarget(who) && me->IsWithinDistInMap(who, 40))
+            if (Phase == IDLE && me->IsValidAttackTarget(who) && me->IsWithinDistInMap(who, 60))
             {
                 Phase = INTRO;
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
@@ -576,6 +582,22 @@ public:
     }
 };
 
+class at_observance_chamber : public AreaTriggerScript
+{
+    public:
+        at_observance_chamber() : AreaTriggerScript("at_observance_chamber") {}
+
+        bool OnTrigger(Player* player, AreaTriggerEntry const* /*trigger*/)
+        {
+            uint64 _svalaGUID = player->GetInstanceScript()->GetData64(DATA_SVALA);
+
+            if(Creature* svala = player->GetCreature(*player, _svalaGUID))
+                svala->AI()->SetGUID(player->GetGUID(), 0);
+
+            return true;
+        }
+};
+
 void AddSC_boss_svala()
 {
     new boss_svala();
@@ -583,4 +605,5 @@ void AddSC_boss_svala()
     new boss_svala_sorrowgrave();
     new npc_scourge_hulk();
     new npc_sword_ritual();
+    new at_observance_chamber();
 }
