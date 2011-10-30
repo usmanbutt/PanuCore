@@ -41,6 +41,7 @@ enum Entries
     NPC_PULSING_PUMPKIN         = 23694,
     NPC_PUMPKIN_FIEND           = 23545,
     NPC_SIR_THOMAS              = 23904,
+    HELPER                      = 23686,
     GO_PUMPKIN_SHRINE           = 186267
 };
 
@@ -62,6 +63,17 @@ enum Spells
     SPELL_HEAD_LANDS            = 42400,
     SPELL_CREATE_PUMPKIN_TREATS = 42754,
     SPELL_RHYME_BIG             = 42909,
+	
+    SPELL_SPROUTING             = 42281,
+    SPELL_SPROUT_BODY           = 42285,
+    SPELL_PUMPKIN_AURA_GREEN    = 42294,
+    SPELL_PUMPKIN_AURA          = 42280,
+    SPELL_WISP_BLUE             = 42821,
+    SPELL_WISP_FLIGHT_PORT      = 42818,
+    SPELL_DEATH                 = 42566,
+    SPELL_BODY_FLAME            = 42074,
+    SPELL_SMOKE                 = 42355,
+    SPELL_SQUASH_SOUL           = 42514
 };
 
 uint32 randomLaugh[]            = {11965, 11975, 11976};
@@ -169,9 +181,6 @@ class boss_headless_horseman : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 _summons.Summon(summon);
-                summon->SetDisplayId(24720);
-                summon->SetReactState(REACT_PASSIVE);
-
             }
 
             void JustDied(Unit* /*killer*/)
@@ -454,6 +463,177 @@ class npc_horseman_head : public CreatureScript
         }
 };
 
+class mob_wisp_invis : public CreatureScript
+{
+public:
+    mob_wisp_invis() : CreatureScript("mob_wisp_invis") { }
+
+    CreatureAI* GetAI(Creature* creature) const
+    {
+        return new mob_wisp_invisAI (creature);
+    }
+
+    struct mob_wisp_invisAI : public ScriptedAI
+    {
+        mob_wisp_invisAI(Creature* c) : ScriptedAI(c)
+        {
+            Creaturetype = delay = spell = spell2 = 0;
+            //that's hack but there are no info about range of this spells in dbc
+            /*SpellEntry *wisp = GET_SPELL(SPELL_WISP_BLUE);
+            if (wisp)
+                wisp->rangeIndex = 6; //100 yards
+            SpellEntry *port = GET_SPELL(SPELL_WISP_FLIGHT_PORT);
+            if (port)
+                port->rangeIndex = 6;*/
+        }
+
+        uint32 Creaturetype;
+        uint32 delay;
+        uint32 spell;
+        uint32 spell2;
+        void Reset(){}
+        void EnterCombat(Unit* /*who*/){}
+        void SetType(uint32 _type)
+        {
+            switch(Creaturetype = _type)
+            {
+                case 1:
+                    spell = SPELL_PUMPKIN_AURA_GREEN;
+                    break;
+                case 2:
+                    delay = 15000;
+                    spell = SPELL_BODY_FLAME;
+                    spell2 = SPELL_DEATH;
+                    break;
+                case 3:
+                    delay = 15000;
+                    spell = SPELL_SMOKE;
+                    break;
+                case 4:
+                    delay = 7000;
+                    spell2 = SPELL_WISP_BLUE;
+                    break;
+            }
+            if (spell)
+                DoCast(me, spell);
+        }
+
+        void SpellHit(Unit* /*caster*/, const SpellEntry *spell)
+        {
+            if (spell->Id == SPELL_WISP_FLIGHT_PORT && Creaturetype == 4)
+                me->SetDisplayId(2027);
+        }
+
+        void MoveInLineOfSight(Unit* who)
+        {
+            if (!who || Creaturetype != 1 || !who->isTargetableForAttack())
+                return;
+
+            if (me->IsWithinDist(who, 0.1f, false) && !who->HasAura(SPELL_SQUASH_SOUL))
+                DoCast(who, SPELL_SQUASH_SOUL);
+        }
+
+        void UpdateAI(const uint32 diff)
+        {
+            if (delay)
+            {
+                if (delay <= diff)
+                {
+                    me->RemoveAurasDueToSpell(SPELL_SMOKE);
+                    if (spell2)
+                        DoCast(me, spell2);
+                    delay = 0;
+                } else delay -= diff;
+            }
+        }
+    };
+
+};
+
+
+class mob_pulsing_pumpkin : public CreatureScript
+{
+public:
+    mob_pulsing_pumpkin() : CreatureScript("mob_pulsing_pumpkin") { }
+
+    CreatureAI* GetAI(Creature* creature) const
+    {
+        return new mob_pulsing_pumpkinAI (creature);
+    }
+
+    struct mob_pulsing_pumpkinAI : public ScriptedAI
+    {
+        mob_pulsing_pumpkinAI(Creature* c) : ScriptedAI(c) {}
+
+        bool sprouted;
+        uint64 debuffGUID;
+
+        void Reset()
+        {
+            float x, y, z;
+            me->GetPosition(x, y, z);   //this visual aura some under ground
+            me->GetMap()->CreatureRelocation(me, x, y, z + 0.35f, 0.0f);
+            Despawn();
+            Creature* debuff = DoSpawnCreature(HELPER, 0, 0, 0, 0, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 14500);
+            if (debuff)
+            {
+                debuff->SetDisplayId(me->GetDisplayId());
+                debuff->CastSpell(debuff, SPELL_PUMPKIN_AURA_GREEN, false);
+                CAST_AI(mob_wisp_invis::mob_wisp_invisAI, debuff->AI())->SetType(1);
+                debuffGUID = debuff->GetGUID();
+            }
+            sprouted = false;
+            DoCast(me, SPELL_PUMPKIN_AURA, true);
+            DoCast(me, SPELL_SPROUTING);
+            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED);
+        }
+
+        void EnterCombat(Unit* /*who*/){}
+
+        void SpellHit(Unit* /*caster*/, const SpellEntry *spell)
+        {
+            if (spell->Id == SPELL_SPROUTING)
+            {
+                sprouted = true;
+                me->RemoveAllAuras();
+                me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED);
+                DoCast(me, SPELL_SPROUT_BODY, true);
+                me->UpdateEntry(NPC_PUMPKIN_FIEND);
+                DoStartMovement(me->getVictim());
+            }
+        }
+
+        void Despawn()
+        {
+            if (!debuffGUID) return;
+            Unit* debuff = Unit::GetUnit((*me), debuffGUID);
+            if (debuff)
+                debuff->SetVisible(false);
+                debuffGUID = 0;
+        }
+
+        void JustDied(Unit* /*killer*/) { if (!sprouted) Despawn(); }
+
+        void MoveInLineOfSight(Unit* who)
+        {
+            if (!who || !who->isTargetableForAttack() || !me->IsHostileTo(who) || me->getVictim())
+                return;
+
+            me->AddThreat(who, 0.0f);
+            if (sprouted)
+                DoStartMovement(who);
+        }
+
+        void UpdateAI(const uint32 /*diff*/)
+        {
+            if (sprouted && UpdateVictim())
+                DoMeleeAttackIfReady();
+        }
+    };
+
+};
+
+
 class go_pumpkin_shrine : public GameObjectScript
 {
     public:
@@ -491,5 +671,7 @@ void AddSC_boss_headless_horseman()
 {
     new boss_headless_horseman();
     new npc_horseman_head();
+    new mob_pulsing_pumpkin();
+    new mob_wisp_invis();
     new go_pumpkin_shrine();
 }
