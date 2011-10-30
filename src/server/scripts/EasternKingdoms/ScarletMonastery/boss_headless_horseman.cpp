@@ -11,7 +11,8 @@ enum Yells
     SAY_CONFLAGRATION           = -1189004,
     SAY_SPROUTING_PUMPKINS      = -1189005,
     SAY_PLAYER_DEATH            = -1189006,
-    SAY_DEATH                   = -1189007
+    SAY_DEATH                   = -1189007,
+    SAY_APPEAR                  = -1189100
 };
 
 enum Actions
@@ -459,6 +460,7 @@ class go_pumpkin_shrine : public GameObjectScript
             {
                 if (Unit* horseman = go->GetOwner())
                 {
+                    DoScriptText(SAY_APPEAR,horseman);
                     horseman->ToCreature()->AI()->AttackStart(player);
                     horseman->AddThreat(player, 1000.0f);
                     go->Delete();
