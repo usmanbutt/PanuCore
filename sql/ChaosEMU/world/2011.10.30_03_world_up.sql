@@ -3,6 +3,7 @@ UPDATE `creature_template` SET `AIName` = '', `ScriptName` = 'npc_scourge_hulk' 
 
 -- Ritual Target
 UPDATE `creature_template` SET `faction_A` = 35, `faction_H` = 35, `unit_flags` = '33554944', `flags_extra` = '130' WHERE `entry` IN (27327, 30805);
+INSERT INTO `areatrigger_scripts` (`entry`, `ScriptName`) VALUES (5140, 'at_observance_chamber');
 
 -- Ritual Sword NPC
 DELETE FROM `creature_template` WHERE (`entry`=27325);

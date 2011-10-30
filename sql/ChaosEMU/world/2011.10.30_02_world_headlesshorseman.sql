@@ -10,3 +10,8 @@ INSERT INTO `script_texts` (`npc_entry`, `entry`, `content_default`, `content_lo
 
 -- Correct equip template
 REPLACE INTO `creature_equip_template` (`entry`, `itemEntry1`, `itemEntry2`, `itemEntry3`) VALUES (3001, 49128, 0, 0);
+
+-- Scriptnames
+UPDATE `creature_template` SET `ScriptName`='mob_pulsing_pumpkin' WHERE `entry` = 23694;
+UPDATE `creature_template` SET `ScriptName`='mob_wisp_invis', `faction_A`=35, `faction_H`=35, `unit_flags`='33554434' WHERE `entry`='23686';
+UPDATE `creature_template` SET `ScriptName`='mob_wisp_invis', `unit_flags`='33554434' WHERE `entry`='24034';
