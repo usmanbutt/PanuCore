@@ -1,18 +1,33 @@
-// The Headless Horseman
+/*
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "ScriptPCH.h"
 #include "LFGMgr.h"
 
 enum Yells
 {
-    SAY_ENTRANCE                = -1189001,
-    SAY_REJOINED                = -1189002,
-    SAY_LOST_HEAD               = -1189003,
-    SAY_CONFLAGRATION           = -1189004,
-    SAY_SPROUTING_PUMPKINS      = -1189005,
-    SAY_PLAYER_DEATH            = -1189006,
-    SAY_DEATH                   = -1189007,
-    SAY_APPEAR                  = -1189100
+    SAY_ENTRANCE                = -1189100,
+    SAY_REJOINED                = -1189101,
+    SAY_LOST_HEAD               = -1189102,
+    SAY_LOST_HEAD2              = -1189103,
+    SAY_CONFLAGRATION           = -1189104,
+    SAY_SPROUTING_PUMPKINS      = -1189105,
+    SAY_PLAYER_DEATH            = -1189106,
+    SAY_DEATH                   = -1189107
 };
 
 enum Actions
@@ -45,7 +60,7 @@ enum Spells
     SPELL_FLYING_HEAD           = 42399, // flying head visual
     SPELL_HEAD                  = 42413, // horseman head visual
     SPELL_HEAD_LANDS            = 42400,
-  //SPELL_CREATE_PUMPKIN_TREATS = 42754,
+    SPELL_CREATE_PUMPKIN_TREATS = 42754,
     SPELL_RHYME_BIG             = 42909,
 };
 
@@ -60,7 +75,7 @@ static Position flightPos[]=
     {1791.671f, 1360.825f, 30.1f, 2.766f},
     {1777.449f, 1364.652f, 25.1f, 2.911f},
     {1770.126f, 1361.402f, 20.7f, 4.093f},
-    {1772.743f, 1354.941f, 18.4f, 5.841f}
+    {1755.552f, 1366.757f, 19.5f, 6.212f}
 };
 
 static char const* Text[]=
@@ -71,7 +86,7 @@ static char const* Text[]=
     "Now, know demise!"
 };
 
-#define EMOTE_LAUGH   "Headless Horseman laughs."
+//#define EMOTE_LAUGH   "Headless Horseman laughs."
 #define GOSSIP_OPTION "Call the Headless Horseman."
 
 class boss_headless_horseman : public CreatureScript
@@ -97,6 +112,7 @@ class boss_headless_horseman : public CreatureScript
                 me->SetUnitMovementFlags(MOVEMENTFLAG_NONE);
                 me->AddUnitMovementFlag(MOVEMENTFLAG_LEVITATING);
                 me->SetSpeed(MOVE_RUN, 2.0f, true);
+                me->SetSpeed(MOVE_FLIGHT, 3.2f, true);
                 me->SetCorpseDelay(75);
 
                 _wpCount = 0;
@@ -119,7 +135,7 @@ class boss_headless_horseman : public CreatureScript
             {
                 if (type != POINT_MOTION_TYPE || id != _wpCount)
                     return;
-
+					
                 if (id < 7)
                 {
                     ++_wpCount;
@@ -134,8 +150,6 @@ class boss_headless_horseman : public CreatureScript
 
                     if (me->getVictim())
                         me->GetMotionMaster()->MoveChase(me->getVictim());
-
-                    DoScriptText(SAY_ENTRANCE, me);
                 }
             }
 
@@ -155,9 +169,9 @@ class boss_headless_horseman : public CreatureScript
             void JustSummoned(Creature* summon)
             {
                 _summons.Summon(summon);
-                summon->SetInCombatWithZone();
+                summon->SetDisplayId(24720);
+                summon->SetReactState(REACT_PASSIVE);
 
-                // DoScriptText(SAY_SPROUTING_PUMPKINS, me);
             }
 
             void JustDied(Unit* /*killer*/)
@@ -261,6 +275,7 @@ class boss_headless_horseman : public CreatureScript
                                 _phase = 1;
                                 _wpReached = true;
                                 me->SetVisible(true);
+                                DoScriptText(SAY_ENTRANCE, me);
                             }
                         }
                         _introTimer = 3*IN_MILLISECONDS;
@@ -302,7 +317,6 @@ class boss_headless_horseman : public CreatureScript
 
                 if (_laughTimer <= diff)
                 {
-                    me->MonsterTextEmote(EMOTE_LAUGH, 0);
                     DoPlaySoundToSet(me, randomLaugh[rand()%3]);
                     _laughTimer = urand(11, 22) *IN_MILLISECONDS;
                 }
@@ -326,8 +340,11 @@ class boss_headless_horseman : public CreatureScript
                         if (_conflagTimer <= diff)
                         {
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 30.0f, true))
+                            {
+                                DoScriptText(SAY_CONFLAGRATION, me);
                                 DoCast(target, SPELL_CONFLAGRATION);
-                            _conflagTimer = urand(8, 12) *IN_MILLISECONDS;
+                            }
+                            _conflagTimer = urand(20, 25) *IN_MILLISECONDS;
                         }
                         else
                             _conflagTimer -= diff;
@@ -335,8 +352,9 @@ class boss_headless_horseman : public CreatureScript
                     case 3:
                         if (_summonTimer <= diff)
                         {
+                            DoScriptText(SAY_SPROUTING_PUMPKINS, me);
                             DoCast(me, SPELL_SUMMON_PUMPKIN, true);
-                            _summonTimer = 15*IN_MILLISECONDS;
+                            _summonTimer = 45*IN_MILLISECONDS;
                         }
                         else
                             _summonTimer -= diff;
@@ -381,7 +399,7 @@ class npc_horseman_head : public CreatureScript
                 me->GetMotionMaster()->MoveRandom(30.0f);
                 DoCast(me, SPELL_HEAD, true);
                 DoCast(me, SPELL_HEAD_LANDS, true);
-                DoScriptText(SAY_LOST_HEAD, me);
+                DoScriptText(RAND(SAY_LOST_HEAD, SAY_LOST_HEAD2), me);
                 _despawn = false;
             }
 
@@ -460,7 +478,6 @@ class go_pumpkin_shrine : public GameObjectScript
             {
                 if (Unit* horseman = go->GetOwner())
                 {
-                    DoScriptText(SAY_APPEAR,horseman);
                     horseman->ToCreature()->AI()->AttackStart(player);
                     horseman->AddThreat(player, 1000.0f);
                     go->Delete();
