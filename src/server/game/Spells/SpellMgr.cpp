@@ -3048,9 +3048,6 @@ void SpellMgr::LoadDbcDataCorrections()
             case 52479: // Gift of the Harvester
                 spellInfo->MaxAffectedTargets = 1;
                 break;
-            case 42132: // Headless Horseman - Start Fire
-                spellInfo->rangeIndex = 13;
-                break;
             case 41376: // Spite
             case 39992: // Needle Spine
             case 29576: // Multi-Shot
