@@ -3,7 +3,7 @@
 # Server version:               5.5.16
 # Server OS:                    Win64
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2011-11-01 14:17:17
+# Date/time:                    2011-11-03 00:05:06
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -121,6 +121,48 @@ CREATE TABLE IF NOT EXISTS `arena_team_member` (
 DELETE FROM `arena_team_member`;
 /*!40000 ALTER TABLE `arena_team_member` DISABLE KEYS */;
 /*!40000 ALTER TABLE `arena_team_member` ENABLE KEYS */;
+
+
+# Dumping structure for table characters.armory_character_stats
+DROP TABLE IF EXISTS `armory_character_stats`;
+CREATE TABLE IF NOT EXISTS `armory_character_stats` (
+  `guid` int(11) NOT NULL,
+  `data` longtext NOT NULL,
+  `save_date` int(11) DEFAULT NULL,
+  PRIMARY KEY (`guid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='World of Warcraft Armory table';
+
+# Dumping data for table characters.armory_character_stats: 0 rows
+DELETE FROM `armory_character_stats`;
+/*!40000 ALTER TABLE `armory_character_stats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `armory_character_stats` ENABLE KEYS */;
+
+
+# Dumping structure for table characters.armory_game_chart
+DROP TABLE IF EXISTS `armory_game_chart`;
+CREATE TABLE IF NOT EXISTS `armory_game_chart` (
+  `gameid` int(11) NOT NULL,
+  `teamid` int(11) NOT NULL,
+  `guid` int(11) NOT NULL,
+  `changeType` int(11) NOT NULL,
+  `ratingChange` int(11) NOT NULL,
+  `teamRating` int(11) NOT NULL,
+  `damageDone` int(11) NOT NULL,
+  `deaths` int(11) NOT NULL,
+  `healingDone` int(11) NOT NULL,
+  `damageTaken` int(11) NOT NULL,
+  `healingTaken` int(11) NOT NULL,
+  `killingBlows` int(11) NOT NULL,
+  `mapId` int(11) NOT NULL,
+  `start` int(11) NOT NULL,
+  `end` int(11) NOT NULL,
+  PRIMARY KEY (`gameid`,`teamid`,`guid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='WoWArmory Game Chart';
+
+# Dumping data for table characters.armory_game_chart: 0 rows
+DELETE FROM `armory_game_chart`;
+/*!40000 ALTER TABLE `armory_game_chart` DISABLE KEYS */;
+/*!40000 ALTER TABLE `armory_game_chart` ENABLE KEYS */;
 
 
 # Dumping structure for table characters.auctionhouse
@@ -559,6 +601,25 @@ CREATE TABLE IF NOT EXISTS `character_equipmentsets` (
 DELETE FROM `character_equipmentsets`;
 /*!40000 ALTER TABLE `character_equipmentsets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_equipmentsets` ENABLE KEYS */;
+
+
+# Dumping structure for table characters.character_feed_log
+DROP TABLE IF EXISTS `character_feed_log`;
+CREATE TABLE IF NOT EXISTS `character_feed_log` (
+  `guid` int(11) NOT NULL,
+  `type` smallint(1) NOT NULL,
+  `data` int(11) NOT NULL,
+  `date` int(11) DEFAULT NULL,
+  `counter` int(11) NOT NULL,
+  `difficulty` smallint(6) DEFAULT '-1',
+  `item_guid` int(11) DEFAULT '-1',
+  `item_quality` smallint(6) NOT NULL DEFAULT '-1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+# Dumping data for table characters.character_feed_log: 0 rows
+DELETE FROM `character_feed_log`;
+/*!40000 ALTER TABLE `character_feed_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `character_feed_log` ENABLE KEYS */;
 
 
 # Dumping structure for table characters.character_gifts
