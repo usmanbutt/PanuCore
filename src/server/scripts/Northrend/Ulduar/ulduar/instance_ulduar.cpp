@@ -38,7 +38,9 @@ class instance_ulduar : public InstanceMapScript
 
             uint32 Encounter[MAX_ENCOUNTER];
             std::string m_strInstData;
-
+            std::list<uint64> MimironDoorGUIDList;
+            std::set<uint64> mRubbleSpawns;
+			
             // Creatures
             uint64 LeviathanGUID;
             uint64 IgnisGUID;
@@ -57,9 +59,13 @@ class instance_ulduar : public InstanceMapScript
             uint64 VX001GUID;
             uint64 AerialUnitGUID;
             uint64 MimironElevatorGUID;
-            std::list<uint64> MimironDoorGUIDList;
             uint64 HodirGUID;
             uint64 ThorimGUID;
+            uint64 RunicColossusGUID;
+            uint64 RuneGiantGUID;
+            uint64 RunicDoorGUID;
+            uint64 StoneDoorGUID;
+            uint64 ThorimDoorGUID;
             uint64 FreyaGUID;
             uint64 KeeperGUIDs[3];
             uint64 VezaxGUID;
@@ -87,8 +93,6 @@ class instance_ulduar : public InstanceMapScript
             uint8 elderCount;
             bool conSpeedAtory;
             bool Unbroken;
-
-            std::set<uint64> mRubbleSpawns;
 
             void Initialize()
             {
@@ -224,9 +228,6 @@ class instance_ulduar : public InstanceMapScript
                     case NPC_HODIR:
                         HodirGUID = creature->GetGUID();
                         break;
-                    case NPC_THORIM:
-                        ThorimGUID = creature->GetGUID();
-                        break;
                     case NPC_FREYA:
                         FreyaGUID = creature->GetGUID();
                         break;
@@ -253,7 +254,17 @@ class instance_ulduar : public InstanceMapScript
                     case NPC_AERIAL_COMMAND_UNIT:
                         AerialUnitGUID = creature->GetGUID();
                         break;
-
+                    // Thorim
+                    case NPC_THORIM:
+                        ThorimGUID = creature->GetGUID();
+                        break;
+                    case NPC_RUNIC_COLOSSUS:
+                        RunicColossusGUID = creature->GetGUID();
+                        break;
+                    case NPC_RUNE_GIANT:
+                        RuneGiantGUID = creature->GetGUID();
+                        break;
+					
                     // Hodir's Helper NPCs
                     case NPC_EIVI_NIGHTFEATHER:
                         if (TeamInInstance == HORDE)
@@ -306,10 +317,6 @@ class instance_ulduar : public InstanceMapScript
                         break;
                     case GO_KOLOGARN_DOOR:
                         KologarnDoorGUID = gameObject->GetGUID();
-                        break;
-                    case GO_THORIM_CHEST_HERO:
-                    case GO_THORIM_CHEST:
-                        ThorimChestGUID = gameObject->GetGUID();
                         break;
                     case GO_HODIR_RARE_CACHE_OF_WINTER_HERO:
                     case GO_HODIR_RARE_CACHE_OF_WINTER:
@@ -382,6 +389,19 @@ class instance_ulduar : public InstanceMapScript
                             GetBossState(BOSS_THORIM) == DONE)
                             gameObject->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED);
                         break;
+                    case GO_THORIM_CHEST_HERO:
+                    case GO_THORIM_CHEST:
+                        ThorimChestGUID = gameObject->GetGUID();
+                        break;
+                    case GO_THORIM_ENCOUNTER_DOOR:
+                        ThorimDoorGUID = gameObject->GetGUID();
+                        break;
+                    case GO_THORIM_STONE_DOOR:
+                        StoneDoorGUID = gameObject->GetGUID();
+                        break;
+                    case GO_THORIM_RUNIC_DOOR:
+                        RunicDoorGUID = gameObject->GetGUID();
+                    break;
                 }
             }
 
@@ -504,9 +524,8 @@ class instance_ulduar : public InstanceMapScript
                         }
                         break;
                     case BOSS_THORIM:
-                        if (state == DONE)
-                            if (GameObject* gameObject = instance->GetGameObject(ThorimChestGUID))
-                                gameObject->SetRespawnTime(gameObject->GetRespawnDelay());
+                        if (GameObject* obj = instance->GetGameObject(ThorimDoorGUID))
+                            obj->SetGoState(state == IN_PROGRESS ? GO_STATE_READY : GO_STATE_ACTIVE);
                         break;
                 }
 
@@ -540,6 +559,14 @@ class instance_ulduar : public InstanceMapScript
                         break;
                     case DATA_MIMIRON_ELEVATOR:
                         if (GameObject* go = instance->GetGameObject(MimironElevatorGUID))
+                            go->SetGoState(GOState(data));
+                        break;
+                    case DATA_RUNIC_DOOR:
+                        if (GameObject* go = instance->GetGameObject(RunicDoorGUID))
+                            go->SetGoState(GOState(data));
+                        break;
+                    case DATA_STONE_DOOR:
+                        if (GameObject* go = instance->GetGameObject(StoneDoorGUID))
                             go->SetGoState(GOState(data));
                         break;
                     case DATA_HODIR_RARE_CACHE:
@@ -598,6 +625,10 @@ class instance_ulduar : public InstanceMapScript
                         return HodirGUID;
                     case BOSS_THORIM:
                         return ThorimGUID;
+                    case DATA_RUNIC_COLOSSUS:       
+                        return RunicColossusGUID;
+                    case DATA_RUNE_GIANT:           
+                        return RuneGiantGUID;
                     case BOSS_FREYA:
                         return FreyaGUID;
                     case BOSS_VEZAX:

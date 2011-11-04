@@ -83,6 +83,10 @@ enum UlduarNPCs
     NPC_VX_001                   = 33651,
     NPC_AERIAL_COMMAND_UNIT      = 33670,
 
+    // Thorim
+    NPC_RUNIC_COLOSSUS          = 32872,
+    NPC_RUNE_GIANT              = 32873,	
+
     // Freya's Keepers
     NPC_IRONBRANCH               = 32913,
     NPC_BRIGHTLEAF               = 32915,
@@ -125,6 +129,9 @@ enum UlduarGameObjects
     GO_KOLOGARN_DOOR                      = 194553,
     GO_THORIM_CHEST_HERO                  = 194315,
     GO_THORIM_CHEST                       = 194314,
+    GO_THORIM_ENCOUNTER_DOOR              = 194559,
+    GO_THORIM_STONE_DOOR                  = 194558,
+    GO_THORIM_RUNIC_DOOR                  = 194557,
     GO_HODIR_RARE_CACHE_OF_WINTER         = 194200,
     GO_HODIR_RARE_CACHE_OF_WINTER_HERO    = 194201,
     GO_HODIR_CHEST_HERO                   = 194308,
@@ -191,6 +198,13 @@ enum UlduarData
     DATA_AERIAL_UNIT,
     DATA_MIMIRON_ELEVATOR,
     DATA_CALL_TRAM,
+
+    // Thorim
+    DATA_RUNIC_COLOSSUS,
+    DATA_RUNE_GIANT,
+    DATA_RUNIC_DOOR,
+    DATA_STONE_DOOR,
+    DATA_HODIR_RARE_CHEST,
 	
     // Hodir
     DATA_HODIR_RARE_CACHE,
