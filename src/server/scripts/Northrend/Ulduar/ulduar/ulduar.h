@@ -77,6 +77,7 @@ enum UlduarNPCs
     NPC_VEZAX                    = 33271,
     NPC_YOGGSARON                = 33288,
     NPC_ALGALON                  = 32871,
+    NPC_BRANN_ALGALON            = 34064,
 
     // Mimiron
     NPC_LEVIATHAN_MKII           = 33432,
@@ -156,9 +157,17 @@ enum UlduarGameObjects
     GO_MIMIRON_DOOR_3                     = 194775,
     GO_BIG_RED_BUTTON                     = 194739,
     GO_WAY_TO_YOGG                        = 194255,
+    GO_ALGALON_DOOR                       = 194767,
+    GO_ALGALON_FLOOR_COM                  = 194715,
+    GO_ALGALON_FLOOR_OOC                  = 194716,
+    GO_ALGALON_GLOBE                      = 194148,
+    GO_ALGALON_BRIDGE                     = 194253,
+    GO_ALGALON_INVISDOOR                  = 194910,
+    GO_ALGALON_CONSOLE                    = 194628,
+    GO_GIFT_OF_THE_OBSERVER               = 194821,
 };
 
-enum LeviathanData
+enum UlduarSharedActions
 {
     EVENT_TOWER_OF_STORM_DESTROYED      = 21031,
     EVENT_TOWER_OF_FROST_DESTROYED      = 21032,
@@ -169,6 +178,7 @@ enum LeviathanData
     ACTION_TOWER_OF_FLAMES_DESTROYED    = 3,
     ACTION_TOWER_OF_LIFE_DESTROYED      = 4,
     ACTION_MOVE_TO_CENTER_POSITION      = 10,
+    ACTION_ALGALON_ASCEND               = -123460, //Wipe Raid, don't respawn
 };
 
 enum UlduarAchievementCriteriaIds
@@ -208,6 +218,17 @@ enum UlduarData
 	
     // Hodir
     DATA_HODIR_RARE_CACHE,
+	
+    //Algalon
+    DATA_ALGALON_INTRO,
+    DATA_ALGALON_TIMER,
+    DATA_BRANN_ALGALON,
+};
+
+enum UlduarWorldStates
+{
+    WORLDSTATE_SHOW_TIMER                 = 4132,
+    WORLDSTATE_ALGALON_TIMER              = 4131
 };
 
 enum UlduarAchievementData
