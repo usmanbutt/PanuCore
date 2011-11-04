@@ -142,6 +142,13 @@ enum UlduarGameObjects
     GO_HODIR_DOOR                         = 194634,
     GO_HODIR_ICE_DOOR                     = 194441,
     GO_ARCHIVUM_DOOR                      = 194556,
+    GO_MIMIRON_TRAIN                      = 194675,
+    GO_MIMIRON_ELEVATOR                   = 194749,
+    GO_MIMIRON_DOOR_1                     = 194776,
+    GO_MIMIRON_DOOR_2                     = 194774,
+    GO_MIMIRON_DOOR_3                     = 194775,
+    GO_BIG_RED_BUTTON                     = 194739,
+    GO_WAY_TO_YOGG                        = 194255,
 };
 
 enum LeviathanData
@@ -178,6 +185,13 @@ enum UlduarData
     DATA_TOY_PILE_2,
     DATA_TOY_PILE_3,
 
+    //Mimiron
+    DATA_LEVIATHAN_MK_II,
+    DATA_VX_001,
+    DATA_AERIAL_UNIT,
+    DATA_MIMIRON_ELEVATOR,
+    DATA_CALL_TRAM,
+	
     // Hodir
     DATA_HODIR_RARE_CACHE,
 };

@@ -51,7 +51,13 @@ class instance_ulduar : public InstanceMapScript
             uint64 AssemblyGUIDs[3];
             uint64 KologarnGUID;
             uint64 AuriayaGUID;
+            uint64 MimironTrainGUID;
             uint64 MimironGUID;
+            uint64 LeviathanMKIIGUID;
+            uint64 VX001GUID;
+            uint64 AerialUnitGUID;
+            uint64 MimironElevatorGUID;
+            std::list<uint64> MimironDoorGUIDList;
             uint64 HodirGUID;
             uint64 ThorimGUID;
             uint64 FreyaGUID;
@@ -74,6 +80,7 @@ class instance_ulduar : public InstanceMapScript
             uint64 ArchivumDoorGUID;
 
             // Miscellaneous
+            uint64 WayToYoggGUID;
             uint32 TeamInInstance;
             uint32 HodirRareCacheData;
             uint32 ColossusData;
@@ -113,6 +120,7 @@ class instance_ulduar : public InstanceMapScript
                 ArchivumDoorGUID                 = 0;
                 TeamInInstance                   = 0;
                 HodirRareCacheData               = 0;
+                WayToYoggGUID                    = 0;
                 ColossusData                     = 0;
                 elderCount                       = 0;
                 conSpeedAtory                    = false;
@@ -213,9 +221,6 @@ class instance_ulduar : public InstanceMapScript
                     case NPC_AURIAYA:
                         AuriayaGUID = creature->GetGUID();
                         break;
-                    case NPC_MIMIRON:
-                        MimironGUID = creature->GetGUID();
-                        break;
                     case NPC_HODIR:
                         HodirGUID = creature->GetGUID();
                         break;
@@ -233,6 +238,20 @@ class instance_ulduar : public InstanceMapScript
                         break;
                     case NPC_ALGALON:
                         AlgalonGUID = creature->GetGUID();
+                        break;
+
+                    // Mimiron
+                    case NPC_MIMIRON:
+                        MimironGUID = creature->GetGUID();
+                        break;
+                    case NPC_LEVIATHAN_MKII:
+                        LeviathanMKIIGUID = creature->GetGUID();
+                        break;
+                    case NPC_VX_001:
+                        VX001GUID = creature->GetGUID();
+                        break;
+                    case NPC_AERIAL_COMMAND_UNIT:
+                        AerialUnitGUID = creature->GetGUID();
                         break;
 
                     // Hodir's Helper NPCs
@@ -341,6 +360,28 @@ class instance_ulduar : public InstanceMapScript
                         if (GetBossState(BOSS_ASSEMBLY_OF_IRON) != DONE)
                             HandleGameObject(ArchivumDoorGUID, false);
                         break;
+                    case GO_MIMIRON_TRAIN:
+                        gameObject->setActive(true);
+                        MimironTrainGUID = gameObject->GetGUID();
+                        break;
+                    case GO_MIMIRON_ELEVATOR:
+                        gameObject->setActive(true);
+                        MimironElevatorGUID = gameObject->GetGUID();
+                        break;
+                    case GO_MIMIRON_DOOR_1:
+                    case GO_MIMIRON_DOOR_2:
+                    case GO_MIMIRON_DOOR_3:
+                        gameObject->setActive(true);
+                        MimironDoorGUIDList.push_back(gameObject->GetGUID());
+                        break;
+                    case GO_WAY_TO_YOGG:
+                        WayToYoggGUID = gameObject->GetGUID();
+                        if (GetBossState(BOSS_FREYA) == DONE &&
+                            GetBossState(BOSS_MIMIRON) == DONE &&
+                            GetBossState(BOSS_HODIR) == DONE &&
+                            GetBossState(BOSS_THORIM) == DONE)
+                            gameObject->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED);
+                        break;
                 }
             }
 
@@ -416,8 +457,14 @@ class instance_ulduar : public InstanceMapScript
                     case BOSS_RAZORSCALE:
                     case BOSS_XT002:
                     case BOSS_AURIAYA:
-                    case BOSS_MIMIRON:
                     case BOSS_FREYA:
+                        break;
+                    case BOSS_MIMIRON:
+                        for (std::list<uint64>::iterator i = MimironDoorGUIDList.begin(); i != MimironDoorGUIDList.end(); i++)
+                        {
+                            if (GameObject* obj = instance->GetGameObject(*i))
+                                obj->SetGoState(state == IN_PROGRESS ? GO_STATE_READY : GO_STATE_ACTIVE );
+                        }
                         break;
                     case BOSS_ASSEMBLY_OF_IRON:
                         if (state == DONE)
@@ -463,6 +510,12 @@ class instance_ulduar : public InstanceMapScript
                         break;
                 }
 
+                if (GetBossState(BOSS_FREYA) == DONE &&
+                    GetBossState(BOSS_MIMIRON) == DONE &&
+                    GetBossState(BOSS_HODIR) == DONE &&
+                    GetBossState(BOSS_THORIM) == DONE)
+                    if (GameObject* go = instance->GetGameObject(WayToYoggGUID))
+                        go->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_LOCKED);
                 return true;
             }
 
@@ -480,6 +533,14 @@ class instance_ulduar : public InstanceMapScript
                                 gameObject->SetGoState(GO_STATE_ACTIVE_ALTERNATIVE);
                             SaveToDB();
                         }
+                        break;
+                    case DATA_CALL_TRAM:
+                        if (GameObject* go = instance->GetGameObject(MimironTrainGUID))
+                            go->UseDoorOrButton();
+                        break;
+                    case DATA_MIMIRON_ELEVATOR:
+                        if (GameObject* go = instance->GetGameObject(MimironElevatorGUID))
+                            go->SetGoState(GOState(data));
                         break;
                     case DATA_HODIR_RARE_CACHE:
                         HodirRareCacheData = data;
@@ -527,6 +588,12 @@ class instance_ulduar : public InstanceMapScript
                         return AuriayaGUID;
                     case BOSS_MIMIRON:
                         return MimironGUID;
+                    case DATA_LEVIATHAN_MK_II:      
+                        return LeviathanMKIIGUID;
+                    case DATA_VX_001:               
+                        return VX001GUID;
+                    case DATA_AERIAL_UNIT:          
+                        return AerialUnitGUID;
                     case BOSS_HODIR:
                         return HodirGUID;
                     case BOSS_THORIM:
@@ -641,7 +708,35 @@ class instance_ulduar : public InstanceMapScript
         }
 };
 
+class go_call_tram : public GameObjectScript
+{
+public:
+    go_call_tram() : GameObjectScript("go_call_tram") { }
+
+    bool OnGossipHello(Player* /*pPlayer*/, GameObject* pGo)
+    {
+        InstanceScript* pInstance = pGo->GetInstanceScript();
+
+        if (!pInstance)
+            return false;
+
+        switch (pGo->GetEntry())
+        {
+            case 194914:
+            case 194438:
+                pInstance->SetData(DATA_CALL_TRAM, 0);
+                break;
+            case 194912:
+            case 194437:
+                pInstance->SetData(DATA_CALL_TRAM, 1);
+                break;
+        }
+        return true;
+    }
+};
+
 void AddSC_instance_ulduar()
 {
     new instance_ulduar();
+    new go_call_tram();
 }
