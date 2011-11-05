@@ -6,7 +6,7 @@ UPDATE `creature_template` SET `ScriptName` = 'mob_algalon_asteroid_trigger' WHE
 UPDATE `creature_template` SET `ScriptName` = 'mob_living_constellation' WHERE `entry` = 33052;
 UPDATE `creature_template` SET `ScriptName` = 'mob_collapsing_star' WHERE `entry` = 32955;
 UPDATE `creature_template` SET `ScriptName` = 'mob_black_hole' WHERE `entry` = 32953;
-UPDATE `creature_template` SET `ScriptName` = 'mob_dark_matter' WHERE `entry` = 33089;
+UPDATE `creature_template` SET `ScriptName` = 'mob_dark_matter_algalon' WHERE `entry` = 33089;
 
 UPDATE `creature_template` SET `equipment_id` = 1857, `ScriptName` = 'mob_brann_algalon' WHERE `entry` = 34064;
 
@@ -38,7 +38,7 @@ INSERT INTO `spell_script_names`(`spell_id`,`ScriptName`) VALUES
 ( '64596','spell_algalon_cosmic_smash_damage'),
 ( '64443','spell_algalon_big_bang'),
 ( '64584','spell_algalon_big_bang'),
-( '62168','spell_algalon_black hole'),
+( '62168','spell_algalon_black_hole'),
 ( '62301','spell_algalon_cosmic_smash_initial'), 
 ( '64598','spell_algalon_cosmic_smash_initial'),
 ( '64487','spell_algalon_ascend_to_the_heavens');
