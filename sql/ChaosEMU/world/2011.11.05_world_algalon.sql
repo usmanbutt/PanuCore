@@ -75,3 +75,7 @@ insert into `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language
 ('34064','0','0','We did it, lads! We got here before Algalon''s arrival. Maybe we can rig the systems to interfere with his analysis--','14','0','100','0','0','15824','Brann AlgalonSummoned01'),
 ('34064','1','0','I''ll head back to the archivum and see if I can jam his signal. I might be able to buy us some time while you take care of him.','14','0','100','0','0','15825','Brann AlgalonSummoned02'),
 ('34064','2','0','I know just the place. Will you be all right?','12','0','100','0','0','15823','Brann AlgalonDefeated');
+
+DELETE FROM `achievement_criteria_data` WHERE `criteria_id` = 10678;
+INSERT INTO `achievement_criteria_data` VALUES
+(10678,11,0,0,'achievement_herald_of_the_titans');
