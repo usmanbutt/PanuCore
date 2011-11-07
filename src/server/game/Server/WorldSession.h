@@ -211,8 +211,6 @@ class CharacterCreateInfo
     private:
         virtual ~CharacterCreateInfo(){};
 };
-//Playerbot mod
-typedef UNORDERED_MAP<uint64, Player*> PlayerBotMap;
 
 /// Player session in the World
 class WorldSession
@@ -220,13 +218,7 @@ class WorldSession
     public:
         WorldSession(uint32 id, WorldSocket* sock, AccountTypes sec, bool ispremium, uint8 expansion, time_t mute_time, LocaleConstant locale, uint32 recruiter, bool isARecruiter);
         ~WorldSession();
-        //Playerbot mod
-        void AddPlayerBot(uint64 guid);
-        void LogoutPlayerBot(uint64 guid, bool Save);
-        Player *GetPlayerBot (uint64 guid) const;
-        PlayerBotMap m_playerBots;
-        PlayerBotMap::const_iterator GetPlayerBotsBegin() const { return m_playerBots.begin(); }
-        PlayerBotMap::const_iterator GetPlayerBotsEnd()   const { return m_playerBots.end();   }
+
         bool PlayerLoading() const { return m_playerLoading; }
         bool PlayerLogout() const { return m_playerLogout; }
         bool PlayerLogoutWithSave() const { return m_playerLogout && m_playerSave; }
@@ -417,7 +409,6 @@ class WorldSession
         void HandlePlayerLoginOpcode(WorldPacket& recvPacket);
         void HandleCharEnum(QueryResult result);
         void HandlePlayerLogin(LoginQueryHolder * holder);
-		void HandlePlayerBotLogin(SQLQueryHolder * holder);
         void HandleCharFactionOrRaceChange(WorldPacket& recv_data);
 
         // played time
@@ -924,7 +915,6 @@ class WorldSession
         QueryCallback<QueryResult, uint64> _sendStabledPetCallback;
         QueryCallback<PreparedQueryResult, CharacterCreateInfo*> _charCreateCallback;
         QueryResultHolderFuture _charLoginCallback;
- 		QueryResultHolderFuture _charBotLoginCallback;
 
     private:
         // private trade methods
