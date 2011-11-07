@@ -784,13 +784,16 @@ class npc_tirion_toc : public CreatureScript
                             m_instance->SetData(TYPE_EVENT, 6008);
                             break;
                         case 6008:
+                            {
                             Creature *m_mage = me->FindNearestCreature(33643, 100.0f, true);
                             m_mage->SetOrientation(me->GetOrientation());
                             m_mage->AI()->DoCastAOE(53142);
                             m_uiUpdateTimer = 11000;
                             m_instance->SetData(TYPE_EVENT, 6009);
                             break;
+                            }
                         case 6009:
+                            {
                             GameObject *portal = me->FindNearestGameObject(191164, 100.0f);
                             float posx = portal->GetPositionX();
                             float posy = portal->GetPositionY();
@@ -808,6 +811,7 @@ class npc_tirion_toc : public CreatureScript
                             }
                             m_uiUpdateTimer = 1000;
                             m_instance->SetData(TYPE_EVENT, 6010);
+                            }
                         case 6010:
                             if (IsHeroic())
                             {
