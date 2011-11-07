@@ -779,39 +779,35 @@ class npc_tirion_toc : public CreatureScript
                             break;
                         case 6005:
                             DoScriptText(SAY_STAGE_4_06, me);
-							me->SummonCreature(33643, me->GetPositionX(), me->GetPositionY()+5, me->GetPositionZ(), me->GetOrientation());
-							m_uiUpdateTimer = 10000;
-							m_instance->SetData(TYPE_EVENT, 6008);
+                            me->SummonCreature(33643, me->GetPositionX(), me->GetPositionY()+5, me->GetPositionZ(), me->GetOrientation());
+                            m_uiUpdateTimer = 10000;
+                            m_instance->SetData(TYPE_EVENT, 6008);
                             break;
-						case 6008:
-							{
-								Creature *m_mage = me->FindNearestCreature(33643, 100.0f, true);
-								m_mage->SetOrientation(me->GetOrientation());
-								m_mage->AI()->DoCastAOE(53142);
-								m_uiUpdateTimer = 11000;
-								m_instance->SetData(TYPE_EVENT, 6009);
-								break;
-							}
-						case 6009:
-							{
-								GameObject *portal = me->FindNearestGameObject(191164, 100.0f);
-								float posx = portal->GetPositionX();
-								float posy = portal->GetPositionY();
-								float posz = portal->GetPositionZ();
-								portal->DestroyForNearbyPlayers();
-								Map::PlayerList const &players = me->GetMap()->GetPlayers();
-								for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
-								{
-									Player* p_portalcaster = itr->getSource();
-									if (!p_portalcaster->isGameMaster())
-									{
-										p_portalcaster->SummonGameObject(191164, posx, posy, posz, 0, 0, 0, 0, 0, 6000000);
-										break;
-									}
-								}
-								m_uiUpdateTimer = 1000;
-								m_instance->SetData(TYPE_EVENT, 6010);
-							}
+                        case 6008:
+                            Creature *m_mage = me->FindNearestCreature(33643, 100.0f, true);
+                            m_mage->SetOrientation(me->GetOrientation());
+                            m_mage->AI()->DoCastAOE(53142);
+                            m_uiUpdateTimer = 11000;
+                            m_instance->SetData(TYPE_EVENT, 6009);
+                            break;
+                        case 6009:
+                            GameObject *portal = me->FindNearestGameObject(191164, 100.0f);
+                            float posx = portal->GetPositionX();
+                            float posy = portal->GetPositionY();
+                            float posz = portal->GetPositionZ();
+                            portal->DestroyForNearbyPlayers();
+                            Map::PlayerList const &players = me->GetMap()->GetPlayers();
+                            for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+                            {
+                                 Player* p_portalcaster = itr->getSource();
+                                 if (!p_portalcaster->isGameMaster())
+                                 {
+                                     p_portalcaster->SummonGameObject(191164, posx, posy, posz, 0, 0, 0, 0, 0, 6000000);
+                                     break;
+                                 }
+                            }
+                            m_uiUpdateTimer = 1000;
+                            m_instance->SetData(TYPE_EVENT, 6010);
                         case 6010:
                             if (IsHeroic())
                             {

@@ -185,108 +185,108 @@ class instance_ulduar : public InstanceMapScript
                   }
                   return return_value;
             }	
-			void OnPlayerKilled(Player* /*player*/)
-			{
-				for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
-				{
-					if (Encounter[i] == IN_PROGRESS)
-					{
-						if (i < BOSS_ALGALON)
-							PlayerDeathFlag |= UlduarBossDeadFlags(TypeToDeadFlag(i));
-						else if (i == BOSS_ALGALON)
-							AlgalonKillCount++;
+            void OnPlayerKilled(Player* /*player*/)
+            {
+                for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+                {
+                    if (Encounter[i] == IN_PROGRESS)
+                    {
+                        if (i < BOSS_ALGALON)
+                            PlayerDeathFlag |= UlduarBossDeadFlags(TypeToDeadFlag(i));
+                        else if (i == BOSS_ALGALON)
+                            AlgalonKillCount++;
+                    }
+                }
+            }
+
+            bool CheckAchievementCriteriaMeet(uint32 criteria_id, Player const* /*source*/, Unit const* /*target = NULL*/, uint32 /*miscvalue1 = 0*/)
+            {
+                switch (criteria_id)
+                {
+                    // Kills without Death Achievement
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FLAMELEVIATAN_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FLAMELEVIATAN_25:
+                        return !(PlayerDeathFlag & DEAD_FLAME_LEVIATHAN);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_IGNIS_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_IGNIS_25:
+                        return !(PlayerDeathFlag & DEAD_IGNIS);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_RAZORSCALE_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_RAZORSCALE_25:
+                        return !(PlayerDeathFlag & DEAD_RAZORSCALE);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_XT002_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_XT002_25:
+                        return !(PlayerDeathFlag & DEAD_XT002);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ASSEMBLY_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ASSEMBLY_25:
+                        return !(PlayerDeathFlag & DEAD_ASSEMBLY);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_KOLOGARN_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_KOLOGARN_25:
+                        return !(PlayerDeathFlag & DEAD_KOLOGARN);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_AURIAYA_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_AURIAYA_25:
+                        return !(PlayerDeathFlag & DEAD_AURIAYA);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_HODIR_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_HODIR_25:
+                        return !(PlayerDeathFlag & DEAD_HODIR);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_THORIM_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_THORIM_25:
+                        return !(PlayerDeathFlag & DEAD_THORIM);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FREYA_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FREYA_25:
+                        return !(PlayerDeathFlag & DEAD_FREYA);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_MIMIRON_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_MIMIRON_25:
+                        return !(PlayerDeathFlag & DEAD_MIMIRON);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_VEZAX_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_VEZAX_25:
+                        return !(PlayerDeathFlag & DEAD_VEZAX);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_YOGGSARON_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_YOGGSARON_25:
+                        return !(PlayerDeathFlag & DEAD_YOGGSARON);
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ALGALON_10:
+                    case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ALGALON_25:
+                        return !(AlgalonKillCount);
+               }
+
+                // Yogg-Saron
+                switch (criteria_id)
+                {
+                    case ACHIEVEMENT_CRITERIA_THE_ASSASSINATION_OF_KING_LLANE_10:
+                    case ACHIEVEMENT_CRITERIA_THE_ASSASSINATION_OF_KING_LLANE_25:
+                    {
+                        if (GetBossState(BOSS_YOGGSARON) != IN_PROGRESS)
+                            return false;
+
+                        if (Creature* Sara = instance->GetCreature(SaraGUID))
+                            return (Sara->AI()->GetData(DATA_PORTAL_PHASE) == 0);
+
+                        return false;
 					}
-				}
-			}		
+                    case ACHIEVEMENT_CRITERIA_THE_TORTURED_CHAMPION_10:
+                    case ACHIEVEMENT_CRITERIA_THE_TORTURED_CHAMPION_25:
+                    {
+                        if (GetBossState(BOSS_YOGGSARON) != IN_PROGRESS)
+                            return false;
 
-			bool CheckAchievementCriteriaMeet(uint32 criteria_id, Player const* /*source*/, Unit const* /*target = NULL*/, uint32 /*miscvalue1 = 0*/)
-			{
-				switch (criteria_id)
-				{
-					// Kills without Death Achievement
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FLAMELEVIATAN_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FLAMELEVIATAN_25:
-						return !(PlayerDeathFlag & DEAD_FLAME_LEVIATHAN);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_IGNIS_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_IGNIS_25:
-						return !(PlayerDeathFlag & DEAD_IGNIS);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_RAZORSCALE_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_RAZORSCALE_25:
-						return !(PlayerDeathFlag & DEAD_RAZORSCALE);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_XT002_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_XT002_25:
-						return !(PlayerDeathFlag & DEAD_XT002);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ASSEMBLY_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ASSEMBLY_25:
-						return !(PlayerDeathFlag & DEAD_ASSEMBLY);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_KOLOGARN_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_KOLOGARN_25:
-						return !(PlayerDeathFlag & DEAD_KOLOGARN);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_AURIAYA_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_AURIAYA_25:
-						return !(PlayerDeathFlag & DEAD_AURIAYA);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_HODIR_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_HODIR_25:
-						return !(PlayerDeathFlag & DEAD_HODIR);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_THORIM_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_THORIM_25:
-						return !(PlayerDeathFlag & DEAD_THORIM);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FREYA_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_FREYA_25:
-						return !(PlayerDeathFlag & DEAD_FREYA);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_MIMIRON_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_MIMIRON_25:
-						return !(PlayerDeathFlag & DEAD_MIMIRON);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_VEZAX_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_VEZAX_25:
-						return !(PlayerDeathFlag & DEAD_VEZAX);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_YOGGSARON_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_YOGGSARON_25:
-						return !(PlayerDeathFlag & DEAD_YOGGSARON);
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ALGALON_10:
-					case ACHIEVEMENT_CRITERIA_KILL_WITHOUT_DEATHS_ALGALON_25:
-						return !(AlgalonKillCount);
-				}
+                        if (Creature* Sara = instance->GetCreature(SaraGUID))
+                            return (Sara->AI()->GetData(DATA_PORTAL_PHASE) == 2);
 
-				// Yogg-Saron
-				switch (criteria_id)
-				{
-					case ACHIEVEMENT_CRITERIA_THE_ASSASSINATION_OF_KING_LLANE_10:
-					case ACHIEVEMENT_CRITERIA_THE_ASSASSINATION_OF_KING_LLANE_25:
-					{
-						if (GetBossState(BOSS_YOGGSARON) != IN_PROGRESS)
-							return false;
+                        return false;
+                    }
+                    case ACHIEVEMENT_CRITERIA_FORGING_OF_THE_DEMON_SOUL_10:
+                    case ACHIEVEMENT_CRITERIA_FORGING_OF_THE_DEMON_SOUL_25:
+                    {
+                        if (GetBossState(BOSS_YOGGSARON) != IN_PROGRESS)
+                            return false;
 
-						if (Creature* Sara = instance->GetCreature(SaraGUID))
-							return (Sara->AI()->GetData(DATA_PORTAL_PHASE) == 0);
+                        if (Creature* Sara = instance->GetCreature(SaraGUID))
+                            return (Sara->AI()->GetData(DATA_PORTAL_PHASE) == 1);
 
-						return false;
-					}
-					case ACHIEVEMENT_CRITERIA_THE_TORTURED_CHAMPION_10:
-					case ACHIEVEMENT_CRITERIA_THE_TORTURED_CHAMPION_25:
-					{
-						if (GetBossState(BOSS_YOGGSARON) != IN_PROGRESS)
-							return false;
-
-						if (Creature* Sara = instance->GetCreature(SaraGUID))
-							return (Sara->AI()->GetData(DATA_PORTAL_PHASE) == 2);
-
-						return false;
-					}
-					case ACHIEVEMENT_CRITERIA_FORGING_OF_THE_DEMON_SOUL_10:
-					case ACHIEVEMENT_CRITERIA_FORGING_OF_THE_DEMON_SOUL_25:
-					{
-						if (GetBossState(BOSS_YOGGSARON) != IN_PROGRESS)
-							return false;
-
-						if (Creature* Sara = instance->GetCreature(SaraGUID))
-							return (Sara->AI()->GetData(DATA_PORTAL_PHASE) == 1);
-
-						return false;
-					}
-				}
-				return false;
-			}
+                        return false;
+                    }
+                }
+                return false;
+            }
 			
             bool IsEncounterInProgress() const
             {
@@ -433,13 +433,13 @@ class instance_ulduar : public InstanceMapScript
                         RuneGiantGUID = creature->GetGUID();
                         break;
 
-					// Yogg-Saron
-					case NPC_YOGGSARON:
-						YoggSaronGUID = creature->GetGUID();
-						break;
-					case NPC_SARA:
-						SaraGUID = creature->GetGUID();
-						break;
+                    // Yogg-Saron
+                    case NPC_YOGGSARON:
+                        YoggSaronGUID = creature->GetGUID();
+                        break;
+                    case NPC_SARA:
+                        SaraGUID = creature->GetGUID();
+                        break;
 					
                     // Hodir's Helper NPCs
                     case NPC_EIVI_NIGHTFEATHER:
@@ -617,20 +617,20 @@ class instance_ulduar : public InstanceMapScript
                             gameObject->SetFlag(GAMEOBJECT_FLAGS, GO_FLAG_NOT_SELECTABLE);
                         }          
                     break;
-					case GO_YOGGSARON_DOOR:
-						YoggSaronDoorGUID = gameObject->GetGUID();
-						HandleGameObject(NULL, true, gameObject);
+                    case GO_YOGGSARON_DOOR:
+                        YoggSaronDoorGUID = gameObject->GetGUID();
+                        HandleGameObject(NULL, true, gameObject);
                     break;
-					case GO_YOGGBRAIN_DOOR_1:
-						YoggSaronBrainDoor1GUID = gameObject->GetGUID();
+                    case GO_YOGGBRAIN_DOOR_1:
+                        YoggSaronBrainDoor1GUID = gameObject->GetGUID();
                     break;
-					case GO_YOGGBRAIN_DOOR_2:
-						YoggSaronBrainDoor2GUID = gameObject->GetGUID();
-						HandleGameObject(NULL, false, gameObject);
+                    case GO_YOGGBRAIN_DOOR_2:
+                        YoggSaronBrainDoor2GUID = gameObject->GetGUID();
+                        HandleGameObject(NULL, false, gameObject);
                     break;
-					case GO_YOGGBRAIN_DOOR_3:
-						YoggSaronBrainDoor3GUID = gameObject->GetGUID();
-						HandleGameObject(NULL, false, gameObject);
+                    case GO_YOGGBRAIN_DOOR_3:
+                        YoggSaronBrainDoor3GUID = gameObject->GetGUID();
+                        HandleGameObject(NULL, false, gameObject);
                     break;
                 }
             }
@@ -776,11 +776,11 @@ class instance_ulduar : public InstanceMapScript
 
                         }
                         break;
-					case BOSS_YOGGSARON:
-						if (state == IN_PROGRESS)
-							HandleGameObject(YoggSaronDoorGUID, false);
-						else
-							HandleGameObject(YoggSaronDoorGUID, true);
+                    case BOSS_YOGGSARON:
+                        if (state == IN_PROGRESS)
+                            HandleGameObject(YoggSaronDoorGUID, false);
+                        else
+                            HandleGameObject(YoggSaronDoorGUID, true);
                         break;
                 }
 
@@ -836,9 +836,9 @@ class instance_ulduar : public InstanceMapScript
                     case DATA_UNBROKEN:
                         Unbroken = bool(data);
                         break;
-					case DATA_ADD_HELP_FLAG:
-						SupportKeeperFlag |= UlduarKeeperSupport(data);
-						break;
+                    case DATA_ADD_HELP_FLAG:
+                        SupportKeeperFlag |= UlduarKeeperSupport(data);
+                        break;
                     case DATA_ALGALON_INTRO:
                         AlgalonIntroDone = data;
                         SaveToDB();
@@ -920,16 +920,16 @@ class instance_ulduar : public InstanceMapScript
                         return FreyaGUID;
                     case BOSS_VEZAX:
                         return VezaxGUID;
-					// Yogg-Saron
-					case BOSS_YOGGSARON:
+                    // Yogg-Saron
+                    case BOSS_YOGGSARON:
                         return YoggSaronGUID;
-					case TYPE_SARA:
+                    case TYPE_SARA:
                         return SaraGUID;
-					case TYPE_BRAIN_DOOR_1 :
+                    case TYPE_BRAIN_DOOR_1 :
                         return YoggSaronBrainDoor1GUID;
-					case TYPE_BRAIN_DOOR_2 :
+                    case TYPE_BRAIN_DOOR_2 :
                         return YoggSaronBrainDoor2GUID;
-					case TYPE_BRAIN_DOOR_3 :
+                    case TYPE_BRAIN_DOOR_3 :
                         return YoggSaronBrainDoor3GUID;
                     //Algalon the Observer
                     case BOSS_ALGALON:
@@ -987,8 +987,8 @@ class instance_ulduar : public InstanceMapScript
                     case DATA_ALGALON_TIMER:
                         return SignalTimerState;
                         break;
-					case DATA_KEEPER_SUPPORT_YOGG:
-						return SupportKeeperFlag;
+                    case DATA_KEEPER_SUPPORT_YOGG:
+                        return SupportKeeperFlag;
                         break;
                     default:
                         break;
@@ -1046,10 +1046,10 @@ class instance_ulduar : public InstanceMapScript
                     SetData(DATA_ALGALON_INTRO, data1);
                     SignalTimerState = data2;
                     SignalTimerMinutes = data3;
-					uint32 tmpState, tmpState2;
-					loadStream >> tmpState >> tmpState2;
-					ColossusData = tmpState;
-					PlayerDeathFlag = tmpState2;
+                    uint32 tmpState, tmpState2;
+                    loadStream >> tmpState >> tmpState2;
+                    ColossusData = tmpState;
+                    PlayerDeathFlag = tmpState2;
                 }
 
                 OUT_LOAD_INST_DATA_COMPLETE;
