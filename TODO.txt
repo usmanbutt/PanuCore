@@ -3,24 +3,18 @@ Todolist for ChaosCore
 --------------------------------[CORE]
 -Merge with TrinityCore (daily or weekly)
 
-(optional) add Playerbot
-
-
 --------------------------------[SCRIPTS]
--Add Ulduar from Darkman1983 ( www.github.com/darkman1983/trinitycore)
 -Add EoE Scripts from Darkman1983
-
--Add Algalon script from Pesthuf (www.github.com/pesthuf/trinitycore)
 
 -Add Hallowsend Event from Retriman
 
 -Merge some fixes from the old Repo
 
+-Add Halion script for Ruby Sanctum
 
+-Fix HoR waves
 
 ---------------------------------[SQL]
-
--(hallowsend) fix the horseman pumpkin spell display (this can be script too)
 
 -(or maybe scripts): add pumpkin respawn time in hallowsend event
 
