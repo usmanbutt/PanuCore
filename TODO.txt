@@ -6,16 +6,31 @@ Todolist for ChaosCore
 --------------------------------[SCRIPTS]
 -Add EoE Scripts from Darkman1983
 
+-fix algalons cosmic smash visual [fix in old core]
+
 -Add Hallowsend Event from Retriman
 
 -Merge some fixes from the old Repo
 
--Add Halion script for Ruby Sanctum
-
 -Fix HoR waves
 
+-add ToCH scripts
+
+-fix mimirons jump to his phase2 bot (he dont move to him)
+
 ---------------------------------[SQL]
+-add the missing guardians in the center of the map
 
 -(or maybe scripts): add pumpkin respawn time in hallowsend event
 
--move the SQL files to old folder if a new DB in the DB repo is released
+-move the SQL files to old folder if a new DB in the DB repo is released (or update pack)
+
+-add more sql support for ruby sanctum (spawns, damage, spawntime)
+
+-fix thorims loot cache (u cant open him maby wrong flag)
+
+-add hodirs rare winter chache
+
+-add loot for mimirons cache
+
+-eventAI or smartAI ofr c++ for trashmobs (ulduar and icc)
