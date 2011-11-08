@@ -83,6 +83,11 @@ public:
             events.ScheduleEvent(EVENT_SUMMON, 30000);
         }
 
+        void JustDied(Unit* /*killer*/)
+        {
+            instance->SetBossState(BOSS_MAEXXNA, DONE);
+        }
+	
         void UpdateAI(const uint32 diff)
         {
             if (!UpdateVictim() || !CheckInRoom())

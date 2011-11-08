@@ -302,6 +302,7 @@ public:
             if (instance)
                 instance->SetData(DATA_HORSEMEN0 + id, DONE);
 
+            instance->SetBossState(BOSS_HORSEMEN, DONE);
             if (instance && DoEncounterAction(NULL, false, false, true))
             {
                 instance->SetBossState(BOSS_HORSEMEN, DONE);

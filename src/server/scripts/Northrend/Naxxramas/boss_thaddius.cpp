@@ -147,6 +147,7 @@ public:
         {
             _JustDied();
             DoScriptText(SAY_DEATH, me);
+            instance->SetBossState(BOSS_THADDIUS, DONE);
         }
 
         void DoAction(const int32 action)
