@@ -1,4 +1,4 @@
--- immunities for trash
+﻿-- immunities for trash
 UPDATE creature_template SET mechanic_immune_mask=534724095 WHERE entry IN(40417,40418,40419,40420,40421,40422,40423,40424);
 -- immunities for bosses
 UPDATE creature_template SET mechanic_immune_mask=1071595519 WHERE entry IN(39747,39823,39751,39899,39920,39922,39863,39864,40142,39944,39945,40143,40144,40145,39746,49805);
@@ -196,3 +196,6 @@ UPDATE `creature_template` SET `flags_extra` = 1 WHERE `entry` IN
 UPDATE creature_template SET mechanic_immune_mask = 617299803 WHERE entry IN (39751,39920,39899,39922,39747,39823,39746,39805,39863,39864,39944,39945,40142,40143,40144,40145);
 
 UPDATE creature_template SET faction_A=103, faction_H=103, speed_walk=2, unit_flags=64 WHERE entry IN (39746,39805);
+
+DELETE FROM creature WHERE id = 39863;
+INSERT INTO creature VALUES ('250456', '39863', '724', '15', '1', '0', '0', '3144,93', '527,233', ' 72.887245', '0,110395', '604800', '0', '0', '11156000', '0', '0', '0', '0', '0');
