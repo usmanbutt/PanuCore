@@ -19,13 +19,11 @@ Todolist for ChaosCore
 -fix mimirons jump to his phase2 bot (he dont move to him)
 
 ---------------------------------[SQL]
--add the missing guardians in the center of the map
+-add the missing keepers after boss kill to activate their helping gossip
 
 -(or maybe scripts): add pumpkin respawn time in hallowsend event
 
 -move the SQL files to old folder if a new DB in the DB repo is released (or update pack)
-
--add more sql support for ruby sanctum (spawns, damage, spawntime)
 
 -fix thorims loot cache (u cant open him maby wrong flag)
 
@@ -33,4 +31,4 @@ Todolist for ChaosCore
 
 -add loot for mimirons cache
 
--eventAI or smartAI ofr c++ for trashmobs (ulduar and icc)
+-add c++ support for ulduar trashmobs
