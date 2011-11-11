@@ -565,9 +565,6 @@ class Map : public GridRefManager<NGridType>
             void AddToGrid(T* object, Cell const& cell);
 
         template<class T>
-            void RemoveFromGrid(T* object, Cell const& cell);
-
-        template<class T>
             void DeleteFromWorld(T*);
 
         template<class T>
