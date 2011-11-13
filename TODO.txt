@@ -3,14 +3,11 @@ Todolist for ChaosCore
 --------------------------------[CORE]
 -Merge with TrinityCore (daily or weekly)
 
+
 --------------------------------[SCRIPTS]
 -Add EoE Scripts from Darkman1983
 
 -fix algalons cosmic smash visual [fix in old core]
-
--Add Hallowsend Event from Retriman
-
--Merge some fixes from the old Repo
 
 -Fix HoR waves
 
@@ -18,8 +15,13 @@ Todolist for ChaosCore
 
 -fix mimirons jump to his phase2 bot (he dont move to him)
 
+-fix Ulduar achivements and doors:
+-Champion of Ulduar
+-Keepers of Ulduar
+-Algalons achievements
+-Archivum door
+
 ---------------------------------[SQL]
--add the missing keepers after boss kill to activate their helping gossip
 
 -(or maybe scripts): add pumpkin respawn time in hallowsend event
 
