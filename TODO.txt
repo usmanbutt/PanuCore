@@ -1,36 +1,39 @@
-Todolist for ChaosCore
+############################################################################################
+#                                                                                          #
+#                                   Todolist for ChaosCore                                 #
+#                                                                                          #
+############################################################################################
 
---------------------------------[CORE]
+
+############################################################################################
+# CORE                                                                                     #
+#   Add here everything which connected to the core: (spells,groups,maps etc..)            #
+#                                                                                          #
+############################################################################################
 -Merge with TrinityCore (daily or weekly)
 
 
---------------------------------[SCRIPTS]
+############################################################################################
+# Scripts                                                                                  #
+#    Add here script bugs (instance world event etc..)                                     #
+#                                                                                          #
+############################################################################################
+
 -Add EoE Scripts from Darkman1983
-
 -fix algalons cosmic smash visual [fix in old core]
-
--Fix HoR waves
-
 -add ToCH scripts
-
 -fix mimirons jump to his phase2 bot (he dont move to him)
+-fix Ulduar releated achievements
+-Algalons achievements (kill without player death)
 
--fix Ulduar achivements and doors:
--Champion of Ulduar
--Keepers of Ulduar
--Algalons achievements
--Archivum door
 
----------------------------------[SQL]
+############################################################################################
+# Database                                                                                 #
+#     Add here database bugs (loot spawn etc..)                                            #
+#                                                                                          #
+############################################################################################
 
--(or maybe scripts): add pumpkin respawn time in hallowsend event
-
+-add pumpkin respawn time in hallowsend event
 -move the SQL files to old folder if a new DB in the DB repo is released (or update pack)
-
--fix thorims loot cache (u cant open him maby wrong flag)
-
--add hodirs rare winter chache
-
--add loot for mimirons cache
-
+-add loot for mimirons cache freya and thorim too
 -add c++ support for ulduar trashmobs
