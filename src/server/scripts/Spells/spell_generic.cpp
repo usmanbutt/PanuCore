@@ -1430,6 +1430,77 @@ public:
     }
 };
 
+enum TheTurkinator
+{
+    SPELL_KILL_COUNTER_VISUAL       = 62015,
+    SPELL_KILL_COUNTER_VISUAL_MAX   = 62021
+};
+
+class spell_gen_turkey_tracker : public SpellScriptLoader
+{
+    public:
+        spell_gen_turkey_tracker() : SpellScriptLoader("spell_gen_turkey_tracker") {}
+
+        class spell_gen_turkey_tracker_SpellScript : public SpellScript
+        {
+            PrepareSpellScript(spell_gen_turkey_tracker_SpellScript);
+
+            bool Validate(SpellInfo const* /*spellEntry*/)
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_KILL_COUNTER_VISUAL))
+                    return false;
+                if (!sSpellMgr->GetSpellInfo(SPELL_KILL_COUNTER_VISUAL_MAX))
+                    return false;
+                return true;
+            }
+
+            void HandleScript(SpellEffIndex /*effIndex*/)
+            {
+                Unit* caster = GetCaster();
+
+                if (!caster || !caster->ToPlayer())
+                    return;
+
+                if (Aura* aura = caster->GetAura(GetSpellInfo()->Id))
+                {
+                    switch (aura->GetStackAmount())
+                    {
+                        case 10:
+                            caster->MonsterTextEmote("Turkey Hunter!", caster->GetGUID(), true);
+                            caster->CastSpell(caster, SPELL_KILL_COUNTER_VISUAL, true);
+                            break;
+                        case 20:
+                            caster->MonsterTextEmote("Turkey Domination!", caster->GetGUID(), true);
+                            caster->CastSpell(caster, SPELL_KILL_COUNTER_VISUAL, true);
+                            break;
+                        case 30:
+                            caster->MonsterTextEmote("Turkey Slaughter!", caster->GetGUID(), true);
+                            caster->CastSpell(caster, SPELL_KILL_COUNTER_VISUAL, true);
+                            break;
+                        case 40:
+                            caster->MonsterTextEmote("TURKEY TRIUMPH!", caster->GetGUID(), true);
+                            caster->CastSpell(caster, SPELL_KILL_COUNTER_VISUAL, true);
+                            caster->CastSpell(caster, SPELL_KILL_COUNTER_VISUAL_MAX, true); // Achievement Credit
+                            caster->RemoveAurasDueToSpell(GetSpellInfo()->Id);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            void Register()
+            {
+                OnEffectHitTarget += SpellEffectFn(spell_gen_turkey_tracker_SpellScript::HandleScript, EFFECT_1, SPELL_EFFECT_SCRIPT_EFFECT);
+            }
+        };
+
+        SpellScript* GetSpellScript() const
+        {
+            return new spell_gen_turkey_tracker_SpellScript();
+        }
+};
+
 void AddSC_generic_spell_scripts()
 {
     new spell_gen_absorb0_hitlimit1();
@@ -1463,4 +1534,5 @@ void AddSC_generic_spell_scripts()
     new spell_gen_vehicle_scaling();
     new spell_gen_oracle_wolvar_reputation();
     new spell_gen_luck_of_the_draw();
+    new spell_gen_turkey_tracker();
 }
