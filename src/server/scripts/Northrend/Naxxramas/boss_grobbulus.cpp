@@ -45,7 +45,7 @@ public:
 
     struct boss_grobbulusAI : public BossAI
     {
-        boss_grobbulusAI(Creature* c) : BossAI(c, BOSS_GROBBULUS)
+        boss_grobbulusAI(Creature* c) : BossAI(c, DATA_GROBBULUS)
         {
             me->ApplySpellImmune(0, IMMUNITY_ID, SPELL_POISON_CLOUD_ADD, true);
         }

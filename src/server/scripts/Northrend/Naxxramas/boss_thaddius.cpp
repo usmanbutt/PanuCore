@@ -106,7 +106,7 @@ public:
 
     struct boss_thaddiusAI : public BossAI
     {
-        boss_thaddiusAI(Creature* c) : BossAI(c, BOSS_THADDIUS)
+        boss_thaddiusAI(Creature* c) : BossAI(c, DATA_THADDIUS)
         {
             // init is a bit tricky because thaddius shall track the life of both adds, but not if there was a wipe
             // and, in particular, if there was a crash after both adds were killed (should not respawn)
@@ -147,7 +147,7 @@ public:
         {
             _JustDied();
             DoScriptText(SAY_DEATH, me);
-            instance->SetBossState(BOSS_THADDIUS, DONE);
+            instance->SetBossState(DATA_THADDIUS, DONE);
         }
 
         void DoAction(const int32 action)

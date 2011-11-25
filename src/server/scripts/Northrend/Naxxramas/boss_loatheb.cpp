@@ -48,7 +48,7 @@ public:
 
     struct boss_loathebAI : public BossAI
     {
-        boss_loathebAI(Creature* c) : BossAI(c, BOSS_LOATHEB) {}
+        boss_loathebAI(Creature* c) : BossAI(c, DATA_LOATHEB) {}
 
         void EnterCombat(Unit* /*who*/)
         {
@@ -60,7 +60,7 @@ public:
 
         void JustDied(Unit* /*killer*/)
         {
-            instance->SetBossState(BOSS_LOATHEB, DONE);
+            instance->SetBossState(DATA_LOATHEB, DONE);
         }
 		
         void UpdateAI(const uint32 diff)
