@@ -63,7 +63,7 @@ public:
 
     struct boss_anubrekhanAI : public BossAI
     {
-        boss_anubrekhanAI(Creature* c) : BossAI(c, DATA_ANUBREKHAN) {}
+        boss_anubrekhanAI(Creature* c) : BossAI(c, BOSS_ANUBREKHAN) {}
 
         bool hasTaunted;
 

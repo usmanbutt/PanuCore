@@ -89,7 +89,7 @@ public:
 
     struct boss_four_horsemenAI : public BossAI
     {
-        boss_four_horsemenAI(Creature* c) : BossAI(c, DATA_HORSEMEN)
+        boss_four_horsemenAI(Creature* c) : BossAI(c, BOSS_HORSEMEN)
         {
             id = Horsemen(0);
             for (uint8 i = 0; i < 4; ++i)
@@ -158,7 +158,7 @@ public:
 
                 if (reset)
                 {
-                    if (instance->GetBossState(DATA_HORSEMEN) != NOT_STARTED)
+                    if (instance->GetBossState(BOSS_HORSEMEN) != NOT_STARTED)
                     {
                         if (!Thane->isAlive())
                             Thane->Respawn();
@@ -302,9 +302,10 @@ public:
             if (instance)
                 instance->SetData(DATA_HORSEMEN0 + id, DONE);
 
+            instance->SetBossState(BOSS_HORSEMEN, DONE);
             if (instance && DoEncounterAction(NULL, false, false, true))
             {
-                instance->SetBossState(DATA_HORSEMEN, DONE);
+                instance->SetBossState(BOSS_HORSEMEN, DONE);
                 instance->SaveToDB();
 
                 // Achievements related to the 4-horsemen are given through spell 59450 which does not exist.

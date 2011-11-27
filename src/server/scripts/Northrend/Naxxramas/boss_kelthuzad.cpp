@@ -241,12 +241,6 @@ const Position PosWeavers[MAX_WEAVERS] =
     {3704.71f, -5175.96f, 143.597f, 3.36549f},
 };
 
-enum Achievements
-{
-    ACHIEVEMENT_THE_UNDYING_10 = 2187,
-    ACHIEVEMENT_THE_IMMORTAL_25 = 2186
-};
-
 // predicate function to select not charmed target
 struct NotCharmedTargetSelector : public std::unary_function<Unit*, bool>
 {
@@ -265,7 +259,7 @@ public:
 
     struct boss_kelthuzadAI : public BossAI
     {
-        boss_kelthuzadAI(Creature* c) : BossAI(c, DATA_KELTHUZAD), spawns(c)
+        boss_kelthuzadAI(Creature* c) : BossAI(c, BOSS_KELTHUZAD), spawns(c)
         {
             uiFaction = me->getFaction();
         }
@@ -349,9 +343,6 @@ public:
                     player->SetFloatValue(OBJECT_FIELD_SCALE_X, (*itr).second);
             }
             chained.clear();
-			
-            if (instance && instance->GetData(DATA_PLAYER_DEATHS) == 0)
-                instance->DoCompleteAchievement(RAID_MODE(ACHIEVEMENT_THE_UNDYING_10,ACHIEVEMENT_THE_IMMORTAL_25));
         }
 
         void EnterCombat(Unit* /*who*/)
@@ -461,8 +452,9 @@ public:
                     {
                         Phase = 3 ;
                         DoScriptText(SAY_REQUEST_AID, me);
-                        if (Creature* LichKing = Unit::GetCreature(*me, instance ? instance->GetData64(DATA_LICHKING) : 0))
-                            DoScriptText(SAY_ANSWER_REQUEST, LichKing);
+                        //here Lich King should respond to KelThuzad but I don't know which Creature to make talk
+                        //so for now just make Kelthuzad says it.
+                        DoScriptText(SAY_ANSWER_REQUEST, me);
 
                         for (uint8 i = 0; i <= 3; ++i)
                         {
@@ -665,7 +657,7 @@ public:
             return false;
 
         InstanceScript* instance = player->GetInstanceScript();
-        if (!instance || instance->IsEncounterInProgress() || instance->GetBossState(DATA_KELTHUZAD) == DONE)
+        if (!instance || instance->IsEncounterInProgress() || instance->GetBossState(BOSS_KELTHUZAD) == DONE)
             return false;
 
         Creature* pKelthuzad = CAST_CRE(Unit::GetUnit(*player, instance->GetData64(DATA_KELTHUZAD)));
