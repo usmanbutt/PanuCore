@@ -60,7 +60,7 @@ class boss_faerlina : public CreatureScript
 
         struct boss_faerlinaAI : public BossAI
         {
-            boss_faerlinaAI(Creature* creature) : BossAI(creature, BOSS_FAERLINA),
+            boss_faerlinaAI(Creature* creature) : BossAI(creature, DATA_FAERLINA),
                 _frenzyDispels(0), _introDone(false), _delayFrenzy(false)
             {
             }

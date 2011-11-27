@@ -2202,7 +2202,7 @@ public:
             {
                 Quest const* qInfo = sObjectMgr->GetQuestTemplate(QUEST_YOU_RE_NOT_SO_BIG_NOW);
                 if (qInfo)
-                    CAST_PLR(killer)->RewardPlayerAndGroupAtEvent(uint32(qInfo->ReqCreatureOrGOId[0]), killer);
+                    CAST_PLR(killer)->RewardPlayerAndGroupAtEvent(uint32(qInfo->RequiredNpcOrGo[0]), killer);
             }
         }
     };
