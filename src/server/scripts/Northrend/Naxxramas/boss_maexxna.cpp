@@ -68,7 +68,7 @@ public:
 
     struct boss_maexxnaAI : public BossAI
     {
-        boss_maexxnaAI(Creature* c) : BossAI(c, BOSS_MAEXXNA) {}
+        boss_maexxnaAI(Creature* c) : BossAI(c, DATA_MAEXXNA) {}
 
         bool enraged;
 
@@ -85,7 +85,8 @@ public:
 
         void JustDied(Unit* /*killer*/)
         {
-            instance->SetBossState(BOSS_MAEXXNA, DONE);
+            _JustDied();
+            instance->SetBossState(DATA_MAEXXNA, DONE);
         }
 	
         void UpdateAI(const uint32 diff)

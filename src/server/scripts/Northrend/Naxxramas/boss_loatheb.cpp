@@ -48,11 +48,12 @@ public:
 
     struct boss_loathebAI : public BossAI
     {
-        boss_loathebAI(Creature* c) : BossAI(c, BOSS_LOATHEB) {}
+        boss_loathebAI(Creature* c) : BossAI(c, DATA_LOATHEB) {}
 
         void EnterCombat(Unit* /*who*/)
         {
             _EnterCombat();
+            instance->SetBossState(DATA_LOATHEB, IN_PROGRESS);
             events.ScheduleEvent(EVENT_AURA, 10000);
             events.ScheduleEvent(EVENT_BLOOM, 5000);
             events.ScheduleEvent(EVENT_DOOM, 120000);
@@ -60,7 +61,8 @@ public:
 
         void JustDied(Unit* /*killer*/)
         {
-            instance->SetBossState(BOSS_LOATHEB, DONE);
+            _JustDied();
+            instance->SetBossState(DATA_LOATHEB, DONE);
         }
 		
         void UpdateAI(const uint32 diff)

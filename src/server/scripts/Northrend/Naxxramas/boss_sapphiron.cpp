@@ -81,7 +81,7 @@ public:
 
     struct boss_sapphironAI : public BossAI
     {
-        boss_sapphironAI(Creature* c) : BossAI(c, BOSS_SAPPHIRON)
+        boss_sapphironAI(Creature* c) : BossAI(c, DATA_SAPPHIRON)
             , phase(PHASE_NULL)
         {
             map = me->GetMap();
@@ -271,18 +271,14 @@ public:
                             break;
                         }
                         case EVENT_FLIGHT:
-                            if (HealthAbovePct(10))
-                            {
-                                phase = PHASE_FLIGHT;
-                                events.SetPhase(PHASE_FLIGHT);
-                                me->SetReactState(REACT_PASSIVE);
-                                me->AttackStop();
-                                float x, y, z, o;
-                                me->GetHomePosition(x, y, z, o);
-                                me->GetMotionMaster()->MovePoint(1, x, y, z);
-                                return;
-                            }
-                            break;
+                            phase = PHASE_FLIGHT;
+                            events.SetPhase(PHASE_FLIGHT);
+                            me->SetReactState(REACT_PASSIVE);
+                            me->AttackStop();
+                            float x, y, z, o;
+                            me->GetHomePosition(x, y, z, o);
+                            me->GetMotionMaster()->MovePoint(1, x, y, z);
+                            return;
                     }
                 }
 
