@@ -608,6 +608,8 @@ void AddSC_outdoorpvp_gh();
 
 // player
 void AddSC_chat_log();
+//custom
+void AddSC_BountyHunter();
 
 #endif
 
@@ -1258,6 +1260,7 @@ void AddCustomScripts()
 {
 #ifdef SCRIPTS
     /* This is where custom scripts should be added. */
+    AddSC_BountyHunter();
 
 #endif
 }
