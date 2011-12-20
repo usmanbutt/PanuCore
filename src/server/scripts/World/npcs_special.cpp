@@ -1624,44 +1624,46 @@ public:
 ## npc_winter_reveler
 ####*/
 
-enum WinterReveler
-{
-    SPELL_MISTLETOE_DEBUFF       = 26218,
-    SPELL_CREATE_MISTLETOE       = 26206,
-    SPELL_CREATE_HOLLY           = 26207,
-    SPELL_CREATE_SNOWFLAKES      = 45036,
-};
-
 class npc_winter_reveler : public CreatureScript
 {
-    public:
-        npc_winter_reveler() : CreatureScript("npc_winter_reveler") { }
+public:
+    npc_winter_reveler() : CreatureScript("npc_winter_reveler") { }
 
-        struct npc_winter_revelerAI : public ScriptedAI
+    struct npc_winter_revelerAI : public ScriptedAI
+    {
+        npc_winter_revelerAI(Creature* c) : ScriptedAI(c) {}
+        void ReceiveEmote(Player* player, uint32 emote)
         {
-            npc_winter_revelerAI(Creature* c) : ScriptedAI(c) {}
+            if (!IsHolidayActive(HOLIDAY_FEAST_OF_WINTER_VEIL))
+                return;
+            //TODO: check auralist.
+            if (player->HasAura(26218))
+                return;
 
-            void ReceiveEmote(Player* player, uint32 emote)
+            if (emote == TEXT_EMOTE_KISS)
             {
-                if (player->HasAura(SPELL_MISTLETOE_DEBUFF))
-                    return;
-
-                if (!IsHolidayActive(HOLIDAY_FEAST_OF_WINTER_VEIL))
-                    return;
-
-                if (emote == TEXT_EMOTE_KISS)
+                me->CastSpell(me, 26218, false);
+                player->CastSpell(player, 26218, false);
+                switch (urand(0, 2))
                 {
-                    uint32 spellId = RAND<uint32>(SPELL_CREATE_MISTLETOE, SPELL_CREATE_HOLLY, SPELL_CREATE_SNOWFLAKES);
-                    me->CastSpell(player, spellId, false);
-                    me->CastSpell(player, SPELL_MISTLETOE_DEBUFF, false);
+                    case 0:
+                        me->CastSpell(player, 26207, false);
+                        break;
+                    case 1:
+                        me->CastSpell(player, 26206, false);
+                        break;
+                    case 2:
+                        me->CastSpell(player, 45036, false);
+                        break;
                 }
             }
-        };
-
-        CreatureAI* GetAI(Creature* creature) const
-        {
-            return new npc_winter_revelerAI(creature);
         }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const
+    {
+        return new npc_winter_revelerAI(creature);
+    }
 };
 
 /*####
@@ -1676,6 +1678,8 @@ class npc_winter_reveler : public CreatureScript
 #define VIPER_TIMER 3000
 
 #define C_VIPER 19921
+
+#define RAND 5
 
 class npc_snake_trap : public CreatureScript
 {
@@ -1723,7 +1727,7 @@ public:
                 float attackRadius = me->GetAttackDistance(who);
                 if (me->IsWithinDistInMap(who, attackRadius) && me->IsWithinLOSInMap(who))
                 {
-                    if (!(rand() % 5))
+                    if (!(rand() % RAND))
                     {
                         me->setAttackTimer(BASE_ATTACK, (rand() % 10) * 100);
                         SpellTimer = (rand() % 10) * 100;
