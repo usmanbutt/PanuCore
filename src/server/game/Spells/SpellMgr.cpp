@@ -3074,6 +3074,10 @@ void SpellMgr::LoadDbcDataCorrections()
                 // because of bug in dbc
                 spellInfo->procChance = 0;
                 break;
+            case 39920: // Soulgrinder beam effect
+            case 39921: // Vim'Gol: Pentagram Beam
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+                break;
             case 20335: // Heart of the Crusader
             case 20336:
             case 20337:
