@@ -32,7 +32,7 @@ WardenCheckMgr::WardenCheckMgr()
 
 WardenCheckMgr::~WardenCheckMgr()
 {
-    for (int i = 0; i < CheckStore.size(); ++i)
+    for (int i = 0; i < (int)CheckStore.size(); ++i)
         delete CheckStore[i];
 
     for (CheckResultContainer::iterator itr = CheckResultStore.begin(); itr != CheckResultStore.end(); ++itr)
@@ -50,7 +50,7 @@ void WardenCheckMgr::LoadWardenChecks()
     }
 
     // For reload case
-    for (int i = 0; i < CheckStore.size(); ++i)
+    for (int i = 0; i < (int)CheckStore.size(); ++i)
         delete CheckStore[i];
 
     CheckStore.clear();

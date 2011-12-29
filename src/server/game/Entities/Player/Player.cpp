@@ -23858,7 +23858,7 @@ void Player::CompletedAchievement(AchievementEntry const* entry)
 bool Player::HasAchieved(uint32 entry)
 {
     if(AchievementEntry const *achievement = sAchievementStore.LookupEntry(entry))
-        return GetAchievementMgr().HasAchieved(achievement);
+        return GetAchievementMgr().HasAchieved(entry);
     return false;
 }	
 

@@ -1333,7 +1333,7 @@ public:
                     if (!player->HasEnoughMoney(10000000))
                     {
                         player->SendBuyError(BUY_ERR_NOT_ENOUGHT_MONEY, 0, 0, 0);
-                        player->PlayerTalkClass->SendCloseGossip();
+                        player->CLOSE_GOSSIP_MENU();
                         break;
                     }
                     else
@@ -1346,7 +1346,7 @@ public:
                         player->CastSpell(player, 63624, true, NULL, NULL, player->GetGUID());
 
                         // Should show another Gossip text with "Congratulations..."
-                        player->PlayerTalkClass->SendCloseGossip();
+                        player->CLOSE_GOSSIP_MENU();
                     }
                 }
                 break;
@@ -1951,7 +1951,9 @@ public:
                 {
                     DoCast(SPELL_SUMMON_BABY_BUNNY);
                     bunnyTimer = urand(20000, 40000);
-                }else bunnyTimer -= diff;
+                }
+                else 
+                    bunnyTimer -= diff;
             }
             else
             {
@@ -2891,7 +2893,7 @@ public:
                 player->SetFlag(PLAYER_FLAGS, PLAYER_FLAGS_NO_XP_GAIN);
             }
         }
-        player->PlayerTalkClass->SendCloseGossip();
+        player->CLOSE_GOSSIP_MENU();
         return true;
     }
 };
@@ -2902,7 +2904,6 @@ public:
 
 enum
 {
-<<<<<<< HEAD
     SPELL_TORCH_TOSSING_COMPLETE_A = 45719,
     SPELL_TORCH_TOSSING_COMPLETE_H = 46651,
     SPELL_TORCH_TOSSING_TRAINING   = 45716,
@@ -3066,41 +3067,6 @@ class npc_keg_delivery : public CreatureScript
 
         bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
         {
-            player->PlayerTalkClass->ClearMenus();
-=======
-    new npc_air_force_bots;
-    new npc_lunaclaw_spirit;
-    new npc_chicken_cluck;
-    new npc_dancing_flames;
-    new npc_doctor;
-    new npc_injured_patient;
-    new npc_garments_of_quests;
-    new npc_guardian;
-    new npc_kingdom_of_dalaran_quests;
-    new npc_mount_vendor;
-    new npc_rogue_trainer;
-    new npc_sayge;
-    new npc_steam_tonk;
-    new npc_tonk_mine;
-    new npc_winter_reveler;
-    new npc_brewfest_reveler;
-    new npc_snake_trap;
-    new npc_mirror_image;
-    new npc_ebon_gargoyle;
-    new npc_lightwell;
-    new mob_mojo;
-    new npc_training_dummy;
-    new npc_shadowfiend;
-    new npc_wormhole;
-    new npc_pet_trainer;
-    new npc_locksmith;
-    new npc_tabard_vendor;
-    new npc_experience;
-    new npc_fire_elemental;
-    new npc_earth_elemental;
-}
->>>>>>> 3bd80d2bdf29f18eefe976fc645a9989aace7904
-
             if (action == GOSSIP_ACTION_INFO_DEF + 1)
             {
                 player->CastSpell(player, SPELL_RENTAL_RACING_RAM, true);
@@ -3108,7 +3074,7 @@ class npc_keg_delivery : public CreatureScript
                 creature->AddAura(SPELL_RELAY_RACE_DEBUFF, player);
                 player->CLOSE_GOSSIP_MENU();
             }
-
+            player->CLOSE_GOSSIP_MENU();
             return true;
         }
 

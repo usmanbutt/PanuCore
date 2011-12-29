@@ -6324,22 +6324,12 @@ void Spell::EffectChargeDest(SpellEffIndex /*effIndex*/)
 
     if (m_targets.HasDst())
     {
-<<<<<<< HEAD
-        //if (m_caster->ToPlayer())
-        //    sAnticheatMgr->DisableAnticheatDetection(m_caster->ToPlayer());
-
-        float x, y, z;
-        m_targets.GetDst()->GetPosition(x, y, z);
-        m_caster->GetMotionMaster()->MoveCharge(x, y, z);
-=======
         Position pos;
         m_targets.GetDst()->GetPosition(&pos);
         float angle = m_caster->GetRelativeAngle(pos.GetPositionX(), pos.GetPositionY());
         float dist = m_caster->GetDistance(pos);
         m_caster->GetFirstCollisionPosition(pos, dist, angle);
-
         m_caster->GetMotionMaster()->MoveCharge(pos.m_positionX, pos.m_positionY, pos.m_positionZ);
->>>>>>> 3bd80d2bdf29f18eefe976fc645a9989aace7904
     }
 }
 
