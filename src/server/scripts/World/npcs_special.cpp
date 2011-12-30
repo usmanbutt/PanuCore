@@ -1333,7 +1333,7 @@ public:
                     if (!player->HasEnoughMoney(10000000))
                     {
                         player->SendBuyError(BUY_ERR_NOT_ENOUGHT_MONEY, 0, 0, 0);
-                        player->PlayerTalkClass->SendCloseGossip();
+                        player->CLOSE_GOSSIP_MENU();
                         break;
                     }
                     else
@@ -1346,7 +1346,7 @@ public:
                         player->CastSpell(player, 63624, true, NULL, NULL, player->GetGUID());
 
                         // Should show another Gossip text with "Congratulations..."
-                        player->PlayerTalkClass->SendCloseGossip();
+                        player->CLOSE_GOSSIP_MENU();
                     }
                 }
                 break;
@@ -1951,7 +1951,9 @@ public:
                 {
                     DoCast(SPELL_SUMMON_BABY_BUNNY);
                     bunnyTimer = urand(20000, 40000);
-                }else bunnyTimer -= diff;
+                }
+                else 
+                    bunnyTimer -= diff;
             }
             else
             {
@@ -2254,6 +2256,121 @@ public:
     CreatureAI* GetAI(Creature* creature) const
     {
         return new npc_shadowfiendAI(creature);
+    }
+};
+
+/*######
+# npc_fire_elemental
+######*/
+#define SPELL_FIRENOVA        12470
+#define SPELL_FIRESHIELD      13376
+#define SPELL_FIREBLAST       57984
+
+class npc_fire_elemental : public CreatureScript
+{
+public:
+    npc_fire_elemental() : CreatureScript("npc_fire_elemental") { }
+
+    struct npc_fire_elementalAI : public ScriptedAI
+    {
+        npc_fire_elementalAI(Creature* creature) : ScriptedAI(creature) {}
+
+        uint32 FireNova_Timer;
+        uint32 FireShield_Timer;
+        uint32 FireBlast_Timer;
+
+        void Reset()
+        {
+            FireNova_Timer = 5000 + rand() % 15000; // 5-20 sec cd
+            FireBlast_Timer = 5000 + rand() % 15000; // 5-20 sec cd
+            FireShield_Timer = 0;
+            me->ApplySpellImmune(0, IMMUNITY_SCHOOL, SPELL_SCHOOL_MASK_FIRE, true);
+        }
+
+        void UpdateAI(const uint32 diff)
+        {
+            if (!UpdateVictim())
+                return;
+
+            if (me->HasUnitState(UNIT_STAT_CASTING))
+                return;
+
+            if (FireShield_Timer <= diff)
+            {
+                DoCast(me->getVictim(), SPELL_FIRESHIELD);
+                FireShield_Timer = 2 * IN_MILLISECONDS;
+            }
+            else
+                FireShield_Timer -= diff;
+
+            if (FireBlast_Timer <= diff)
+            {
+                DoCast(me->getVictim(), SPELL_FIREBLAST);
+                FireBlast_Timer = 5000 + rand() % 15000; // 5-20 sec cd
+            }
+            else
+                FireBlast_Timer -= diff;
+
+            if (FireNova_Timer <= diff)
+            {
+                DoCast(me->getVictim(), SPELL_FIRENOVA);
+                FireNova_Timer = 5000 + rand() % 15000; // 5-20 sec cd
+            }
+            else
+                FireNova_Timer -= diff;
+
+            DoMeleeAttackIfReady();
+        }
+    };
+
+    CreatureAI *GetAI(Creature* creature) const
+    {
+        return new npc_fire_elementalAI(creature);
+    }
+};
+
+/*######
+# npc_earth_elemental
+######*/
+#define SPELL_ANGEREDEARTH        36213
+
+class npc_earth_elemental : public CreatureScript
+{
+public:
+    npc_earth_elemental() : CreatureScript("npc_earth_elemental") { }
+
+    struct npc_earth_elementalAI : public ScriptedAI
+    {
+        npc_earth_elementalAI(Creature* creature) : ScriptedAI(creature) {}
+
+        uint32 AngeredEarth_Timer;
+
+        void Reset()
+        {
+            AngeredEarth_Timer = 0;
+            me->ApplySpellImmune(0, IMMUNITY_SCHOOL, SPELL_SCHOOL_MASK_NATURE, true);
+        }
+
+        void UpdateAI(const uint32 diff)
+        {
+            if (!UpdateVictim())
+                return;
+
+            if (AngeredEarth_Timer <= diff)
+            {
+                DoCast(me->getVictim(), SPELL_ANGEREDEARTH);
+                AngeredEarth_Timer = 5000 + rand() % 15000; // 5-20 sec cd
+            }
+            else
+                AngeredEarth_Timer -= diff;
+
+            DoMeleeAttackIfReady();
+        }
+    };
+
+    CreatureAI *GetAI(Creature* creature) const
+    {
+        return new npc_earth_elementalAI(creature);
     }
 };
 
@@ -2776,7 +2893,7 @@ public:
                 player->SetFlag(PLAYER_FLAGS, PLAYER_FLAGS_NO_XP_GAIN);
             }
         }
-        player->PlayerTalkClass->SendCloseGossip();
+        player->CLOSE_GOSSIP_MENU();
         return true;
     }
 };
@@ -2950,8 +3067,6 @@ class npc_keg_delivery : public CreatureScript
 
         bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
         {
-            player->PlayerTalkClass->ClearMenus();
-
             if (action == GOSSIP_ACTION_INFO_DEF + 1)
             {
                 player->CastSpell(player, SPELL_RENTAL_RACING_RAM, true);
@@ -2959,7 +3074,7 @@ class npc_keg_delivery : public CreatureScript
                 creature->AddAura(SPELL_RELAY_RACE_DEBUFF, player);
                 player->CLOSE_GOSSIP_MENU();
             }
-
+            player->CLOSE_GOSSIP_MENU();
             return true;
         }
 
