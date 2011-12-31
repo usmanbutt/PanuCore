@@ -3016,6 +3016,9 @@ void SpellMgr::LoadDbcDataCorrections()
 
         switch (spellInfo->Id)
         {
+            case 23881: // Warrior's Bloodthirst
+                spellInfo->EffectImplicitTargetA[1] = TARGET_UNIT_CASTER;
+                break;
             case 24259: // Felhunter's Spell Lock
                 spellInfo->speed = 80;
                 break;
