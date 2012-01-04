@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -26,6 +26,8 @@
 #include "SpellAuraEffects.h"
 #include "SkillDiscovery.h"
 #include "GridNotifiers.h"
+#include "Group.h"
+#include "LFGMgr.h"
 
 class spell_gen_absorb0_hitlimit1 : public SpellScriptLoader
 {
@@ -606,6 +608,9 @@ class spell_creature_permanent_feign_death : public SpellScriptLoader
                 Unit* target = GetTarget();
                 target->SetFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_DEAD);
                 target->SetFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH);
+
+                if (target->GetTypeId() == TYPEID_UNIT)
+                    target->ToCreature()->SetReactState(REACT_PASSIVE);
             }
 
             void Register()

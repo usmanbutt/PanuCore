@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -72,8 +72,10 @@ enum eSpells
 
     SPELL_BLACK_KNIGHT_RES  = 67693,
 
-    SPELL_LEAP                          = 67749,
-    SPELL_LEAP_H                        = 67880
+    SPELL_LEAP              = 67749,
+    SPELL_LEAP_H            = 67880,
+
+    SPELL_KILL_CREDIT       = 68663
 };
 
 enum eModels
@@ -416,6 +418,7 @@ class boss_black_knight : public CreatureScript
         {
             //uiState=ENABLE;
             DoScriptText(SAY_DEATH_3, me);
+            DoCast(me, SPELL_KILL_CREDIT);
             if (GameObject* pGO = GameObject::GetGameObject(*me, pInstance->GetData64(DATA_MAIN_GATE1)))
                 pInstance->HandleGameObject(pGO->GetGUID(),true);
             // Prevent corpse despawning
@@ -433,7 +436,7 @@ class boss_black_knight : public CreatureScript
             if (Map* instance = me->GetMap())
             {
                 Creature* npc = instance->GetCreature(pInstance->GetData64(DATA_ANNOUNCER));
-                //fix brutale per il loot Â°OÂ°
+                //fix brutale per il loot °O°
 
                 if (pInstance)
                     pInstance->SetBossState(NPC_BLACK_KNIGHT, DONE);
