@@ -3022,9 +3022,6 @@ void SpellMgr::LoadDbcDataCorrections()
             case 24259: // Felhunter's Spell Lock
                 spellInfo->speed = 80;
                 break;
-            case 23881: // Bloodthirst
-                spellInfo->EffectImplicitTargetA[1] = 1;
-                break;
             case 48278:
                 spellInfo->Targets = 1;
                 spellInfo->StackAmount = 3;
