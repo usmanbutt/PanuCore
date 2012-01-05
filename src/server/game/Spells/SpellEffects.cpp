@@ -5729,6 +5729,12 @@ void Spell::EffectStuck(SpellEffIndex /*effIndex*/)
     if (!sWorld->getBoolConfig(CONFIG_CAST_UNSTUCK))
         return;
 
+    if (m_caster->getClass() == CLASS_DEATH_KNIGHT && m_caster->GetMapId() == 609)
+    {
+        SendCastResult(SPELL_FAILED_NOT_HERE);
+        return;
+    }
+
     Player* target = (Player*)m_caster;
 
     // Prevent players from trying to unstuck themselves in the Jail box.
