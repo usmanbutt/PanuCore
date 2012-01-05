@@ -3016,11 +3016,11 @@ void SpellMgr::LoadDbcDataCorrections()
 
         switch (spellInfo->Id)
         {
+            case 23881: // Warrior's Bloodthirst
+                spellInfo->EffectImplicitTargetA[1] = TARGET_UNIT_CASTER;
+                break;
             case 24259: // Felhunter's Spell Lock
                 spellInfo->speed = 80;
-                break;
-            case 23881: // Bloodthirst
-                spellInfo->EffectImplicitTargetA[1] = 1;
                 break;
             case 48278:
                 spellInfo->Targets = 1;
@@ -3073,6 +3073,10 @@ void SpellMgr::LoadDbcDataCorrections()
             case 8494: // Mana Shield (rank 2)
                 // because of bug in dbc
                 spellInfo->procChance = 0;
+                break;
+            case 39920: // Soulgrinder beam effect
+            case 39921: // Vim'Gol: Pentagram Beam
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
                 break;
             case 20335: // Heart of the Crusader
             case 20336:
