@@ -961,6 +961,7 @@ class WorldSession
         uint32 recruiterId;
         bool isRecruiter;
         ACE_Based::LockedQueue<WorldPacket*, ACE_Thread_Mutex> _recvQueue;
+        time_t timeLastWhoCommand;
 };
 #endif
 /// @}

@@ -431,12 +431,25 @@ void SmartAI::MovementInform(uint32 MovementType, uint32 Data)
     MovepointReached(Data);
 }
 
+void SmartAI::RemoveAuras()
+{
+    // Only loop throught the applied auras, because here is where all auras on the current unit are stored
+    Unit::AuraApplicationMap appliedAuras = me->GetAppliedAuras();
+    for (Unit::AuraApplicationMap::iterator iter = appliedAuras.begin(); iter != appliedAuras.end(); ++iter)
+    {
+        Aura const* aura = iter->second->GetBase();
+        if (!aura->GetSpellInfo()->IsPassive() && !aura->GetSpellInfo()->HasAura(SPELL_AURA_CONTROL_VEHICLE) && aura->GetCaster() != me)
+            me->RemoveAurasDueToSpell(aura->GetId());
+    }
+}
+
 void SmartAI::EnterEvadeMode()
 {
     if (!me->isAlive())
         return;
 
-    me->RemoveAllAuras();
+    RemoveAuras();
+    
     me->DeleteThreatList();
     me->CombatStop(true);
     me->LoadCreaturesAddon();
