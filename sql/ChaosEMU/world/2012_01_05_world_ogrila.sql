@@ -9,7 +9,7 @@ SET @NPC_PENTAGRAM_RESETER  := 23040;
 
 SET @SPELL_PENTAGRAM_VISUAL := 39921;
 
-UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN  (@NPC_VIMGOL, @NPC_PENTAGRAM_RESETER, @NPC_PENTAGRAM_BUNNY);;
+UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN  (@NPC_VIMGOL, @NPC_PENTAGRAM_RESETER, @NPC_PENTAGRAM_BUNNY);
 
 DELETE FROM `conditions` WHERE SourceTypeOrReferenceId = 13 AND SourceEntry IN (@SPELL_PENTAGRAM_VISUAL);
 INSERT INTO `conditions` VALUES
@@ -42,8 +42,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 
 DELETE FROM creature_text WHERE entry IN (@NPC_VIMGOL);
 INSERT INTO creature_text (entry, groupid, id, TEXT, TYPE, LANGUAGE, probability, emote, duration, sound, COMMENT) VALUES
-(@NPC_VIMGOL,1,0,'¿Cómo osais invocarme?',14,0,100,1,0,0,'GomVil - Intro'),
-(@NPC_VIMGOL,2,0,'¡Ahora yo crecer y machacaros!',14,0,100,1,0,0,'GomVil - Enrage');
+(@NPC_VIMGOL,1,0,'Å¼CÃ³mo osais invocarme?',14,0,100,1,0,0,'GomVil - Intro'),
+(@NPC_VIMGOL,2,0,'Ë‡Ahora yo crecer y machacaros!',14,0,100,1,0,0,'GomVil - Enrage');
 /*(@NPC_VIMGOL,1,0,'You dare summon me?',14,0,100,1,0,0,'GomVil - Intro'),
 (@NPC_VIMGOL,2,0,'Now me grow bigger and crush you!',14,0,100,1,0,0,'GomVil - Enrage');*/
 
