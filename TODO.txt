@@ -28,6 +28,12 @@
 -Algalons achievements (kill without player death)
 -fix Portal NPC of Gunship Battle to walk on the Ship
 -fix rare issue that gunships are invisible ( active object issue)
+-add missing script events to Pit ofSaron
+-fix intro event in pit of saron
+-fix waves and wave counter in HoR
+-fix killing at lich kings frostaura in HoR
+-add better summon positions in HoR at Lichking
+-add better position for icewall summons
 
 
 ############################################################################################
@@ -40,3 +46,4 @@
 -move the SQL files to old folder if a new DB in the DB repo is released (or update pack)
 -add loot for mimirons cache freya and thorim too
 -add c++ support for ulduar trashmobs
+-fix portal teleport in frozen halls
