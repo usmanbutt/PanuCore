@@ -4598,11 +4598,14 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
                 case 26465:
                     unitTarget->RemoveAuraFromStack(26464);
                     return;
+                // Shield-Breaker - Argent Tournament
                 case 62575:
                 {
-                    if (m_caster->GetOwner())
+                    if(m_caster->GetOwner())
                         m_caster->GetOwner()->CastSpell(unitTarget,62626,true );
-                    return;
+                    else
+                        m_caster->CastSpell(unitTarget,62626,true );
+                        return;
                 }
                 case 62960:
                 {
@@ -4612,15 +4615,28 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
                     m_caster->CastSpell(unitTarget,68321,true );
                     return;
                 }
-                case 62626:
-                case 68321:
+                // Charge - Argent Tournament
+                case 68282:
                 {
                     if (!unitTarget)
                         return;
+                    m_caster->CastSpell(unitTarget,68284,true);
+                }
+                // Shield-Breaker - Argent Tournament
+                case 62626:
+                // Charge - Argent Tournament
+                case 68321:
+                {
+                    if(!unitTarget)
+                        return;
                     if (unitTarget->GetAura(62719))
                         unitTarget->RemoveAuraFromStack(62719);
+
                     if(unitTarget->GetAura(64100))
                         unitTarget->RemoveAuraFromStack(64100);
+
+                    if(Aura* defend = unitTarget->GetAura(66482))
+                        defend->ModStackAmount(-1);
                     return;
                 }
                 // Shadow Flame (All script effects, not just end ones to prevent player from dodging the last triggered spell)
