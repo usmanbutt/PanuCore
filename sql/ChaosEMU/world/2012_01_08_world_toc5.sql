@@ -288,9 +288,9 @@ INSERT INTO `script_texts` (`npc_entry`,`entry`,`content_default`,`sound`,`type`
 (0,@SCRIPT_TEXTS_ID-12, 'ˇ%s begins to invoke the Waking Nightmare!',0,3,0,0, 'Paletress - Memory warning.'),
 (0,@SCRIPT_TEXTS_ID-13, '%s targets $N with the Hammer of Righteous!',0,3,0,0, 'Eadric - Combat - Warning - Hammer'),
 (0,@SCRIPT_TEXTS_ID-20, '$N has risen to the ranks of champion in our tournament. We are proud to present him today.',0,1,0,1, 'ToC5 Player presentation'),
-(0,@SCRIPT_TEXTS_ID-21, '$GUn:Una; $Gpoderoso:poderosa; $Gcampeón:campeona;, $Gun:una; $Gcapacitado:capacitada; $c, $gun:una; honorable $r. Presentamos a $N.',13838,1,0,1, 'ToC5 Player presentation'),
+(0,@SCRIPT_TEXTS_ID-21, 'We offer a mighty capable $c, an honorable $r.  We present $N.',13838,1,0,1, 'ToC5 Player presentation'),
 (0,@SCRIPT_TEXTS_ID-22, 'If you do not yet know his name, we are certain you will after these battles. We present, $N.',13838,1,0,1, 'ToC5 Player presentation'),
-(0,@SCRIPT_TEXTS_ID-23, '$GUno:Una; de $glos:las; más $gfieros:fieras; $cs in the field of battle, presented $N.',13838,1,0,1, 'ToC5 Player presentation'),
+(0,@SCRIPT_TEXTS_ID-23, 'Champions on the tournament ground speak highly of this  $c  Today we present $N.',13838,1,0,1, 'ToC5 Player presentation'),
 (0,@SCRIPT_TEXTS_ID-24, 'If you still do not know his name, we are sure you will do after this fight. Introducing $N.',13838,1,0,1, 'ToC5 Player presentation');
 
 -- Texts
