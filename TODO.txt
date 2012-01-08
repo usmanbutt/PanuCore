@@ -22,7 +22,6 @@
 
 -Add EoE Scripts from Darkman1983
 -fix algalons cosmic smash visual [fix in old core]
--add ToCH scripts
 -fix mimirons jump to his phase2 bot (he dont move to him)
 -fix Ulduar releated achievements
 -Algalons achievements (kill without player death)
@@ -34,6 +33,8 @@
 -fix killing at lich kings frostaura in HoR
 -add better summon positions in HoR at Lichking
 -add better position for icewall summons
+-add better wintergrasp codes
+
 
 
 ############################################################################################
@@ -47,3 +48,4 @@
 -add loot for mimirons cache freya and thorim too
 -add c++ support for ulduar trashmobs
 -fix portal teleport in frozen halls
+-add sound id's at svalas script texts
