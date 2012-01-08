@@ -15614,9 +15614,13 @@ bool Player::SatisfyQuestSeasonal(Quest const* qInfo, bool /*msg*/)
 {
     if (!qInfo->IsSeasonal() || m_seasonalquests.empty())
         return true;
-    if (m_seasonalquests.find(qInfo->GetSeasonalQuestEvent()) == m_seasonalquests.end()) return false;
+
+    uint16 eventId = sGameEventMgr->GetEventIdForQuest(qInfo);
+    if (m_seasonalquests.find(eventId) == m_seasonalquests.end())
+        return false;
+
     // if not found in cooldown list
-    return m_seasonalquests[qInfo->GetSeasonalQuestEvent()].find(qInfo->GetQuestId()) == m_seasonalquests[qInfo->GetSeasonalQuestEvent()].end();
+    return m_seasonalquests[eventId].find(qInfo->GetQuestId()) == m_seasonalquests[eventId].end();
 }
 
 bool Player::GiveQuestSourceItem(Quest const* quest)
@@ -18079,7 +18083,8 @@ void Player::_LoadWeeklyQuestStatus(PreparedQueryResult result)
     {
         do
         {
-            uint32 quest_id = (*result)[0].GetUInt32();
+            Field* fields = result->Fetch();
+            uint32 quest_id = fields[0].GetUInt32();
             Quest const* quest = sObjectMgr->GetQuestTemplate(quest_id);
             if (!quest)
                 continue;
@@ -18101,8 +18106,9 @@ void Player::_LoadSeasonalQuestStatus(PreparedQueryResult result)
     {
         do
         {
-            uint32 quest_id = (*result)[0].GetUInt32();
-            uint16 event_id = (*result)[1].GetUInt16();
+            Field* fields = result->Fetch();
+            uint32 quest_id = fields[0].GetUInt32();
+            uint32 event_id = fields[1].GetUInt32();
             Quest const* quest = sObjectMgr->GetQuestTemplate(quest_id);
             if (!quest)
                 continue;
@@ -19320,18 +19326,18 @@ void Player::_SaveSeasonalQuestStatus(SQLTransaction& trans)
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_QUEST_STATUS_SEASONAL_CHAR);
     stmt->setUInt32(0, GetGUIDLow());
     trans->Append(stmt);
-    
+
     for (SeasonalEventQuestMap::const_iterator iter = m_seasonalquests.begin(); iter != m_seasonalquests.end(); ++iter)
     {
-        uint16 event_id  = iter->first;
-        for (SeasonalQuestSet::const_iterator itr = (iter->second).begin(); itr != (iter->second).end(); ++itr)
+        uint16 event_id = iter->first;
+        for (SeasonalQuestSet::const_iterator itr = iter->second.begin(); itr != iter->second.end(); ++itr)
         {
-            uint32 quest_id  = (*itr);
+            uint32 quest_id = (*itr);
 
             PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_CHARACTER_SEASONALQUESTSTATUS);
-            stmt->setUInt32(0,GetGUIDLow());
-            stmt->setUInt32(1,quest_id);
-            stmt->setUInt16(1,event_id);
+            stmt->setUInt32(0, GetGUIDLow());
+            stmt->setUInt32(1, quest_id);
+            stmt->setUInt32(2, event_id);
             trans->Append(stmt);
         }
     }
@@ -22043,6 +22049,8 @@ void Player::SendInitialPacketsBeforeAddToMap()
     // SMSG_PET_GUIDS
     // SMSG_UPDATE_WORLD_STATE
     // SMSG_POWER_UPDATE
+
+    SetMover(this);
 }
 
 void Player::SendInitialPacketsAfterAddToMap()
@@ -22433,11 +22441,11 @@ void Player::SetWeeklyQuestStatus(uint32 quest_id)
 
 void Player::SetSeasonalQuestStatus(uint32 quest_id)
 {
-    Quest const* q = sObjectMgr->GetQuestTemplate(quest_id);
-    if (!q)
+    Quest const* quest = sObjectMgr->GetQuestTemplate(quest_id);
+    if (!quest)
         return;
-    
-    m_seasonalquests[q->GetSeasonalQuestEvent()].insert(quest_id);
+
+    m_seasonalquests[sGameEventMgr->GetEventIdForQuest(quest)].insert(quest_id);
     m_SeasonalQuestChanged = true;
 }
 
