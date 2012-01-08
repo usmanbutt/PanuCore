@@ -26,6 +26,8 @@
 -fix mimirons jump to his phase2 bot (he dont move to him)
 -fix Ulduar releated achievements
 -Algalons achievements (kill without player death)
+-fix Portal NPC of Gunship Battle to walk on the Ship
+-fix rare issue that gunships are invisible ( active object issue)
 
 
 ############################################################################################
