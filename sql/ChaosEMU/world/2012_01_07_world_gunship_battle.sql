@@ -284,3 +284,5 @@ UPDATE `gameobject_template` SET `data1` = 201874 WHERE `entry` = 202179;
 UPDATE `gameobject_template` SET `data1` = 201875 WHERE `entry` = 202180;
 
 UPDATE item_template SET ScriptName = 'item_icc_rocket_pack' WHERE entry = 49278;
+
+UPDATE `creature_template` SET `npcflag`=1 WHERE `entry`=37184;
