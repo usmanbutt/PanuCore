@@ -20,7 +20,8 @@
 #                                                                                          #
 ############################################################################################
 
--Add EoE Scripts from Darkman1983
+-Add EoE Scripts
+-Add better Ruby Sanctum Scripts
 -fix algalons cosmic smash visual [fix in old core]
 -fix mimirons jump to his phase2 bot (he dont move to him)
 -fix Ulduar releated achievements
@@ -49,3 +50,7 @@
 -add c++ support for ulduar trashmobs
 -fix portal teleport in frozen halls
 -add sound id's at svalas script texts
+-add waypoints to icc upper spire trashmobs at plague part
+-add better hitbox for xt-002 in ulduar
+-add better hitbox for Halion in Ruby Sanctum
+-add better hitbox for onyxia in onyxias lair
