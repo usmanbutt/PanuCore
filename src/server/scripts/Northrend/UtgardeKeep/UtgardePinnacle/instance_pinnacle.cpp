@@ -170,8 +170,12 @@ public:
 
         void SetData64(uint32 type, uint64 data)
         {
-            if (type == DATA_SACRIFICED_PLAYER)
-                uiSacrificedPlayer = data;
+            switch (type)
+            {
+                case DATA_SACRIFICED_PLAYER:
+                    uiSacrificedPlayer = data;
+                    break;
+            }
         }
 
         uint32 GetData(uint32 type)
