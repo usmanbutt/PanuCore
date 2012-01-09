@@ -1344,6 +1344,12 @@ void Spell::DoAllEffectOnTarget(TargetInfo* target)
             AuraEffect* aurEff = m_spellAura->GetEffect(1);
             aurEff->SetAmount(CalculatePctU(aurEff->GetAmount(), damageInfo.damage));
         }
+
+        // Cobra Strikes 	
+        if (m_spellInfo->SpellFamilyName == SPELLFAMILY_HUNTER && m_spellInfo->SpellFamilyFlags[1] & 0x10000000)	
+            if (Unit * owner = caster->GetOwner())	
+                if (Aura* pAura = owner->GetAura(53257))	
+                    pAura->DropCharge();
         m_damage = damageInfo.damage;
     }
     // Passive spell hits/misses or active spells only misses (only triggers)
@@ -3831,6 +3837,9 @@ void Spell::SendSpellGo()
         castFlags |= CAST_FLAG_UNKNOWN_19;                   // same as in SMSG_SPELL_START
     }
 
+    if (m_targets.HasTraj())
+        castFlags |= CAST_FLAG_ADJUST_MISSILE;
+
     WorldPacket data(SMSG_SPELL_GO, 50);                    // guess size
 
     if (m_CastItem)
@@ -3873,11 +3882,10 @@ void Spell::SendSpellGo()
             }
         }
     }
-
-    if (castFlags & CAST_FLAG_UNKNOWN_18)
+    if (castFlags & CAST_FLAG_ADJUST_MISSILE)
     {
-        data << float(0);
-        data << uint32(0);
+        data << m_targets.GetElevation();
+        data << uint32(m_targets.GetSpeedXY()*m_targets.GetSpeedZ()*2);
     }
 
     if (castFlags & CAST_FLAG_AMMO)

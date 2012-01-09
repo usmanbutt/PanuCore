@@ -20,12 +20,22 @@
 #                                                                                          #
 ############################################################################################
 
--Add EoE Scripts from Darkman1983
+-Add EoE Scripts
+-Add better Ruby Sanctum Scripts
 -fix algalons cosmic smash visual [fix in old core]
--add ToCH scripts
 -fix mimirons jump to his phase2 bot (he dont move to him)
 -fix Ulduar releated achievements
 -Algalons achievements (kill without player death)
+-fix Portal NPC of Gunship Battle to walk on the Ship
+-fix rare issue that gunships are invisible ( active object issue)
+-add missing script events to Pit ofSaron
+-fix intro event in pit of saron
+-fix waves and wave counter in HoR
+-fix killing at lich kings frostaura in HoR
+-add better summon positions in HoR at Lichking
+-add better position for icewall summons
+-add better wintergrasp codes
+
 
 
 ############################################################################################
@@ -38,3 +48,9 @@
 -move the SQL files to old folder if a new DB in the DB repo is released (or update pack)
 -add loot for mimirons cache freya and thorim too
 -add c++ support for ulduar trashmobs
+-fix portal teleport in frozen halls
+-add sound id's at svalas script texts
+-add waypoints to icc upper spire trashmobs at plague part
+-add better hitbox for xt-002 in ulduar
+-add better hitbox for Halion in Ruby Sanctum
+-add better hitbox for onyxia in onyxias lair

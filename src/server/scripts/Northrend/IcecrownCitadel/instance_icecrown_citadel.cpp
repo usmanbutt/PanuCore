@@ -1005,7 +1005,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                 return false;
             }
 
-            bool CheckRequiredBosses(uint32 bossId, Player const* player = NULL) const
+           /*bool CheckRequiredBosses(uint32 bossId, Player const* player = NULL) const
             {
                 if (player && AccountMgr::IsGMAccount(player->GetSession()->GetSecurity()))
                     return true;
@@ -1044,9 +1044,9 @@ class instance_icecrown_citadel : public InstanceMapScript
                     return false;
 
                 return true;
-            }
+            }*/
 
-            bool CheckPlagueworks(uint32 bossId) const
+            /*bool CheckPlagueworks(uint32 bossId) const
             {
                 switch (bossId)
                 {
@@ -1063,9 +1063,9 @@ class instance_icecrown_citadel : public InstanceMapScript
                 }
 
                 return true;
-            }
+            }*/
 
-            bool CheckCrimsonHalls(uint32 bossId) const
+            /*bool CheckCrimsonHalls(uint32 bossId) const
             {
                 switch (bossId)
                 {
@@ -1082,9 +1082,9 @@ class instance_icecrown_citadel : public InstanceMapScript
                 }
 
                 return true;
-            }
+            }*/
 
-            bool CheckFrostwingHalls(uint32 bossId) const
+            /*bool CheckFrostwingHalls(uint32 bossId) const
             {
                 switch (bossId)
                 {
@@ -1101,9 +1101,9 @@ class instance_icecrown_citadel : public InstanceMapScript
                 }
 
                 return true;
-            }
+            }*/
 
-            bool CheckLowerSpire(uint32 bossId) const
+            /*bool CheckLowerSpire(uint32 bossId) const
             {
                 switch (bossId)
                 {
@@ -1136,7 +1136,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                 }
 
                 return true;
-            }
+            }*/
 
             std::string GetSaveData()
             {

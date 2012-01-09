@@ -1069,7 +1069,7 @@ class npc_muradin_gunship : public CreatureScript
                             }
                             break;
                         case EVENT_OUTRO_ALLIANCE_1:
-  //                          _instance->DoCompleteAchievement(RAID_MODE(IM_ON_A_BOAT_10,IM_ON_A_BOAT_25,IM_ON_A_BOAT_10,IM_ON_A_BOAT_25));
+                            _instance->DoCompleteAchievement(RAID_MODE(IM_ON_A_BOAT_10,IM_ON_A_BOAT_25,IM_ON_A_BOAT_10,IM_ON_A_BOAT_25));
                             _instance->DoCastSpellOnPlayers(SPELL_ACHIEVEMENT_CHECK);
                             StartFlyShip(skybreaker);
                             StopFlyShip(CheckUnfriendlyShip(me,_instance,DATA_GB_HIGH_OVERLORD_SAURFANG));
@@ -2248,7 +2248,7 @@ class npc_saurfang_gunship : public CreatureScript
                             }
                             break;
                         case EVENT_OUTRO_HORDE_1:
-//                            _instance->DoCompleteAchievement(RAID_MODE(IM_ON_A_BOAT_10,IM_ON_A_BOAT_25,IM_ON_A_BOAT_10,IM_ON_A_BOAT_25));
+                            _instance->DoCompleteAchievement(RAID_MODE(IM_ON_A_BOAT_10,IM_ON_A_BOAT_25,IM_ON_A_BOAT_10,IM_ON_A_BOAT_25));
                             _instance->DoCastSpellOnPlayers(SPELL_ACHIEVEMENT_CHECK);
                             StartFlyShip(orgrimmar);
                             StopFlyShip(CheckUnfriendlyShip(me,_instance,DATA_GB_MURADIN_BRONZEBEARD));

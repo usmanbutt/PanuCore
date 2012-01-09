@@ -126,7 +126,6 @@ WorldSession::~WorldSession()
 
     if (_warden)
         delete _warden;
-
     ///- empty incoming packet queue
     WorldPacket* packet = NULL;
     while (_recvQueue.next(packet))
@@ -152,7 +151,6 @@ uint32 WorldSession::GetGuidLow() const
 {
     return GetPlayer() ? GetPlayer()->GetGUIDLow() : 0;
 }
-
 /// Send a packet to the client
 void WorldSession::SendPacket(WorldPacket const* packet)
 {
@@ -361,7 +359,6 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
 
     if (m_Socket && !m_Socket->IsClosed() && _warden)
         _warden->Update();
-
     ProcessQueryCallbacks();
 
     //check if we are safe to proceed with logout
@@ -375,7 +372,6 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
 
         if (m_Socket && GetPlayer() && _warden)
             _warden->Update();
-
         ///- Cleanup socket pointer if need
         if (m_Socket && m_Socket->IsClosed())
         {
@@ -1118,7 +1114,6 @@ void WorldSession::ProcessQueryCallbacks()
         _stableSwapCallback.FreeResult();
     }
 }
-
 void WorldSession::InitWarden(BigNumber* k, std::string os)
 {
     if (os == "Win")
