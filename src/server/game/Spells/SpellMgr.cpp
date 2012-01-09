@@ -3027,12 +3027,6 @@ void SpellMgr::LoadDbcDataCorrections()
             case 24259: // Felhunter's Spell Lock
                 spellInfo->speed = 80;
                 break;
-            case 48278:
-                spellInfo->Targets = 1;
-                spellInfo->StackAmount = 3;
-                spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_TARGET_ENEMY;
-                spellInfo->EffectImplicitTargetB[0] = TARGET_UNIT_NEARBY_ENEMY;
-                break;
             case 30657: // Quake
                 spellInfo->EffectTriggerSpell[0] = 30571;
                 break;
