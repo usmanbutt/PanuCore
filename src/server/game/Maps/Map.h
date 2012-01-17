@@ -459,6 +459,8 @@ class Map : public GridRefManager<NGridType>
         void SetDynLOSObjectState(uint32 id, bool state);
         bool GetDynLOSObjectState(uint32 id);
         bool IsInDynLOS(float x, float y, float z, float x2, float y2, float z2);
+        float GetWaterOrGroundLevel(float x, float y, float z, float* ground = NULL, bool swim = false) const;
+
     private:
         std::map<uint32, DynamicLOSObject*> m_dynamicLOSObjects;
         uint32 m_dynamicLOSCounter;

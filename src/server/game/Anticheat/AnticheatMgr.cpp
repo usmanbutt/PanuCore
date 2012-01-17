@@ -97,7 +97,7 @@ void AnticheatMgr::TeleportPlaneHackDetection(Player* player, MovementInfo movem
     if (movementInfo.HasMovementFlag(MOVEMENTFLAG_FALLING))
         return;
 
-    if (player->getDeathState() == DEAD_FALLING)
+    if (player->getDeathState() == DEAD)
         return;
     float x, y, z;
     player->GetPosition(x, y, z);
