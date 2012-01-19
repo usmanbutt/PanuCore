@@ -178,7 +178,6 @@ class instance_icecrown_citadel : public InstanceMapScript
                 if (!TeamInInstance)
                     TeamInInstance = player->GetTeam();
 
-                PrepareGunshipEvent(); // Spawn Gunship Event
             }
 
             void OnCreatureCreate(Creature* creature)
@@ -682,7 +681,6 @@ class instance_icecrown_citadel : public InstanceMapScript
                 switch (type)
                 {
                     case DATA_LADY_DEATHWHISPER:
-                        SetBossState(DATA_GUNSHIP_EVENT, state);    // TEMP HACK UNTIL GUNSHIP SCRIPTED
                         if (state == DONE)
                         {
                             if (GameObject* elevator = instance->GetGameObject(LadyDeathwisperElevatorGUID))
@@ -690,6 +688,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                                 elevator->SetUInt32Value(GAMEOBJECT_LEVEL, 0);
                                 elevator->SetGoState(GO_STATE_READY);
                             }
+                        PrepareGunshipEvent(); // Spawn Gunship Event
                         }
                         break;
                     case DATA_DEATHBRINGER_SAURFANG:
