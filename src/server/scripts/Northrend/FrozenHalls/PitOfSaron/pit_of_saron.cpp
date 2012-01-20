@@ -544,7 +544,7 @@ public:
                                 if (sChampions->isAlive())
                                 {
                                     sChampions->AttackStop();
-                                    sChampions->GetMotionMaster()->MoveFall(476.96f, 0);
+                                    sChampions->GetMotionMaster()->MoveFall();
                                 }
                             }
 
@@ -557,7 +557,7 @@ public:
                                 if (sChampions->isAlive())
                                 {
                                     sChampions->AttackStop();
-                                    sChampions->GetMotionMaster()->MoveFall(497.59f, 0);
+                                    sChampions->GetMotionMaster()->MoveFall();
                                 }
                             }
 
@@ -570,7 +570,7 @@ public:
                                 if (sChampions->isAlive())
                                 {
                                     sChampions->AttackStop();
-                                    sChampions->GetMotionMaster()->MoveFall(497.59f, 0);
+                                    sChampions->GetMotionMaster()->MoveFall();
                                 }
                             }
                             ++StartPhase;

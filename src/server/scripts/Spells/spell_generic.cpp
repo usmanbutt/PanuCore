@@ -1466,33 +1466,61 @@ public:
     }
 };
 
-class spell_gen_luck_of_the_draw: public SpellScriptLoader
+class spell_gen_luck_of_the_draw : public SpellScriptLoader
 {
-public:
-    spell_gen_luck_of_the_draw() : SpellScriptLoader("spell_gen_luck_of_the_draw") { }
+    public:
+        spell_gen_luck_of_the_draw() : SpellScriptLoader("spell_gen_luck_of_the_draw") { }
 
-    class spell_gen_luck_of_the_draw_SpellScript : public SpellScript
-    {
-        PrepareSpellScript(spell_gen_luck_of_the_draw_SpellScript)
-
-        void HandleHit(SpellEffIndex /*effIndex*/)
+        class spell_gen_luck_of_the_draw_AuraScript : public AuraScript
         {
-            if (Unit* target = GetHitUnit())
-                if (Map* map = target->GetMap())
-                    if (!map->IsDungeon())
-                        target->RemoveAurasDueToSpell(GetSpellInfo()->Id);
-        }
+            PrepareAuraScript(spell_gen_luck_of_the_draw_AuraScript);
 
-        void Register()
+            // cheap hax to make it have update calls
+            void CalcPeriodic(AuraEffect const* /*effect*/, bool& isPeriodic, int32& amplitude)
+            {
+                isPeriodic = true;
+                amplitude = 5 * IN_MILLISECONDS;
+            }
+
+            void Update(AuraEffect* /*effect*/)
+            {
+                if (GetUnitOwner()->GetTypeId() != TYPEID_PLAYER)
+                    return;
+
+                const LfgDungeonSet dungeons = sLFGMgr->GetSelectedDungeons(GetUnitOwner()->GetGUID());
+                LfgDungeonSet::const_iterator itr = dungeons.begin();
+                
+                if (itr == dungeons.end())
+                {
+                    Remove(AURA_REMOVE_BY_DEFAULT);
+                    return;
+                }
+
+
+                LFGDungeonEntry const* randomDungeon = sLFGDungeonStore.LookupEntry(*itr);
+                Group* group = GetUnitOwner()->ToPlayer()->GetGroup();
+                Map const* map = GetUnitOwner()->GetMap();
+                if (group && group->isLFGGroup())
+                    if (uint32 dungeonId = sLFGMgr->GetDungeon(group->GetGUID(), true))
+                        if (LFGDungeonEntry const* dungeon = sLFGDungeonStore.LookupEntry(dungeonId))
+                            if (dungeon->map == map->GetId() && dungeon->difficulty == map->GetDifficulty())
+                                if (randomDungeon && randomDungeon->type == LFG_TYPE_RANDOM)
+                                    return; // in correct dungeon
+
+                Remove(AURA_REMOVE_BY_DEFAULT);
+            }
+
+            void Register()
+            {
+                DoEffectCalcPeriodic += AuraEffectCalcPeriodicFn(spell_gen_luck_of_the_draw_AuraScript::CalcPeriodic, EFFECT_0, SPELL_AURA_MOD_DAMAGE_PERCENT_DONE);
+                OnEffectUpdatePeriodic += AuraEffectUpdatePeriodicFn(spell_gen_luck_of_the_draw_AuraScript::Update, EFFECT_0, SPELL_AURA_MOD_DAMAGE_PERCENT_DONE);
+            }
+        };
+
+        AuraScript* GetAuraScript() const
         {
-            OnEffectHitTarget += SpellEffectFn(spell_gen_luck_of_the_draw_SpellScript::HandleHit, EFFECT_0, SPELL_EFFECT_APPLY_AURA);
+            return new spell_gen_luck_of_the_draw_AuraScript();
         }
-    };
-
-    SpellScript* GetSpellScript() const
-    {
-        return new spell_gen_luck_of_the_draw_SpellScript();
-    }
 };
 
 enum TheTurkinator
@@ -1566,6 +1594,82 @@ class spell_gen_turkey_tracker : public SpellScriptLoader
         }
 };
 
+enum DalaranDisguiseSpells
+{
+    SPELL_SUNREAVER_DISGUISE_TRIGGER       = 69672,
+    SPELL_SUNREAVER_DISGUISE_FEMALE        = 70973,
+    SPELL_SUNREAVER_DISGUISE_MALE          = 70974,
+
+    SPELL_SILVER_COVENANT_DISGUISE_TRIGGER = 69673,
+    SPELL_SILVER_COVENANT_DISGUISE_FEMALE  = 70971,
+    SPELL_SILVER_COVENANT_DISGUISE_MALE    = 70972,
+};
+
+class spell_gen_dalaran_disguise : public SpellScriptLoader
+{
+    public:
+        spell_gen_dalaran_disguise(const char* name) : SpellScriptLoader(name) {}
+
+        class spell_gen_dalaran_disguise_SpellScript : public SpellScript
+        {
+            PrepareSpellScript(spell_gen_dalaran_disguise_SpellScript);
+            bool Validate(SpellInfo const* spellEntry)
+            {
+                switch (spellEntry->Id)
+                {
+                    case SPELL_SUNREAVER_DISGUISE_TRIGGER:
+                        if (!sSpellMgr->GetSpellInfo(SPELL_SUNREAVER_DISGUISE_FEMALE))
+                            return false;
+                        if (!sSpellMgr->GetSpellInfo(SPELL_SUNREAVER_DISGUISE_MALE))
+                            return false;
+                        break;
+                    case SPELL_SILVER_COVENANT_DISGUISE_TRIGGER:
+                        if (!sSpellMgr->GetSpellInfo(SPELL_SILVER_COVENANT_DISGUISE_FEMALE))
+                            return false;
+                        if (!sSpellMgr->GetSpellInfo(SPELL_SILVER_COVENANT_DISGUISE_MALE))
+                            return false;
+                        break;
+                }
+                return true;
+            }
+
+            void HandleScript(SpellEffIndex /*effIndex*/)
+            {
+
+                if (Player* player = GetHitPlayer())
+                {
+                    uint8 gender = player->getGender();
+
+                    uint32 spellId = GetSpellInfo()->Id;
+
+                    switch (spellId)
+                    {
+                        case SPELL_SUNREAVER_DISGUISE_TRIGGER:
+                            spellId = gender ? SPELL_SUNREAVER_DISGUISE_FEMALE : SPELL_SUNREAVER_DISGUISE_MALE;
+                            break;
+                        case SPELL_SILVER_COVENANT_DISGUISE_TRIGGER:
+                            spellId = gender ? SPELL_SILVER_COVENANT_DISGUISE_FEMALE : SPELL_SILVER_COVENANT_DISGUISE_MALE;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    GetCaster()->CastSpell(player, spellId, true);
+                }
+            }
+
+            void Register()
+            {
+                OnEffectHitTarget += SpellEffectFn(spell_gen_dalaran_disguise_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
+            }
+        };
+
+        SpellScript* GetSpellScript() const
+        {
+            return new spell_gen_dalaran_disguise_SpellScript();
+        }
+};
+
 void AddSC_generic_spell_scripts()
 {
     new spell_gen_absorb0_hitlimit1();
@@ -1601,4 +1705,6 @@ void AddSC_generic_spell_scripts()
     new spell_gen_damage_reduction_aura();
     new spell_gen_luck_of_the_draw();
     new spell_gen_turkey_tracker();
+    new spell_gen_dalaran_disguise("spell_gen_sunreaver_disguise");
+    new spell_gen_dalaran_disguise("spell_gen_silver_covenant_disguise");
 }

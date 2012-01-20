@@ -15,17 +15,6 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* ScriptData
-SDName: Grizzly_Hills
-SD%Complete: 80
-SDComment: Quest support: 12231, 12247
-SDCategory: Grizzly Hills
-EndScriptData */
-
-/* ContentData
-npc_orsonn_and_kodian
-EndContentData */
-
 #include "ScriptPCH.h"
 #include "ScriptedEscortAI.h"
 
@@ -901,7 +890,6 @@ public:
 
 void AddSC_grizzly_hills()
 {
-    new npc_orsonn_and_kodian;
     new npc_emily;
     new npc_mrfloppy;
     new npc_outhouse_bunny;

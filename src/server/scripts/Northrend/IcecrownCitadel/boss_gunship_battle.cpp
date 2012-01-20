@@ -753,13 +753,6 @@ class npc_muradin_gunship : public CreatureScript
             InstanceScript* pInstance = pCreature->GetInstanceScript();
             if (pInstance && pInstance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE)
             {
-                if ((!player->GetGroup() || !player->GetGroup()->IsLeader(player->GetGUID())) && !player->isGameMaster())
-                {
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "I'm not the raid leader...", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
-                    player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
-                    return true;
-                }
-
                 player->ADD_GOSSIP_ITEM(0, "My companions are all accounted for, Muradin. Let's go!", 631, 1001);
                 player->SEND_GOSSIP_MENU(player->GetGossipTextId(pCreature), pCreature->GetGUID());
                 return true;
@@ -772,9 +765,6 @@ class npc_muradin_gunship : public CreatureScript
             InstanceScript* instance = pCreature->GetInstanceScript();
             player->PlayerTalkClass->ClearMenus();
             player->CLOSE_GOSSIP_MENU();
-
-            if (action == GOSSIP_ACTION_INFO_DEF+2)
-                pCreature->MonsterSay("I'll wait for the raid leader.", LANG_UNIVERSAL, player->GetGUID());
 
             if (action == 1001)
             {
@@ -1956,13 +1946,6 @@ class npc_saurfang_gunship : public CreatureScript
             InstanceScript* pInstance = pCreature->GetInstanceScript();
             if (pInstance && pInstance->GetData(DATA_TEAM_IN_INSTANCE) == HORDE)
             {
-                if ((!player->GetGroup() || !player->GetGroup()->IsLeader(player->GetGUID())) && !player->isGameMaster())
-                {
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "I'm not the raid leader...", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
-                    player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
-                    return true;
-                }
-
                 player->ADD_GOSSIP_ITEM(0, "My companions are all accounted for, Saurfang. Let's go!", 631, 1001);
                 player->SEND_GOSSIP_MENU(player->GetGossipTextId(pCreature), pCreature->GetGUID());
                 return true;
@@ -1975,9 +1958,6 @@ class npc_saurfang_gunship : public CreatureScript
             InstanceScript* instance = pCreature->GetInstanceScript();
             player->PlayerTalkClass->ClearMenus();
             player->CLOSE_GOSSIP_MENU();
-
-            if (action == GOSSIP_ACTION_INFO_DEF+2)
-                pCreature->MonsterSay("I'll wait for the raid leader.", LANG_UNIVERSAL, player->GetGUID());
 
             if (action == 1001)
             {
