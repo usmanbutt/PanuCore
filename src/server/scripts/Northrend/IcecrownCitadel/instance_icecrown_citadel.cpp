@@ -178,7 +178,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                 if (!TeamInInstance)
                     TeamInInstance = player->GetTeam();
 
-
+		PrepareGunshipEvent(); // Spawn Gunship Event
 
 
 
