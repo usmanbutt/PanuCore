@@ -15866,6 +15866,7 @@ bool Unit::SetCharmedBy(Unit* charmer, CharmType type, AuraApplication const* au
             case CHARM_TYPE_VEHICLE:
                 SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PLAYER_CONTROLLED);
                 charmer->ToPlayer()->SetClientControl(this, 1);
+                charmer->ToPlayer()->SetMover(this);
                 charmer->ToPlayer()->SetViewpoint(this, true);
                 charmer->ToPlayer()->VehicleSpellInitialize();
                 break;
@@ -15874,6 +15875,7 @@ bool Unit::SetCharmedBy(Unit* charmer, CharmType type, AuraApplication const* au
                 SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PLAYER_CONTROLLED);
                 charmer->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
                 charmer->ToPlayer()->SetClientControl(this, 1);
+                charmer->ToPlayer()->SetMover(this);
                 charmer->ToPlayer()->SetViewpoint(this, true);
                 charmer->ToPlayer()->PossessSpellInitialize();
                 break;
@@ -17003,7 +17005,7 @@ void Unit::_ExitVehicle(Position const* exitPosition)
 
     WorldPacket data2;
     BuildHeartBeatMsg(&data2);
-    SendMessageToSet(&data2, true);
+    SendMessageToSet(&data2, false);
 
     if (vehicle->GetBase()->HasUnitTypeMask(UNIT_MASK_MINION))
         if (((Minion*)vehicle->GetBase())->GetOwner() == this)

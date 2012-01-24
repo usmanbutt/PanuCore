@@ -3,7 +3,7 @@
 # Server version:               5.5.19
 # Server OS:                    Win64
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2012-01-08 10:03:14
+# Date/time:                    2012-01-23 21:24:36
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,7 +11,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-# Dumping structure for table [wotlk]_characters.account_data
+# Dumping structure for table characters.account_data
 DROP TABLE IF EXISTS `account_data`;
 CREATE TABLE IF NOT EXISTS `account_data` (
   `accountId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
@@ -21,13 +21,13 @@ CREATE TABLE IF NOT EXISTS `account_data` (
   PRIMARY KEY (`accountId`,`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.account_data: ~0 rows (approximately)
+# Dumping data for table characters.account_data: ~0 rows (approximately)
 DELETE FROM `account_data`;
 /*!40000 ALTER TABLE `account_data` DISABLE KEYS */;
 /*!40000 ALTER TABLE `account_data` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.account_instance_times
+# Dumping structure for table characters.account_instance_times
 DROP TABLE IF EXISTS `account_instance_times`;
 CREATE TABLE IF NOT EXISTS `account_instance_times` (
   `accountId` int(10) unsigned NOT NULL,
@@ -36,13 +36,13 @@ CREATE TABLE IF NOT EXISTS `account_instance_times` (
   PRIMARY KEY (`accountId`,`instanceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.account_instance_times: ~0 rows (approximately)
+# Dumping data for table characters.account_instance_times: ~0 rows (approximately)
 DELETE FROM `account_instance_times`;
 /*!40000 ALTER TABLE `account_instance_times` DISABLE KEYS */;
 /*!40000 ALTER TABLE `account_instance_times` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.account_tutorial
+# Dumping structure for table characters.account_tutorial
 DROP TABLE IF EXISTS `account_tutorial`;
 CREATE TABLE IF NOT EXISTS `account_tutorial` (
   `accountId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
@@ -57,13 +57,13 @@ CREATE TABLE IF NOT EXISTS `account_tutorial` (
   PRIMARY KEY (`accountId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.account_tutorial: ~0 rows (approximately)
+# Dumping data for table characters.account_tutorial: ~0 rows (approximately)
 DELETE FROM `account_tutorial`;
 /*!40000 ALTER TABLE `account_tutorial` DISABLE KEYS */;
 /*!40000 ALTER TABLE `account_tutorial` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.addons
+# Dumping structure for table characters.addons
 DROP TABLE IF EXISTS `addons`;
 CREATE TABLE IF NOT EXISTS `addons` (
   `name` varchar(120) NOT NULL DEFAULT '',
@@ -71,13 +71,13 @@ CREATE TABLE IF NOT EXISTS `addons` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Addons';
 
-# Dumping data for table [wotlk]_characters.addons: ~0 rows (approximately)
+# Dumping data for table characters.addons: ~0 rows (approximately)
 DELETE FROM `addons`;
 /*!40000 ALTER TABLE `addons` DISABLE KEYS */;
 /*!40000 ALTER TABLE `addons` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.arena_team
+# Dumping structure for table characters.arena_team
 DROP TABLE IF EXISTS `arena_team`;
 CREATE TABLE IF NOT EXISTS `arena_team` (
   `arenaTeamId` int(10) unsigned NOT NULL DEFAULT '0',
@@ -98,13 +98,13 @@ CREATE TABLE IF NOT EXISTS `arena_team` (
   PRIMARY KEY (`arenaTeamId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.arena_team: ~0 rows (approximately)
+# Dumping data for table characters.arena_team: ~0 rows (approximately)
 DELETE FROM `arena_team`;
 /*!40000 ALTER TABLE `arena_team` DISABLE KEYS */;
 /*!40000 ALTER TABLE `arena_team` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.arena_team_member
+# Dumping structure for table characters.arena_team_member
 DROP TABLE IF EXISTS `arena_team_member`;
 CREATE TABLE IF NOT EXISTS `arena_team_member` (
   `arenaTeamId` int(10) unsigned NOT NULL DEFAULT '0',
@@ -117,13 +117,13 @@ CREATE TABLE IF NOT EXISTS `arena_team_member` (
   PRIMARY KEY (`arenaTeamId`,`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.arena_team_member: ~0 rows (approximately)
+# Dumping data for table characters.arena_team_member: ~0 rows (approximately)
 DELETE FROM `arena_team_member`;
 /*!40000 ALTER TABLE `arena_team_member` DISABLE KEYS */;
 /*!40000 ALTER TABLE `arena_team_member` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.armory_character_stats
+# Dumping structure for table characters.armory_character_stats
 DROP TABLE IF EXISTS `armory_character_stats`;
 CREATE TABLE IF NOT EXISTS `armory_character_stats` (
   `guid` int(11) NOT NULL,
@@ -132,13 +132,13 @@ CREATE TABLE IF NOT EXISTS `armory_character_stats` (
   PRIMARY KEY (`guid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='World of Warcraft Armory table';
 
-# Dumping data for table [wotlk]_characters.armory_character_stats: 0 rows
+# Dumping data for table characters.armory_character_stats: 0 rows
 DELETE FROM `armory_character_stats`;
 /*!40000 ALTER TABLE `armory_character_stats` DISABLE KEYS */;
 /*!40000 ALTER TABLE `armory_character_stats` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.armory_game_chart
+# Dumping structure for table characters.armory_game_chart
 DROP TABLE IF EXISTS `armory_game_chart`;
 CREATE TABLE IF NOT EXISTS `armory_game_chart` (
   `gameid` int(11) NOT NULL,
@@ -159,13 +159,13 @@ CREATE TABLE IF NOT EXISTS `armory_game_chart` (
   PRIMARY KEY (`gameid`,`teamid`,`guid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='WoWArmory Game Chart';
 
-# Dumping data for table [wotlk]_characters.armory_game_chart: 0 rows
+# Dumping data for table characters.armory_game_chart: 0 rows
 DELETE FROM `armory_game_chart`;
 /*!40000 ALTER TABLE `armory_game_chart` DISABLE KEYS */;
 /*!40000 ALTER TABLE `armory_game_chart` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.auctionhouse
+# Dumping structure for table characters.auctionhouse
 DROP TABLE IF EXISTS `auctionhouse`;
 CREATE TABLE IF NOT EXISTS `auctionhouse` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -182,13 +182,13 @@ CREATE TABLE IF NOT EXISTS `auctionhouse` (
   UNIQUE KEY `item_guid` (`itemguid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.auctionhouse: ~0 rows (approximately)
+# Dumping data for table characters.auctionhouse: ~0 rows (approximately)
 DELETE FROM `auctionhouse`;
 /*!40000 ALTER TABLE `auctionhouse` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auctionhouse` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.auctionhousebot
+# Dumping structure for table characters.auctionhousebot
 DROP TABLE IF EXISTS `auctionhousebot`;
 CREATE TABLE IF NOT EXISTS `auctionhousebot` (
   `auctionhouse` int(11) NOT NULL DEFAULT '0' COMMENT 'mapID of the auctionhouse.',
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `auctionhousebot` (
   PRIMARY KEY (`auctionhouse`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-# Dumping data for table [wotlk]_characters.auctionhousebot: ~3 rows (approximately)
+# Dumping data for table characters.auctionhousebot: ~3 rows (approximately)
 DELETE FROM `auctionhousebot`;
 /*!40000 ALTER TABLE `auctionhousebot` DISABLE KEYS */;
 INSERT INTO `auctionhousebot` (`auctionhouse`, `name`, `minitems`, `maxitems`, `percentgreytradegoods`, `percentwhitetradegoods`, `percentgreentradegoods`, `percentbluetradegoods`, `percentpurpletradegoods`, `percentorangetradegoods`, `percentyellowtradegoods`, `percentgreyitems`, `percentwhiteitems`, `percentgreenitems`, `percentblueitems`, `percentpurpleitems`, `percentorangeitems`, `percentyellowitems`, `minpricegrey`, `maxpricegrey`, `minpricewhite`, `maxpricewhite`, `minpricegreen`, `maxpricegreen`, `minpriceblue`, `maxpriceblue`, `minpricepurple`, `maxpricepurple`, `minpriceorange`, `maxpriceorange`, `minpriceyellow`, `maxpriceyellow`, `minbidpricegrey`, `maxbidpricegrey`, `minbidpricewhite`, `maxbidpricewhite`, `minbidpricegreen`, `maxbidpricegreen`, `minbidpriceblue`, `maxbidpriceblue`, `minbidpricepurple`, `maxbidpricepurple`, `minbidpriceorange`, `maxbidpriceorange`, `minbidpriceyellow`, `maxbidpriceyellow`, `maxstackgrey`, `maxstackwhite`, `maxstackgreen`, `maxstackblue`, `maxstackpurple`, `maxstackorange`, `maxstackyellow`, `buyerpricegrey`, `buyerpricewhite`, `buyerpricegreen`, `buyerpriceblue`, `buyerpricepurple`, `buyerpriceorange`, `buyerpriceyellow`, `buyerbiddinginterval`, `buyerbidsperinterval`) VALUES
@@ -266,7 +266,7 @@ INSERT INTO `auctionhousebot` (`auctionhouse`, `name`, `minitems`, `maxitems`, `
 /*!40000 ALTER TABLE `auctionhousebot` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.bugreport
+# Dumping structure for table characters.bugreport
 DROP TABLE IF EXISTS `bugreport`;
 CREATE TABLE IF NOT EXISTS `bugreport` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Identifier',
@@ -275,13 +275,13 @@ CREATE TABLE IF NOT EXISTS `bugreport` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Debug System';
 
-# Dumping data for table [wotlk]_characters.bugreport: ~0 rows (approximately)
+# Dumping data for table characters.bugreport: ~0 rows (approximately)
 DELETE FROM `bugreport`;
 /*!40000 ALTER TABLE `bugreport` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bugreport` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.channels
+# Dumping structure for table characters.channels
 DROP TABLE IF EXISTS `channels`;
 CREATE TABLE IF NOT EXISTS `channels` (
   `name` varchar(128) NOT NULL,
@@ -294,13 +294,13 @@ CREATE TABLE IF NOT EXISTS `channels` (
   PRIMARY KEY (`name`,`team`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Channel System';
 
-# Dumping data for table [wotlk]_characters.channels: ~0 rows (approximately)
+# Dumping data for table characters.channels: ~0 rows (approximately)
 DELETE FROM `channels`;
 /*!40000 ALTER TABLE `channels` DISABLE KEYS */;
 /*!40000 ALTER TABLE `channels` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.characters
+# Dumping structure for table characters.characters
 DROP TABLE IF EXISTS `characters`;
 CREATE TABLE IF NOT EXISTS `characters` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -380,13 +380,13 @@ CREATE TABLE IF NOT EXISTS `characters` (
   KEY `idx_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.characters: ~0 rows (approximately)
+# Dumping data for table characters.characters: ~0 rows (approximately)
 DELETE FROM `characters`;
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_account_data
+# Dumping structure for table characters.character_account_data
 DROP TABLE IF EXISTS `character_account_data`;
 CREATE TABLE IF NOT EXISTS `character_account_data` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -396,13 +396,13 @@ CREATE TABLE IF NOT EXISTS `character_account_data` (
   PRIMARY KEY (`guid`,`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_account_data: ~0 rows (approximately)
+# Dumping data for table characters.character_account_data: ~0 rows (approximately)
 DELETE FROM `character_account_data`;
 /*!40000 ALTER TABLE `character_account_data` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_account_data` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_achievement
+# Dumping structure for table characters.character_achievement
 DROP TABLE IF EXISTS `character_achievement`;
 CREATE TABLE IF NOT EXISTS `character_achievement` (
   `guid` int(10) unsigned NOT NULL,
@@ -411,13 +411,13 @@ CREATE TABLE IF NOT EXISTS `character_achievement` (
   PRIMARY KEY (`guid`,`achievement`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_achievement: ~0 rows (approximately)
+# Dumping data for table characters.character_achievement: ~0 rows (approximately)
 DELETE FROM `character_achievement`;
 /*!40000 ALTER TABLE `character_achievement` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_achievement` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_achievement_progress
+# Dumping structure for table characters.character_achievement_progress
 DROP TABLE IF EXISTS `character_achievement_progress`;
 CREATE TABLE IF NOT EXISTS `character_achievement_progress` (
   `guid` int(10) unsigned NOT NULL,
@@ -427,13 +427,13 @@ CREATE TABLE IF NOT EXISTS `character_achievement_progress` (
   PRIMARY KEY (`guid`,`criteria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_achievement_progress: ~0 rows (approximately)
+# Dumping data for table characters.character_achievement_progress: ~0 rows (approximately)
 DELETE FROM `character_achievement_progress`;
 /*!40000 ALTER TABLE `character_achievement_progress` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_achievement_progress` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_action
+# Dumping structure for table characters.character_action
 DROP TABLE IF EXISTS `character_action`;
 CREATE TABLE IF NOT EXISTS `character_action` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -444,13 +444,13 @@ CREATE TABLE IF NOT EXISTS `character_action` (
   PRIMARY KEY (`guid`,`spec`,`button`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_action: ~0 rows (approximately)
+# Dumping data for table characters.character_action: ~0 rows (approximately)
 DELETE FROM `character_action`;
 /*!40000 ALTER TABLE `character_action` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_action` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_arena_stats
+# Dumping structure for table characters.character_arena_stats
 DROP TABLE IF EXISTS `character_arena_stats`;
 CREATE TABLE IF NOT EXISTS `character_arena_stats` (
   `guid` int(10) NOT NULL,
@@ -459,13 +459,13 @@ CREATE TABLE IF NOT EXISTS `character_arena_stats` (
   PRIMARY KEY (`guid`,`slot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_arena_stats: ~0 rows (approximately)
+# Dumping data for table characters.character_arena_stats: ~0 rows (approximately)
 DELETE FROM `character_arena_stats`;
 /*!40000 ALTER TABLE `character_arena_stats` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_arena_stats` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_aura
+# Dumping structure for table characters.character_aura
 DROP TABLE IF EXISTS `character_aura`;
 CREATE TABLE IF NOT EXISTS `character_aura` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -487,13 +487,13 @@ CREATE TABLE IF NOT EXISTS `character_aura` (
   PRIMARY KEY (`guid`,`caster_guid`,`item_guid`,`spell`,`effect_mask`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_aura: ~0 rows (approximately)
+# Dumping data for table characters.character_aura: ~0 rows (approximately)
 DELETE FROM `character_aura`;
 /*!40000 ALTER TABLE `character_aura` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_aura` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_banned
+# Dumping structure for table characters.character_banned
 DROP TABLE IF EXISTS `character_banned`;
 CREATE TABLE IF NOT EXISTS `character_banned` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -505,13 +505,13 @@ CREATE TABLE IF NOT EXISTS `character_banned` (
   PRIMARY KEY (`guid`,`bandate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Ban List';
 
-# Dumping data for table [wotlk]_characters.character_banned: ~0 rows (approximately)
+# Dumping data for table characters.character_banned: ~0 rows (approximately)
 DELETE FROM `character_banned`;
 /*!40000 ALTER TABLE `character_banned` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_banned` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_battleground_data
+# Dumping structure for table characters.character_battleground_data
 DROP TABLE IF EXISTS `character_battleground_data`;
 CREATE TABLE IF NOT EXISTS `character_battleground_data` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -528,26 +528,26 @@ CREATE TABLE IF NOT EXISTS `character_battleground_data` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_battleground_data: ~0 rows (approximately)
+# Dumping data for table characters.character_battleground_data: ~0 rows (approximately)
 DELETE FROM `character_battleground_data`;
 /*!40000 ALTER TABLE `character_battleground_data` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_battleground_data` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_battleground_random
+# Dumping structure for table characters.character_battleground_random
 DROP TABLE IF EXISTS `character_battleground_random`;
 CREATE TABLE IF NOT EXISTS `character_battleground_random` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_battleground_random: ~0 rows (approximately)
+# Dumping data for table characters.character_battleground_random: ~0 rows (approximately)
 DELETE FROM `character_battleground_random`;
 /*!40000 ALTER TABLE `character_battleground_random` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_battleground_random` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_declinedname
+# Dumping structure for table characters.character_declinedname
 DROP TABLE IF EXISTS `character_declinedname`;
 CREATE TABLE IF NOT EXISTS `character_declinedname` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -559,13 +559,13 @@ CREATE TABLE IF NOT EXISTS `character_declinedname` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_declinedname: ~0 rows (approximately)
+# Dumping data for table characters.character_declinedname: ~0 rows (approximately)
 DELETE FROM `character_declinedname`;
 /*!40000 ALTER TABLE `character_declinedname` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_declinedname` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_equipmentsets
+# Dumping structure for table characters.character_equipmentsets
 DROP TABLE IF EXISTS `character_equipmentsets`;
 CREATE TABLE IF NOT EXISTS `character_equipmentsets` (
   `guid` int(10) NOT NULL DEFAULT '0',
@@ -597,13 +597,13 @@ CREATE TABLE IF NOT EXISTS `character_equipmentsets` (
   KEY `Idx_setindex` (`setindex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_equipmentsets: ~0 rows (approximately)
+# Dumping data for table characters.character_equipmentsets: ~0 rows (approximately)
 DELETE FROM `character_equipmentsets`;
 /*!40000 ALTER TABLE `character_equipmentsets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_equipmentsets` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_feed_log
+# Dumping structure for table characters.character_feed_log
 DROP TABLE IF EXISTS `character_feed_log`;
 CREATE TABLE IF NOT EXISTS `character_feed_log` (
   `guid` int(11) NOT NULL,
@@ -616,13 +616,13 @@ CREATE TABLE IF NOT EXISTS `character_feed_log` (
   `item_quality` smallint(6) NOT NULL DEFAULT '-1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_feed_log: 0 rows
+# Dumping data for table characters.character_feed_log: 0 rows
 DELETE FROM `character_feed_log`;
 /*!40000 ALTER TABLE `character_feed_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_feed_log` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_gifts
+# Dumping structure for table characters.character_gifts
 DROP TABLE IF EXISTS `character_gifts`;
 CREATE TABLE IF NOT EXISTS `character_gifts` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -633,13 +633,13 @@ CREATE TABLE IF NOT EXISTS `character_gifts` (
   KEY `idx_guid` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_gifts: ~0 rows (approximately)
+# Dumping data for table characters.character_gifts: ~0 rows (approximately)
 DELETE FROM `character_gifts`;
 /*!40000 ALTER TABLE `character_gifts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_gifts` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_glyphs
+# Dumping structure for table characters.character_glyphs
 DROP TABLE IF EXISTS `character_glyphs`;
 CREATE TABLE IF NOT EXISTS `character_glyphs` (
   `guid` int(10) unsigned NOT NULL,
@@ -653,13 +653,13 @@ CREATE TABLE IF NOT EXISTS `character_glyphs` (
   PRIMARY KEY (`guid`,`spec`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_glyphs: ~0 rows (approximately)
+# Dumping data for table characters.character_glyphs: ~0 rows (approximately)
 DELETE FROM `character_glyphs`;
 /*!40000 ALTER TABLE `character_glyphs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_glyphs` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_homebind
+# Dumping structure for table characters.character_homebind
 DROP TABLE IF EXISTS `character_homebind`;
 CREATE TABLE IF NOT EXISTS `character_homebind` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -671,13 +671,13 @@ CREATE TABLE IF NOT EXISTS `character_homebind` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_homebind: ~0 rows (approximately)
+# Dumping data for table characters.character_homebind: ~0 rows (approximately)
 DELETE FROM `character_homebind`;
 /*!40000 ALTER TABLE `character_homebind` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_homebind` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_instance
+# Dumping structure for table characters.character_instance
 DROP TABLE IF EXISTS `character_instance`;
 CREATE TABLE IF NOT EXISTS `character_instance` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -687,13 +687,13 @@ CREATE TABLE IF NOT EXISTS `character_instance` (
   KEY `instance` (`instance`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_instance: ~0 rows (approximately)
+# Dumping data for table characters.character_instance: ~0 rows (approximately)
 DELETE FROM `character_instance`;
 /*!40000 ALTER TABLE `character_instance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_instance` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_inventory
+# Dumping structure for table characters.character_inventory
 DROP TABLE IF EXISTS `character_inventory`;
 CREATE TABLE IF NOT EXISTS `character_inventory` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -705,13 +705,13 @@ CREATE TABLE IF NOT EXISTS `character_inventory` (
   KEY `idx_guid` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_inventory: ~0 rows (approximately)
+# Dumping data for table characters.character_inventory: ~0 rows (approximately)
 DELETE FROM `character_inventory`;
 /*!40000 ALTER TABLE `character_inventory` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_inventory` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_pet
+# Dumping structure for table characters.character_pet
 DROP TABLE IF EXISTS `character_pet`;
 CREATE TABLE IF NOT EXISTS `character_pet` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -736,13 +736,13 @@ CREATE TABLE IF NOT EXISTS `character_pet` (
   KEY `idx_slot` (`slot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Pet System';
 
-# Dumping data for table [wotlk]_characters.character_pet: ~0 rows (approximately)
+# Dumping data for table characters.character_pet: ~0 rows (approximately)
 DELETE FROM `character_pet`;
 /*!40000 ALTER TABLE `character_pet` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_pet` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_pet_declinedname
+# Dumping structure for table characters.character_pet_declinedname
 DROP TABLE IF EXISTS `character_pet_declinedname`;
 CREATE TABLE IF NOT EXISTS `character_pet_declinedname` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -756,13 +756,13 @@ CREATE TABLE IF NOT EXISTS `character_pet_declinedname` (
   KEY `owner_key` (`owner`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_pet_declinedname: ~0 rows (approximately)
+# Dumping data for table characters.character_pet_declinedname: ~0 rows (approximately)
 DELETE FROM `character_pet_declinedname`;
 /*!40000 ALTER TABLE `character_pet_declinedname` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_pet_declinedname` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_queststatus
+# Dumping structure for table characters.character_queststatus
 DROP TABLE IF EXISTS `character_queststatus`;
 CREATE TABLE IF NOT EXISTS `character_queststatus` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -782,13 +782,13 @@ CREATE TABLE IF NOT EXISTS `character_queststatus` (
   PRIMARY KEY (`guid`,`quest`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_queststatus: ~0 rows (approximately)
+# Dumping data for table characters.character_queststatus: ~0 rows (approximately)
 DELETE FROM `character_queststatus`;
 /*!40000 ALTER TABLE `character_queststatus` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_queststatus` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_queststatus_daily
+# Dumping structure for table characters.character_queststatus_daily
 DROP TABLE IF EXISTS `character_queststatus_daily`;
 CREATE TABLE IF NOT EXISTS `character_queststatus_daily` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -798,13 +798,13 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_daily` (
   KEY `idx_guid` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_queststatus_daily: ~0 rows (approximately)
+# Dumping data for table characters.character_queststatus_daily: ~0 rows (approximately)
 DELETE FROM `character_queststatus_daily`;
 /*!40000 ALTER TABLE `character_queststatus_daily` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_queststatus_daily` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_queststatus_rewarded
+# Dumping structure for table characters.character_queststatus_rewarded
 DROP TABLE IF EXISTS `character_queststatus_rewarded`;
 CREATE TABLE IF NOT EXISTS `character_queststatus_rewarded` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -812,13 +812,13 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_rewarded` (
   PRIMARY KEY (`guid`,`quest`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_queststatus_rewarded: ~0 rows (approximately)
+# Dumping data for table characters.character_queststatus_rewarded: ~0 rows (approximately)
 DELETE FROM `character_queststatus_rewarded`;
 /*!40000 ALTER TABLE `character_queststatus_rewarded` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_queststatus_rewarded` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_queststatus_seasonal
+# Dumping structure for table characters.character_queststatus_seasonal
 DROP TABLE IF EXISTS `character_queststatus_seasonal`;
 CREATE TABLE IF NOT EXISTS `character_queststatus_seasonal` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -828,13 +828,13 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_seasonal` (
   KEY `idx_guid` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_queststatus_seasonal: ~0 rows (approximately)
+# Dumping data for table characters.character_queststatus_seasonal: ~0 rows (approximately)
 DELETE FROM `character_queststatus_seasonal`;
 /*!40000 ALTER TABLE `character_queststatus_seasonal` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_queststatus_seasonal` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_queststatus_weekly
+# Dumping structure for table characters.character_queststatus_weekly
 DROP TABLE IF EXISTS `character_queststatus_weekly`;
 CREATE TABLE IF NOT EXISTS `character_queststatus_weekly` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -843,13 +843,13 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_weekly` (
   KEY `idx_guid` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_queststatus_weekly: ~0 rows (approximately)
+# Dumping data for table characters.character_queststatus_weekly: ~0 rows (approximately)
 DELETE FROM `character_queststatus_weekly`;
 /*!40000 ALTER TABLE `character_queststatus_weekly` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_queststatus_weekly` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_reputation
+# Dumping structure for table characters.character_reputation
 DROP TABLE IF EXISTS `character_reputation`;
 CREATE TABLE IF NOT EXISTS `character_reputation` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -859,13 +859,13 @@ CREATE TABLE IF NOT EXISTS `character_reputation` (
   PRIMARY KEY (`guid`,`faction`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_reputation: ~0 rows (approximately)
+# Dumping data for table characters.character_reputation: ~0 rows (approximately)
 DELETE FROM `character_reputation`;
 /*!40000 ALTER TABLE `character_reputation` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_reputation` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_skills
+# Dumping structure for table characters.character_skills
 DROP TABLE IF EXISTS `character_skills`;
 CREATE TABLE IF NOT EXISTS `character_skills` (
   `guid` int(10) unsigned NOT NULL COMMENT 'Global Unique Identifier',
@@ -875,13 +875,13 @@ CREATE TABLE IF NOT EXISTS `character_skills` (
   PRIMARY KEY (`guid`,`skill`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_skills: ~0 rows (approximately)
+# Dumping data for table characters.character_skills: ~0 rows (approximately)
 DELETE FROM `character_skills`;
 /*!40000 ALTER TABLE `character_skills` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_skills` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_social
+# Dumping structure for table characters.character_social
 DROP TABLE IF EXISTS `character_social`;
 CREATE TABLE IF NOT EXISTS `character_social` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Character Global Unique Identifier',
@@ -892,13 +892,13 @@ CREATE TABLE IF NOT EXISTS `character_social` (
   KEY `friend` (`friend`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_social: ~0 rows (approximately)
+# Dumping data for table characters.character_social: ~0 rows (approximately)
 DELETE FROM `character_social`;
 /*!40000 ALTER TABLE `character_social` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_social` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_spell
+# Dumping structure for table characters.character_spell
 DROP TABLE IF EXISTS `character_spell`;
 CREATE TABLE IF NOT EXISTS `character_spell` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -908,13 +908,13 @@ CREATE TABLE IF NOT EXISTS `character_spell` (
   PRIMARY KEY (`guid`,`spell`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.character_spell: ~0 rows (approximately)
+# Dumping data for table characters.character_spell: ~0 rows (approximately)
 DELETE FROM `character_spell`;
 /*!40000 ALTER TABLE `character_spell` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_spell` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_spell_cooldown
+# Dumping structure for table characters.character_spell_cooldown
 DROP TABLE IF EXISTS `character_spell_cooldown`;
 CREATE TABLE IF NOT EXISTS `character_spell_cooldown` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier, Low part',
@@ -924,13 +924,13 @@ CREATE TABLE IF NOT EXISTS `character_spell_cooldown` (
   PRIMARY KEY (`guid`,`spell`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_spell_cooldown: ~0 rows (approximately)
+# Dumping data for table characters.character_spell_cooldown: ~0 rows (approximately)
 DELETE FROM `character_spell_cooldown`;
 /*!40000 ALTER TABLE `character_spell_cooldown` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_spell_cooldown` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_stats
+# Dumping structure for table characters.character_stats
 DROP TABLE IF EXISTS `character_stats`;
 CREATE TABLE IF NOT EXISTS `character_stats` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier, Low part',
@@ -967,13 +967,13 @@ CREATE TABLE IF NOT EXISTS `character_stats` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_stats: ~0 rows (approximately)
+# Dumping data for table characters.character_stats: ~0 rows (approximately)
 DELETE FROM `character_stats`;
 /*!40000 ALTER TABLE `character_stats` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_stats` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.character_talent
+# Dumping structure for table characters.character_talent
 DROP TABLE IF EXISTS `character_talent`;
 CREATE TABLE IF NOT EXISTS `character_talent` (
   `guid` int(10) unsigned NOT NULL,
@@ -982,13 +982,13 @@ CREATE TABLE IF NOT EXISTS `character_talent` (
   PRIMARY KEY (`guid`,`spell`,`spec`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.character_talent: ~0 rows (approximately)
+# Dumping data for table characters.character_talent: ~0 rows (approximately)
 DELETE FROM `character_talent`;
 /*!40000 ALTER TABLE `character_talent` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_talent` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.corpse
+# Dumping structure for table characters.corpse
 DROP TABLE IF EXISTS `corpse`;
 CREATE TABLE IF NOT EXISTS `corpse` (
   `corpseGuid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -1016,13 +1016,13 @@ CREATE TABLE IF NOT EXISTS `corpse` (
   KEY `idx_time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Death System';
 
-# Dumping data for table [wotlk]_characters.corpse: ~0 rows (approximately)
+# Dumping data for table characters.corpse: ~0 rows (approximately)
 DELETE FROM `corpse`;
 /*!40000 ALTER TABLE `corpse` DISABLE KEYS */;
 /*!40000 ALTER TABLE `corpse` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.creature_respawn
+# Dumping structure for table characters.creature_respawn
 DROP TABLE IF EXISTS `creature_respawn`;
 CREATE TABLE IF NOT EXISTS `creature_respawn` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -1032,7 +1032,7 @@ CREATE TABLE IF NOT EXISTS `creature_respawn` (
   KEY `idx_instance` (`instanceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Grid Loading System';
 
-# Dumping data for table [wotlk]_characters.creature_respawn: ~6 rows (approximately)
+# Dumping data for table characters.creature_respawn: ~6 rows (approximately)
 DELETE FROM `creature_respawn`;
 /*!40000 ALTER TABLE `creature_respawn` DISABLE KEYS */;
 INSERT INTO `creature_respawn` (`guid`, `respawnTime`, `instanceId`) VALUES
@@ -1045,7 +1045,7 @@ INSERT INTO `creature_respawn` (`guid`, `respawnTime`, `instanceId`) VALUES
 /*!40000 ALTER TABLE `creature_respawn` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.daily_players_reports
+# Dumping structure for table characters.daily_players_reports
 DROP TABLE IF EXISTS `daily_players_reports`;
 CREATE TABLE IF NOT EXISTS `daily_players_reports` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1061,13 +1061,13 @@ CREATE TABLE IF NOT EXISTS `daily_players_reports` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.daily_players_reports: ~0 rows (approximately)
+# Dumping data for table characters.daily_players_reports: ~0 rows (approximately)
 DELETE FROM `daily_players_reports`;
 /*!40000 ALTER TABLE `daily_players_reports` DISABLE KEYS */;
 /*!40000 ALTER TABLE `daily_players_reports` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.gameobject_respawn
+# Dumping structure for table characters.gameobject_respawn
 DROP TABLE IF EXISTS `gameobject_respawn`;
 CREATE TABLE IF NOT EXISTS `gameobject_respawn` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -1077,13 +1077,13 @@ CREATE TABLE IF NOT EXISTS `gameobject_respawn` (
   KEY `idx_instance` (`instanceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Grid Loading System';
 
-# Dumping data for table [wotlk]_characters.gameobject_respawn: ~0 rows (approximately)
+# Dumping data for table characters.gameobject_respawn: ~0 rows (approximately)
 DELETE FROM `gameobject_respawn`;
 /*!40000 ALTER TABLE `gameobject_respawn` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gameobject_respawn` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.game_event_condition_save
+# Dumping structure for table characters.game_event_condition_save
 DROP TABLE IF EXISTS `game_event_condition_save`;
 CREATE TABLE IF NOT EXISTS `game_event_condition_save` (
   `eventEntry` tinyint(3) unsigned NOT NULL,
@@ -1092,13 +1092,13 @@ CREATE TABLE IF NOT EXISTS `game_event_condition_save` (
   PRIMARY KEY (`eventEntry`,`condition_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.game_event_condition_save: ~0 rows (approximately)
+# Dumping data for table characters.game_event_condition_save: ~0 rows (approximately)
 DELETE FROM `game_event_condition_save`;
 /*!40000 ALTER TABLE `game_event_condition_save` DISABLE KEYS */;
 /*!40000 ALTER TABLE `game_event_condition_save` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.game_event_save
+# Dumping structure for table characters.game_event_save
 DROP TABLE IF EXISTS `game_event_save`;
 CREATE TABLE IF NOT EXISTS `game_event_save` (
   `eventEntry` tinyint(3) unsigned NOT NULL,
@@ -1107,7 +1107,7 @@ CREATE TABLE IF NOT EXISTS `game_event_save` (
   PRIMARY KEY (`eventEntry`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.game_event_save: ~15 rows (approximately)
+# Dumping data for table characters.game_event_save: ~15 rows (approximately)
 DELETE FROM `game_event_save`;
 /*!40000 ALTER TABLE `game_event_save` DISABLE KEYS */;
 INSERT INTO `game_event_save` (`eventEntry`, `state`, `next_start`) VALUES
@@ -1129,7 +1129,7 @@ INSERT INTO `game_event_save` (`eventEntry`, `state`, `next_start`) VALUES
 /*!40000 ALTER TABLE `game_event_save` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.gmisland_teleport
+# Dumping structure for table characters.gmisland_teleport
 DROP TABLE IF EXISTS `gmisland_teleport`;
 CREATE TABLE IF NOT EXISTS `gmisland_teleport` (
   `map` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -1141,7 +1141,7 @@ CREATE TABLE IF NOT EXISTS `gmisland_teleport` (
   PRIMARY KEY (`map`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.gmisland_teleport: 1 rows
+# Dumping data for table characters.gmisland_teleport: 1 rows
 DELETE FROM `gmisland_teleport`;
 /*!40000 ALTER TABLE `gmisland_teleport` DISABLE KEYS */;
 INSERT INTO `gmisland_teleport` (`map`, `x`, `y`, `z`, `orientation`, `comment`) VALUES
@@ -1149,7 +1149,7 @@ INSERT INTO `gmisland_teleport` (`map`, `x`, `y`, `z`, `orientation`, `comment`)
 /*!40000 ALTER TABLE `gmisland_teleport` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.gm_subsurveys
+# Dumping structure for table characters.gm_subsurveys
 DROP TABLE IF EXISTS `gm_subsurveys`;
 CREATE TABLE IF NOT EXISTS `gm_subsurveys` (
   `surveyId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -1159,13 +1159,13 @@ CREATE TABLE IF NOT EXISTS `gm_subsurveys` (
   PRIMARY KEY (`surveyId`,`subsurveyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.gm_subsurveys: ~0 rows (approximately)
+# Dumping data for table characters.gm_subsurveys: ~0 rows (approximately)
 DELETE FROM `gm_subsurveys`;
 /*!40000 ALTER TABLE `gm_subsurveys` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gm_subsurveys` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.gm_surveys
+# Dumping structure for table characters.gm_surveys
 DROP TABLE IF EXISTS `gm_surveys`;
 CREATE TABLE IF NOT EXISTS `gm_surveys` (
   `surveyId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -1176,13 +1176,13 @@ CREATE TABLE IF NOT EXISTS `gm_surveys` (
   PRIMARY KEY (`surveyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.gm_surveys: ~0 rows (approximately)
+# Dumping data for table characters.gm_surveys: ~0 rows (approximately)
 DELETE FROM `gm_surveys`;
 /*!40000 ALTER TABLE `gm_surveys` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gm_surveys` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.gm_tickets
+# Dumping structure for table characters.gm_tickets
 DROP TABLE IF EXISTS `gm_tickets`;
 CREATE TABLE IF NOT EXISTS `gm_tickets` (
   `ticketId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -1204,13 +1204,13 @@ CREATE TABLE IF NOT EXISTS `gm_tickets` (
   PRIMARY KEY (`ticketId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.gm_tickets: ~0 rows (approximately)
+# Dumping data for table characters.gm_tickets: ~0 rows (approximately)
 DELETE FROM `gm_tickets`;
 /*!40000 ALTER TABLE `gm_tickets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gm_tickets` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.groups
+# Dumping structure for table characters.groups
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `guid` int(10) unsigned NOT NULL,
@@ -1233,13 +1233,13 @@ CREATE TABLE IF NOT EXISTS `groups` (
   KEY `leaderGuid` (`leaderGuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Groups';
 
-# Dumping data for table [wotlk]_characters.groups: ~0 rows (approximately)
+# Dumping data for table characters.groups: ~0 rows (approximately)
 DELETE FROM `groups`;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.group_instance
+# Dumping structure for table characters.group_instance
 DROP TABLE IF EXISTS `group_instance`;
 CREATE TABLE IF NOT EXISTS `group_instance` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1249,13 +1249,13 @@ CREATE TABLE IF NOT EXISTS `group_instance` (
   KEY `instance` (`instance`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.group_instance: ~0 rows (approximately)
+# Dumping data for table characters.group_instance: ~0 rows (approximately)
 DELETE FROM `group_instance`;
 /*!40000 ALTER TABLE `group_instance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `group_instance` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.group_member
+# Dumping structure for table characters.group_member
 DROP TABLE IF EXISTS `group_member`;
 CREATE TABLE IF NOT EXISTS `group_member` (
   `guid` int(10) unsigned NOT NULL,
@@ -1266,13 +1266,13 @@ CREATE TABLE IF NOT EXISTS `group_member` (
   PRIMARY KEY (`memberGuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Groups';
 
-# Dumping data for table [wotlk]_characters.group_member: ~0 rows (approximately)
+# Dumping data for table characters.group_member: ~0 rows (approximately)
 DELETE FROM `group_member`;
 /*!40000 ALTER TABLE `group_member` DISABLE KEYS */;
 /*!40000 ALTER TABLE `group_member` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild
+# Dumping structure for table characters.guild
 DROP TABLE IF EXISTS `guild`;
 CREATE TABLE IF NOT EXISTS `guild` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1290,13 +1290,13 @@ CREATE TABLE IF NOT EXISTS `guild` (
   PRIMARY KEY (`guildid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Guild System';
 
-# Dumping data for table [wotlk]_characters.guild: ~0 rows (approximately)
+# Dumping data for table characters.guild: ~0 rows (approximately)
 DELETE FROM `guild`;
 /*!40000 ALTER TABLE `guild` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild_bank_eventlog
+# Dumping structure for table characters.guild_bank_eventlog
 DROP TABLE IF EXISTS `guild_bank_eventlog`;
 CREATE TABLE IF NOT EXISTS `guild_bank_eventlog` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Guild Identificator',
@@ -1314,13 +1314,13 @@ CREATE TABLE IF NOT EXISTS `guild_bank_eventlog` (
   KEY `Idx_LogGuid` (`LogGuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.guild_bank_eventlog: ~0 rows (approximately)
+# Dumping data for table characters.guild_bank_eventlog: ~0 rows (approximately)
 DELETE FROM `guild_bank_eventlog`;
 /*!40000 ALTER TABLE `guild_bank_eventlog` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild_bank_eventlog` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild_bank_item
+# Dumping structure for table characters.guild_bank_item
 DROP TABLE IF EXISTS `guild_bank_item`;
 CREATE TABLE IF NOT EXISTS `guild_bank_item` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1332,13 +1332,13 @@ CREATE TABLE IF NOT EXISTS `guild_bank_item` (
   KEY `Idx_item_guid` (`item_guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.guild_bank_item: ~0 rows (approximately)
+# Dumping data for table characters.guild_bank_item: ~0 rows (approximately)
 DELETE FROM `guild_bank_item`;
 /*!40000 ALTER TABLE `guild_bank_item` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild_bank_item` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild_bank_right
+# Dumping structure for table characters.guild_bank_right
 DROP TABLE IF EXISTS `guild_bank_right`;
 CREATE TABLE IF NOT EXISTS `guild_bank_right` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1350,13 +1350,13 @@ CREATE TABLE IF NOT EXISTS `guild_bank_right` (
   KEY `guildid_key` (`guildid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.guild_bank_right: ~0 rows (approximately)
+# Dumping data for table characters.guild_bank_right: ~0 rows (approximately)
 DELETE FROM `guild_bank_right`;
 /*!40000 ALTER TABLE `guild_bank_right` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild_bank_right` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild_bank_tab
+# Dumping structure for table characters.guild_bank_tab
 DROP TABLE IF EXISTS `guild_bank_tab`;
 CREATE TABLE IF NOT EXISTS `guild_bank_tab` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1368,13 +1368,13 @@ CREATE TABLE IF NOT EXISTS `guild_bank_tab` (
   KEY `guildid_key` (`guildid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.guild_bank_tab: ~0 rows (approximately)
+# Dumping data for table characters.guild_bank_tab: ~0 rows (approximately)
 DELETE FROM `guild_bank_tab`;
 /*!40000 ALTER TABLE `guild_bank_tab` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild_bank_tab` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild_eventlog
+# Dumping structure for table characters.guild_eventlog
 DROP TABLE IF EXISTS `guild_eventlog`;
 CREATE TABLE IF NOT EXISTS `guild_eventlog` (
   `guildid` int(10) unsigned NOT NULL COMMENT 'Guild Identificator',
@@ -1390,13 +1390,13 @@ CREATE TABLE IF NOT EXISTS `guild_eventlog` (
   KEY `Idx_LogGuid` (`LogGuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Guild Eventlog';
 
-# Dumping data for table [wotlk]_characters.guild_eventlog: ~0 rows (approximately)
+# Dumping data for table characters.guild_eventlog: ~0 rows (approximately)
 DELETE FROM `guild_eventlog`;
 /*!40000 ALTER TABLE `guild_eventlog` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild_eventlog` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild_member
+# Dumping structure for table characters.guild_member
 DROP TABLE IF EXISTS `guild_member`;
 CREATE TABLE IF NOT EXISTS `guild_member` (
   `guildid` int(10) unsigned NOT NULL COMMENT 'Guild Identificator',
@@ -1423,13 +1423,13 @@ CREATE TABLE IF NOT EXISTS `guild_member` (
   KEY `guildid_rank_key` (`guildid`,`rank`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Guild System';
 
-# Dumping data for table [wotlk]_characters.guild_member: ~0 rows (approximately)
+# Dumping data for table characters.guild_member: ~0 rows (approximately)
 DELETE FROM `guild_member`;
 /*!40000 ALTER TABLE `guild_member` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild_member` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.guild_rank
+# Dumping structure for table characters.guild_rank
 DROP TABLE IF EXISTS `guild_rank`;
 CREATE TABLE IF NOT EXISTS `guild_rank` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1441,13 +1441,13 @@ CREATE TABLE IF NOT EXISTS `guild_rank` (
   KEY `Idx_rid` (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Guild System';
 
-# Dumping data for table [wotlk]_characters.guild_rank: ~0 rows (approximately)
+# Dumping data for table characters.guild_rank: ~0 rows (approximately)
 DELETE FROM `guild_rank`;
 /*!40000 ALTER TABLE `guild_rank` DISABLE KEYS */;
 /*!40000 ALTER TABLE `guild_rank` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.instance
+# Dumping structure for table characters.instance
 DROP TABLE IF EXISTS `instance`;
 CREATE TABLE IF NOT EXISTS `instance` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1462,13 +1462,13 @@ CREATE TABLE IF NOT EXISTS `instance` (
   KEY `difficulty` (`difficulty`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.instance: ~0 rows (approximately)
+# Dumping data for table characters.instance: ~0 rows (approximately)
 DELETE FROM `instance`;
 /*!40000 ALTER TABLE `instance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `instance` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.instance_reset
+# Dumping structure for table characters.instance_reset
 DROP TABLE IF EXISTS `instance_reset`;
 CREATE TABLE IF NOT EXISTS `instance_reset` (
   `mapid` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -1478,7 +1478,7 @@ CREATE TABLE IF NOT EXISTS `instance_reset` (
   KEY `difficulty` (`difficulty`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.instance_reset: ~71 rows (approximately)
+# Dumping data for table characters.instance_reset: ~71 rows (approximately)
 DELETE FROM `instance_reset`;
 /*!40000 ALTER TABLE `instance_reset` DISABLE KEYS */;
 INSERT INTO `instance_reset` (`mapid`, `difficulty`, `resettime`) VALUES
@@ -1556,7 +1556,7 @@ INSERT INTO `instance_reset` (`mapid`, `difficulty`, `resettime`) VALUES
 /*!40000 ALTER TABLE `instance_reset` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.item_instance
+# Dumping structure for table characters.item_instance
 DROP TABLE IF EXISTS `item_instance`;
 CREATE TABLE IF NOT EXISTS `item_instance` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1577,13 +1577,13 @@ CREATE TABLE IF NOT EXISTS `item_instance` (
   KEY `idx_owner_guid` (`owner_guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Item System';
 
-# Dumping data for table [wotlk]_characters.item_instance: ~0 rows (approximately)
+# Dumping data for table characters.item_instance: ~0 rows (approximately)
 DELETE FROM `item_instance`;
 /*!40000 ALTER TABLE `item_instance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `item_instance` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.item_refund_instance
+# Dumping structure for table characters.item_refund_instance
 DROP TABLE IF EXISTS `item_refund_instance`;
 CREATE TABLE IF NOT EXISTS `item_refund_instance` (
   `item_guid` int(10) unsigned NOT NULL COMMENT 'Item GUID',
@@ -1593,13 +1593,13 @@ CREATE TABLE IF NOT EXISTS `item_refund_instance` (
   PRIMARY KEY (`item_guid`,`player_guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Item Refund System';
 
-# Dumping data for table [wotlk]_characters.item_refund_instance: ~0 rows (approximately)
+# Dumping data for table characters.item_refund_instance: ~0 rows (approximately)
 DELETE FROM `item_refund_instance`;
 /*!40000 ALTER TABLE `item_refund_instance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `item_refund_instance` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.item_soulbound_trade_data
+# Dumping structure for table characters.item_soulbound_trade_data
 DROP TABLE IF EXISTS `item_soulbound_trade_data`;
 CREATE TABLE IF NOT EXISTS `item_soulbound_trade_data` (
   `itemGuid` int(10) unsigned NOT NULL COMMENT 'Item GUID',
@@ -1607,13 +1607,13 @@ CREATE TABLE IF NOT EXISTS `item_soulbound_trade_data` (
   PRIMARY KEY (`itemGuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Item Refund System';
 
-# Dumping data for table [wotlk]_characters.item_soulbound_trade_data: ~0 rows (approximately)
+# Dumping data for table characters.item_soulbound_trade_data: ~0 rows (approximately)
 DELETE FROM `item_soulbound_trade_data`;
 /*!40000 ALTER TABLE `item_soulbound_trade_data` DISABLE KEYS */;
 /*!40000 ALTER TABLE `item_soulbound_trade_data` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.jail
+# Dumping structure for table characters.jail
 DROP TABLE IF EXISTS `jail`;
 CREATE TABLE IF NOT EXISTS `jail` (
   `guid` int(11) unsigned NOT NULL COMMENT 'GUID of the jail brother',
@@ -1629,13 +1629,13 @@ CREATE TABLE IF NOT EXISTS `jail` (
   PRIMARY KEY (`guid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Jail table for Trinitycore by WarHead Edited by SPGM';
 
-# Dumping data for table [wotlk]_characters.jail: 0 rows
+# Dumping data for table characters.jail: 0 rows
 DELETE FROM `jail`;
 /*!40000 ALTER TABLE `jail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `jail` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.jail_conf
+# Dumping structure for table characters.jail_conf
 DROP TABLE IF EXISTS `jail_conf`;
 CREATE TABLE IF NOT EXISTS `jail_conf` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1647,7 +1647,7 @@ CREATE TABLE IF NOT EXISTS `jail_conf` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.jail_conf: 17 rows
+# Dumping data for table characters.jail_conf: 17 rows
 DELETE FROM `jail_conf`;
 /*!40000 ALTER TABLE `jail_conf` DISABLE KEYS */;
 INSERT INTO `jail_conf` (`id`, `obt`, `jail_conf`, `jail_tele`, `help_ger`, `help_enq`) VALUES
@@ -1671,7 +1671,7 @@ INSERT INTO `jail_conf` (`id`, `obt`, `jail_conf`, `jail_tele`, `help_ger`, `hel
 /*!40000 ALTER TABLE `jail_conf` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.lag_reports
+# Dumping structure for table characters.lag_reports
 DROP TABLE IF EXISTS `lag_reports`;
 CREATE TABLE IF NOT EXISTS `lag_reports` (
   `reportId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -1684,13 +1684,28 @@ CREATE TABLE IF NOT EXISTS `lag_reports` (
   PRIMARY KEY (`reportId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player System';
 
-# Dumping data for table [wotlk]_characters.lag_reports: ~0 rows (approximately)
+# Dumping data for table characters.lag_reports: ~0 rows (approximately)
 DELETE FROM `lag_reports`;
 /*!40000 ALTER TABLE `lag_reports` DISABLE KEYS */;
 /*!40000 ALTER TABLE `lag_reports` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.mail
+# Dumping structure for table characters.lfg_data
+DROP TABLE IF EXISTS `lfg_data`;
+CREATE TABLE IF NOT EXISTS `lfg_data` (
+  `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
+  `dungeon` int(10) unsigned NOT NULL DEFAULT '0',
+  `state` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='LFG Data';
+
+# Dumping data for table characters.lfg_data: ~0 rows (approximately)
+DELETE FROM `lfg_data`;
+/*!40000 ALTER TABLE `lfg_data` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lfg_data` ENABLE KEYS */;
+
+
+# Dumping structure for table characters.mail
 DROP TABLE IF EXISTS `mail`;
 CREATE TABLE IF NOT EXISTS `mail` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Identifier',
@@ -1711,13 +1726,13 @@ CREATE TABLE IF NOT EXISTS `mail` (
   KEY `idx_receiver` (`receiver`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Mail System';
 
-# Dumping data for table [wotlk]_characters.mail: ~0 rows (approximately)
+# Dumping data for table characters.mail: ~0 rows (approximately)
 DELETE FROM `mail`;
 /*!40000 ALTER TABLE `mail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mail` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.mail_external
+# Dumping structure for table characters.mail_external
 DROP TABLE IF EXISTS `mail_external`;
 CREATE TABLE IF NOT EXISTS `mail_external` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -1730,13 +1745,13 @@ CREATE TABLE IF NOT EXISTS `mail_external` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.mail_external: 0 rows
+# Dumping data for table characters.mail_external: 0 rows
 DELETE FROM `mail_external`;
 /*!40000 ALTER TABLE `mail_external` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mail_external` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.mail_items
+# Dumping structure for table characters.mail_items
 DROP TABLE IF EXISTS `mail_items`;
 CREATE TABLE IF NOT EXISTS `mail_items` (
   `mail_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1747,13 +1762,13 @@ CREATE TABLE IF NOT EXISTS `mail_items` (
   KEY `idx_mail_id` (`mail_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
-# Dumping data for table [wotlk]_characters.mail_items: ~0 rows (approximately)
+# Dumping data for table characters.mail_items: ~0 rows (approximately)
 DELETE FROM `mail_items`;
 /*!40000 ALTER TABLE `mail_items` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mail_items` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.petition
+# Dumping structure for table characters.petition
 DROP TABLE IF EXISTS `petition`;
 CREATE TABLE IF NOT EXISTS `petition` (
   `ownerguid` int(10) unsigned NOT NULL,
@@ -1764,13 +1779,13 @@ CREATE TABLE IF NOT EXISTS `petition` (
   UNIQUE KEY `index_ownerguid_petitionguid` (`ownerguid`,`petitionguid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Guild System';
 
-# Dumping data for table [wotlk]_characters.petition: ~0 rows (approximately)
+# Dumping data for table characters.petition: ~0 rows (approximately)
 DELETE FROM `petition`;
 /*!40000 ALTER TABLE `petition` DISABLE KEYS */;
 /*!40000 ALTER TABLE `petition` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.petition_sign
+# Dumping structure for table characters.petition_sign
 DROP TABLE IF EXISTS `petition_sign`;
 CREATE TABLE IF NOT EXISTS `petition_sign` (
   `ownerguid` int(10) unsigned NOT NULL,
@@ -1783,13 +1798,13 @@ CREATE TABLE IF NOT EXISTS `petition_sign` (
   KEY `Idx_ownerguid` (`ownerguid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Guild System';
 
-# Dumping data for table [wotlk]_characters.petition_sign: ~0 rows (approximately)
+# Dumping data for table characters.petition_sign: ~0 rows (approximately)
 DELETE FROM `petition_sign`;
 /*!40000 ALTER TABLE `petition_sign` DISABLE KEYS */;
 /*!40000 ALTER TABLE `petition_sign` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.pet_aura
+# Dumping structure for table characters.pet_aura
 DROP TABLE IF EXISTS `pet_aura`;
 CREATE TABLE IF NOT EXISTS `pet_aura` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -1810,13 +1825,13 @@ CREATE TABLE IF NOT EXISTS `pet_aura` (
   PRIMARY KEY (`guid`,`spell`,`effect_mask`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Pet System';
 
-# Dumping data for table [wotlk]_characters.pet_aura: ~0 rows (approximately)
+# Dumping data for table characters.pet_aura: ~0 rows (approximately)
 DELETE FROM `pet_aura`;
 /*!40000 ALTER TABLE `pet_aura` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pet_aura` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.pet_spell
+# Dumping structure for table characters.pet_spell
 DROP TABLE IF EXISTS `pet_spell`;
 CREATE TABLE IF NOT EXISTS `pet_spell` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -1825,13 +1840,13 @@ CREATE TABLE IF NOT EXISTS `pet_spell` (
   PRIMARY KEY (`guid`,`spell`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Pet System';
 
-# Dumping data for table [wotlk]_characters.pet_spell: ~0 rows (approximately)
+# Dumping data for table characters.pet_spell: ~0 rows (approximately)
 DELETE FROM `pet_spell`;
 /*!40000 ALTER TABLE `pet_spell` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pet_spell` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.pet_spell_cooldown
+# Dumping structure for table characters.pet_spell_cooldown
 DROP TABLE IF EXISTS `pet_spell_cooldown`;
 CREATE TABLE IF NOT EXISTS `pet_spell_cooldown` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier, Low part',
@@ -1840,13 +1855,13 @@ CREATE TABLE IF NOT EXISTS `pet_spell_cooldown` (
   PRIMARY KEY (`guid`,`spell`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.pet_spell_cooldown: ~0 rows (approximately)
+# Dumping data for table characters.pet_spell_cooldown: ~0 rows (approximately)
 DELETE FROM `pet_spell_cooldown`;
 /*!40000 ALTER TABLE `pet_spell_cooldown` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pet_spell_cooldown` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.players_reports_status
+# Dumping structure for table characters.players_reports_status
 DROP TABLE IF EXISTS `players_reports_status`;
 CREATE TABLE IF NOT EXISTS `players_reports_status` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1862,13 +1877,13 @@ CREATE TABLE IF NOT EXISTS `players_reports_status` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.players_reports_status: ~0 rows (approximately)
+# Dumping data for table characters.players_reports_status: ~0 rows (approximately)
 DELETE FROM `players_reports_status`;
 /*!40000 ALTER TABLE `players_reports_status` DISABLE KEYS */;
 /*!40000 ALTER TABLE `players_reports_status` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.pool_quest_save
+# Dumping structure for table characters.pool_quest_save
 DROP TABLE IF EXISTS `pool_quest_save`;
 CREATE TABLE IF NOT EXISTS `pool_quest_save` (
   `pool_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1876,7 +1891,7 @@ CREATE TABLE IF NOT EXISTS `pool_quest_save` (
   PRIMARY KEY (`pool_id`,`quest_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Dumping data for table [wotlk]_characters.pool_quest_save: ~19 rows (approximately)
+# Dumping data for table characters.pool_quest_save: ~19 rows (approximately)
 DELETE FROM `pool_quest_save`;
 /*!40000 ALTER TABLE `pool_quest_save` DISABLE KEYS */;
 INSERT INTO `pool_quest_save` (`pool_id`, `quest_id`) VALUES
@@ -1902,20 +1917,20 @@ INSERT INTO `pool_quest_save` (`pool_id`, `quest_id`) VALUES
 /*!40000 ALTER TABLE `pool_quest_save` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.reserved_name
+# Dumping structure for table characters.reserved_name
 DROP TABLE IF EXISTS `reserved_name`;
 CREATE TABLE IF NOT EXISTS `reserved_name` (
   `name` varchar(12) NOT NULL DEFAULT '',
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Player Reserved Names';
 
-# Dumping data for table [wotlk]_characters.reserved_name: ~0 rows (approximately)
+# Dumping data for table characters.reserved_name: ~0 rows (approximately)
 DELETE FROM `reserved_name`;
 /*!40000 ALTER TABLE `reserved_name` DISABLE KEYS */;
 /*!40000 ALTER TABLE `reserved_name` ENABLE KEYS */;
 
 
-# Dumping structure for table [wotlk]_characters.worldstates
+# Dumping structure for table characters.worldstates
 DROP TABLE IF EXISTS `worldstates`;
 CREATE TABLE IF NOT EXISTS `worldstates` (
   `entry` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1924,7 +1939,7 @@ CREATE TABLE IF NOT EXISTS `worldstates` (
   PRIMARY KEY (`entry`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Variable Saves';
 
-# Dumping data for table [wotlk]_characters.worldstates: ~8 rows (approximately)
+# Dumping data for table characters.worldstates: ~8 rows (approximately)
 DELETE FROM `worldstates`;
 /*!40000 ALTER TABLE `worldstates` DISABLE KEYS */;
 INSERT INTO `worldstates` (`entry`, `value`, `comment`) VALUES
