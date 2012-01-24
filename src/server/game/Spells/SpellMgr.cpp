@@ -3034,6 +3034,7 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_TARGET_ENEMY;
                 spellInfo->EffectImplicitTargetB[0] = 0;
                 break;
+            case 63665: // Charge (Argent Tournament emote on riders)
             case 31447: // Mark of Kaz'rogal (needs target selection script)
             case 31298: // Sleep (needs target selection script)
             case 51904: // Summon Ghouls On Scarlet Crusade (this should use conditions table, script for this spell needs to be fixed)
@@ -3044,6 +3045,10 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->EffectImplicitTargetB[0] = 0;
                 break;
             case 50317: // Summon Disco Ball
+                spellInfo->EffectImplicitTargetA[1] = TARGET_UNIT_CASTER;
+                break;
+            case 68282: // Charge (Trial of the champion)
+            case 62960: // Charge (Argent tournament fields)
                 spellInfo->EffectImplicitTargetA[1] = TARGET_UNIT_CASTER;
                 break;
             case 31344: // Howl of Azgalor
@@ -3448,9 +3453,6 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Effect[1] = SPELL_EFFECT_SCHOOL_DAMAGE;
                 spellInfo->EffectBasePoints[1] = 20000;
                 spellInfo->EffectImplicitTargetA[1] = TARGET_UNIT_TARGET_ENEMY;
-                break;
-            case 68282: // ToC5 Charge
-                spellInfo->Effect[1] = 0;
                 break;
             case 67705: // Raise Arelas Birhgtstar
             case 67715: // Raise Jaeren Sunworn
