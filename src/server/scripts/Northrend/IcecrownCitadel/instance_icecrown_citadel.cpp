@@ -698,7 +698,6 @@ class instance_icecrown_citadel : public InstanceMapScript
                                 elevator->SetGoState(GO_STATE_READY);
                             }
 
-                             PrepareGunshipEvent(); // Spawn Gunship Event
 
 
 
