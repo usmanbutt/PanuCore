@@ -225,6 +225,5 @@ public:
 void AddSC_icecrown()
 {
     new npc_arete;
-    new npc_alorah_and_grimmin;
     new npc_guardian_pavilion;
 }
