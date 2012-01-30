@@ -269,7 +269,6 @@ class Map : public GridRefManager<NGridType>
         }
 
         virtual bool AddPlayerToMap(Player*);
-        void SendInitTransportsInInstance(Player* player);
         virtual void RemovePlayerFromMap(Player*, bool);
         template<class T> bool AddToMap(T *);
         template<class T> void RemoveFromMap(T *, bool);
@@ -478,7 +477,8 @@ class Map : public GridRefManager<NGridType>
 
         void SendInitTransports(Player* player);
         void SendRemoveTransports(Player* player);
-
+        void SendInitTransportsInInstance(Player* player);
+        
         bool CreatureCellRelocation(Creature* creature, Cell new_cell);
 
         template<class T> void InitializeObject(T* obj);
