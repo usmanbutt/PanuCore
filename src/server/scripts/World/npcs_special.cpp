@@ -2481,7 +2481,7 @@ class npc_wormhole : public CreatureScript
             npc_wormholeAI(Creature* c) : PassiveAI(c)
             {
                 _random = urand(0, 9);
-                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
             }
 
             uint32 GetData(uint32 type)
@@ -3370,7 +3370,7 @@ class npc_dark_iron_guzzler : public CreatureScript
                 {
                     _kegReached = true;
                     me->SetFacingToObject(keg);
-                    me->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_ONESHOT_ATTACK2HLOOSE);
+                    me->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_ONESHOT_ATTACK2H_LOOSE);
                 }
                 else
                     me->DespawnOrUnsummon();
