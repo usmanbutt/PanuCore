@@ -368,7 +368,7 @@ class boss_algalon : public CreatureScript
                 switch(Summon->GetEntry())
                 {
                 case CREATURE_AZEROTH_MODEL:
-                    Summon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                    Summon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_NPC);
                     break;
                 case CREATURE_BLACK_HOLE:
                     --staramount;
@@ -1041,7 +1041,7 @@ class mob_living_constellation : public CreatureScript
             void InitializeAI()
             {
                 active = false;
-                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_NPC);
                 me->SetFlying(true);
                 me->SendMovementFlagUpdate();
                 me->SetReactState(REACT_PASSIVE);
@@ -1062,7 +1062,7 @@ class mob_living_constellation : public CreatureScript
                 case ACTION_ACTIVATE_CONSTELLATION:
                     active = true;
                     me->SetReactState(REACT_AGGRESSIVE);
-                    me->RemoveFlag( UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE |  UNIT_FLAG_PASSIVE);
+                    me->RemoveFlag( UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE |  UNIT_FLAG_IMMUNE_TO_NPC);
                     DoZoneInCombat();
                     if (Unit* Target = SelectTarget(SELECT_TARGET_RANDOM, 0, 0.0f, true))
                         AttackStart(Target);
