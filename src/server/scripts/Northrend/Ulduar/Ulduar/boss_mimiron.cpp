@@ -236,7 +236,7 @@ class boss_mimiron : public CreatureScript
 
                 _Reset();
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1);
-                me->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_USESTANDING);
+                me->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_USE_STANDING);
                 me->SetVisible(true);
                 me->ExitVehicle();
                 me->GetMotionMaster()->MoveTargetedHome();
@@ -870,7 +870,7 @@ public:
             switch (action)
             {
                 case DO_START_ENCOUNTER:
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1 | UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1 | UNIT_FLAG_NON_ATTACKABLE);
                     me->SetReactState(REACT_AGGRESSIVE);
                     phase = PHASE_LEVIATHAN_SOLO;
                     events.SetPhase(PHASE_LEVIATHAN_SOLO);
@@ -1157,7 +1157,7 @@ public:
             switch (action)
             {
                 case DO_START_VX001:
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1 | UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1 | UNIT_FLAG_NON_ATTACKABLE);
                     phase = PHASE_VX001_SOLO;
                     events.SetPhase(PHASE_VX001_SOLO);
                     DoZoneInCombat();
@@ -1474,7 +1474,7 @@ public:
             switch (action)
             {
                 case DO_START_AERIAL:
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1 | UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1 | UNIT_FLAG_NON_ATTACKABLE);
                     me->SetReactState(REACT_AGGRESSIVE);
                     phase = PHASE_AERIAL_SOLO;
                     events.SetPhase(PHASE_AERIAL_SOLO);
