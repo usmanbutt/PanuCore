@@ -1155,7 +1155,7 @@ public:
                                     bStepping = false;
                                     uiBossEvent = DATA_MAL_GANIS_EVENT;
                                     JumpToNextStep(15000);
-                                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                                     me->SetReactState(REACT_PASSIVE);
                                 }
                                 else if (instance->GetData(DATA_EPOCH_EVENT) == FAIL)
@@ -1166,7 +1166,7 @@ public:
                             break;
                         //After Gossip 4
                         case 84:
-                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                             me->SetReactState(REACT_AGGRESSIVE);
                             DoScriptText(SAY_PHASE404, me);
                             SetHoldState(false);
