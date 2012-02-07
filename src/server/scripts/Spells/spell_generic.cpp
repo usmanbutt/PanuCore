@@ -2078,59 +2078,6 @@ class spell_gen_defend : public SpellScriptLoader
         }
 };
 
-enum MountedDuelSpells
-{
-    SPELL_ON_TOURNAMENT_MOUNT = 63034,
-    SPELL_MOUNTED_DUEL        = 62875,
-};
-
-class spell_gen_tournament_duel : public SpellScriptLoader
-{
-    public:
-        spell_gen_tournament_duel() : SpellScriptLoader("spell_gen_tournament_duel") { }
-
-        class spell_gen_tournament_duel_SpellScript : public SpellScript
-        {
-            PrepareSpellScript(spell_gen_tournament_duel_SpellScript);
-
-            bool Validate(SpellInfo const* /*spellEntry*/)
-            {
-                if (!sSpellMgr->GetSpellInfo(SPELL_ON_TOURNAMENT_MOUNT))
-                    return false;
-                if (!sSpellMgr->GetSpellInfo(SPELL_MOUNTED_DUEL))
-                    return false;
-                return true;
-            }
-
-            void HandleScriptEffect(SpellEffIndex effIndex)
-            {
-                if (Unit* rider = GetCaster()->GetCharmer())
-                {
-                    if (Player* plrTarget = GetHitPlayer())
-                    {
-                        if (plrTarget->HasAura(SPELL_ON_TOURNAMENT_MOUNT) && plrTarget->GetVehicleBase())
-                            rider->CastSpell(plrTarget, SPELL_MOUNTED_DUEL, true);
-                    }
-                    else if (Unit* unitTarget = GetHitUnit())
-                    {
-                        if (unitTarget->GetCharmer() && unitTarget->GetCharmer()->GetTypeId() == TYPEID_PLAYER && unitTarget->GetCharmer()->HasAura(SPELL_ON_TOURNAMENT_MOUNT))
-                            rider->CastSpell(unitTarget->GetCharmer(), SPELL_MOUNTED_DUEL, true);
-                    }
-                }
-            }
-
-            void Register()
-            {
-                OnEffectHitTarget += SpellEffectFn(spell_gen_tournament_duel_SpellScript::HandleScriptEffect, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
-            }
-        };
-
-        SpellScript* GetSpellScript() const
-        {
-            return new spell_gen_tournament_duel_SpellScript();
-        }
-};
-
 enum TournamentMountsSpells
 {
     SPELL_LANCE_EQUIPPED = 62853,
