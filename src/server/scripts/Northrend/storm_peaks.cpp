@@ -747,7 +747,7 @@ public:
         {
             if (uiCheckTimer < diff)
             {
-                if (!me->HasUnitState(UNIT_STAT_ONVEHICLE))
+                if (!me->HasUnitState(UNIT_STATE_ONVEHICLE))
                 {
                     // return home
                     if (me->GetDistance(me->GetHomePosition()) > 30.0f)
@@ -821,7 +821,7 @@ public:
             if (who->GetTypeId() != TYPEID_PLAYER)
                 return;
 
-            if (who->ToPlayer()->GetQuestStatus(QUEST_LAST_OF_HER_KIND) == QUEST_STATUS_INCOMPLETE && !who->HasUnitState(UNIT_STAT_ONVEHICLE) && who->GetDistance(me) < 5.0f)
+            if (who->ToPlayer()->GetQuestStatus(QUEST_LAST_OF_HER_KIND) == QUEST_STATUS_INCOMPLETE && !who->HasUnitState(UNIT_STATE_ONVEHICLE) && who->GetDistance(me) < 5.0f)
             {
                 who->CastSpell(who, SPELL_HARNESSED_ICEMAW, true);
                 // disable player control
