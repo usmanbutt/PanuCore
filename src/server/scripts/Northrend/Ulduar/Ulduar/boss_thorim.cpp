@@ -455,7 +455,7 @@ public:
             _DoAggroPulse(diff);
             EncounterTime += diff;
 
-            if (me->HasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (phase == PHASE_1)
@@ -666,7 +666,7 @@ public:
 
         void UpdateAI(uint32 const diff)
         {
-            if (!UpdateVictim() || me->HasUnitState(UNIT_STAT_CASTING))
+            if (!UpdateVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (PrimaryTimer <= diff)
@@ -773,7 +773,7 @@ class npc_thorim_arena_phase : public CreatureScript
 
             void UpdateAI(uint32 const diff)
             {
-                if (!UpdateVictim() || me->HasUnitState(UNIT_STAT_CASTING))
+                if (!UpdateVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
                 if (me->getVictim() && !isOnSameSide(me->getVictim()))
@@ -941,7 +941,7 @@ class npc_runic_colossus : public CreatureScript
                     else RunicSmashTimer -= diff;
                 }
 
-                if (me->HasUnitState(UNIT_STAT_CASTING))
+                if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
                 if (RunicSmashPhase == 2)
@@ -1099,7 +1099,7 @@ public:
 
         void UpdateAI(uint32 const diff)
         {
-            if (!UpdateVictim() || me->HasUnitState(UNIT_STAT_CASTING))
+            if (!UpdateVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (StompTimer <= diff)
@@ -1154,7 +1154,7 @@ public:
 
         void UpdateAI(uint32 const diff)
         {
-            if (!UpdateVictim() || me->HasUnitState(UNIT_STAT_CASTING))
+            if (!UpdateVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (FrostTimer <= diff)
