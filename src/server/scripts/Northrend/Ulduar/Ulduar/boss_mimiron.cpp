@@ -903,7 +903,7 @@ public:
             _DoAggroPulse(diff);
             events.Update(diff);
 
-            if (me->HasUnitState(UNIT_STAT_CASTING) || me->HasUnitState(UNIT_STAT_STUNNED))
+            if (me->HasUnitState(UNIT_STATE_CASTING) || me->HasUnitState(UNIT_STATE_STUNNED))
                 return;
 
             if (phase == PHASE_LEVIATHAN_SOLO || phase == PHASE_LEVIATHAN_ASSEMBLED)
@@ -1254,7 +1254,7 @@ public:
             _DoAggroPulse(diff);
             events.Update(diff);
 
-            if (me->HasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (phase == PHASE_VX001_SOLO || phase == PHASE_VX001_ASSEMBLED)
@@ -1519,7 +1519,7 @@ public:
             _DoAggroPulse(diff);
             events.Update(diff);
 
-            if (me->HasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (phase == PHASE_AERIAL_SOLO || phase == PHASE_AERIAL_ASSEMBLED)

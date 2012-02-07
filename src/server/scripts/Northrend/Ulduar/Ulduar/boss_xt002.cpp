@@ -399,7 +399,7 @@ class boss_xt002 : public CreatureScript
                 if (Creature* heart = me->SummonCreature(NPC_XT002_HEART, *me, TEMPSUMMON_TIMED_DESPAWN, 30*IN_MILLISECONDS))
                 {
                     heart->EnterVehicle(me, 1);
-                    heart->ClearUnitState(UNIT_STAT_ONVEHICLE); // Hack
+                    heart->ClearUnitState(UNIT_STATE_ONVEHICLE); // Hack
                     heart->SetInCombatWithZone();
                     heart->CastSpell(heart, SPELL_EXPOSED_HEART, true);
                 }
