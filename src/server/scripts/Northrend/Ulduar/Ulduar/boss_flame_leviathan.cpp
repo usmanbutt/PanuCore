@@ -404,7 +404,7 @@ class boss_flame_leviathan : public CreatureScript
                 events.Update(diff);
                 _DoAggroPulse(diff);
 
-                if (me->HasUnitState(UNIT_STAT_CASTING))
+                if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
                 if (!Pursued && me->getVictim() && !me->getVictim()->HasAura(SPELL_PURSUED) && !me->HasAura(SPELL_SYSTEMS_SHUTDOWN))
@@ -1861,7 +1861,7 @@ class spell_systems_shutdown : public SpellScriptLoader
                     return;
 
                 //! This could probably in the SPELL_EFFECT_SEND_EVENT handler too:
-                owner->AddUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
+                owner->AddUnitState(UNIT_STATE_STUNNED | UNIT_STATE_ROOT);
                 owner->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED);
                 owner->RemoveAurasDueToSpell(SPELL_GATHERING_SPEED);
             }

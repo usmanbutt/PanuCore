@@ -122,6 +122,7 @@ public:
             return false;
         }
 
+<<<<<<< HEAD
         void OpenDoor(uint64 guid)
         {
             if(!guid)

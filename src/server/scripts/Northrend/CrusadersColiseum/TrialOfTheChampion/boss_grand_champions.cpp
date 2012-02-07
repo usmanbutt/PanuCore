@@ -140,8 +140,6 @@ struct npc_mounted_championAI : ScriptedAI
             case NPC_RUNOK:                  return 29880;
             case NPC_ZULTORE:                return 29261;
             case NPC_VISCERI:                return 10718;
-        }
-        return 0;
     }
 
     void DamageTaken(Unit* /*attacker*/, uint32 & damage)

@@ -254,7 +254,7 @@ public:
                             if (!bSummonArmy)
                             {
                                 bSummonArmy = true;
-                                me->AddUnitState(UNIT_STAT_ROOT | UNIT_STAT_STUNNED);
+                                me->AddUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED);
                                 DoCast(me, SPELL_ARMY_DEAD);
                             }
                             if (!bDeathArmyDone)
@@ -307,7 +307,7 @@ public:
                 }
             }
 
-            if (!me->HasUnitState(UNIT_STAT_ROOT) && !me->HealthBelowPct(1))
+            if (!me->HasUnitState(UNIT_STATE_ROOT) && !me->HealthBelowPct(1))
                 DoMeleeAttackIfReady();
         }
 

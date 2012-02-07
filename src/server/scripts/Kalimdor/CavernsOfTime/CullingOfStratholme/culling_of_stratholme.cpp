@@ -230,63 +230,63 @@ public:
     bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
     {
         player->PlayerTalkClass->ClearMenus();
-        npc_arthasAI* pAI = CAST_AI(npc_arthas::npc_arthasAI, creature->AI());
+        npc_arthasAI* ai = CAST_AI(npc_arthas::npc_arthasAI, creature->AI());
 
-        if (!pAI)
+        if (!ai)
             return false;
 
         switch (action)
         {
             case GOSSIP_ACTION_INFO_DEF:
-                pAI->Start(true, true, player->GetGUID(), 0, false, false);
-                pAI->SetDespawnAtEnd(false);
-                pAI->bStepping = false;
-                pAI->uiStep = 1;
+                ai->Start(true, true, player->GetGUID(), 0, false, false);
+                ai->SetDespawnAtEnd(false);
+                ai->bStepping = false;
+                ai->uiStep = 1;
                 break;
             case GOSSIP_ACTION_INFO_DEF+1:
-                if(pAI->respawned)
+                if(ai->respawned)
                 {
-                    pAI->Start(true, true, 0, 0, false, false);
-                    pAI->SetNextWaypoint(9, false);
-                    pAI->respawned = false;
+                    ai->Start(true, true, 0, 0, false, false);
+                    ai->SetNextWaypoint(9, false);
+                    ai->respawned = false;
                 }
-                pAI->bStepping = true;
-                pAI->uiStep = 24;
+                ai->bStepping = true;
+                ai->uiStep = 24;
                 break;
             case GOSSIP_ACTION_INFO_DEF+2:
-                if(pAI->respawned)
+                if(ai->respawned)
                 {
-                    pAI->Start(true, true, 0, 0, false, false);
-                    pAI->SetNextWaypoint(21, false);
-                    pAI->respawned = false;
+                    ai->Start(true, true, 0, 0, false, false);
+                    ai->SetNextWaypoint(21, false);
+                    ai->respawned = false;
                 }
-                pAI->SetHoldState(false);
-                pAI->bStepping = false;
-                pAI->uiStep = 61;
+                ai->SetHoldState(false);
+                ai->bStepping = false;
+                ai->uiStep = 61;
                 break;
             case GOSSIP_ACTION_INFO_DEF+3:
-                pAI->SetHoldState(false);
+                ai->SetHoldState(false);
                 break;
             case GOSSIP_ACTION_INFO_DEF+4:
-                if(pAI->respawned)
+                if(ai->respawned)
                 {
-                    pAI->Start(true, true, 0, 0, false, false);
-                    pAI->respawned = false;
-                    pAI->SetNextWaypoint(46, false);
+                    ai->Start(true, true, 0, 0, false, false);
+                    ai->respawned = false;
+                    ai->SetNextWaypoint(46, false);
                 }
-                pAI->bStepping = true;
-                pAI->uiStep = 84;
+                ai->bStepping = true;
+                ai->uiStep = 84;
                 break;
             case GOSSIP_ACTION_INFO_DEF+5:
-                pAI->bStepping = true;
-                pAI->uiStep = 85;
+                ai->bStepping = true;
+                ai->uiStep = 85;
                 break;
             case GOSSIP_ACTION_INFO_DEF+6:
-                pAI->Start(true, true, player->GetGUID(), 0, false, false);
-                pAI->SetDespawnAtEnd(false);
-                pAI->bStepping = false;
-                pAI->uiStep = 22;
-                pAI->SetNextWaypoint(3);
+                ai->Start(true, true, player->GetGUID(), 0, false, false);
+                ai->SetDespawnAtEnd(false);
+                ai->bStepping = false;
+                ai->uiStep = 22;
+                ai->SetNextWaypoint(3);
                 break;
         }
         player->CLOSE_GOSSIP_MENU();
@@ -297,11 +297,11 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
-        npc_arthasAI* pAI = CAST_AI(npc_arthas::npc_arthasAI, creature->AI());
+        npc_arthasAI* ai = CAST_AI(npc_arthas::npc_arthasAI, creature->AI());
 
-        if (pAI && pAI->bStepping == false)
+        if (ai && ai->bStepping == false)
         {
-            switch (pAI->uiGossipStep)
+            switch (ai->uiGossipStep)
             {
                 case 0: //This one is a workaround since the very beggining of the script is wrong.
                 {
@@ -1045,7 +1045,7 @@ public:
                             {
                                 pDisguised2->UpdateEntry(NPC_INFINITE_HUNTER, 0);
                                 //Make them unattackable
-                                pDisguised2->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                                pDisguised2->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                                 pDisguised2->SetReactState(REACT_PASSIVE);
                             }
                             JumpToNextStep(2000);
@@ -1055,7 +1055,7 @@ public:
                             {
                                 pDisguised1->UpdateEntry(NPC_INFINITE_AGENT, 0);
                                 //Make them unattackable
-                                pDisguised1->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                                pDisguised1->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                                 pDisguised1->SetReactState(REACT_PASSIVE);
                             }
                             JumpToNextStep(2000);
@@ -1065,7 +1065,7 @@ public:
                             {
                                 pDisguised0->UpdateEntry(NPC_INFINITE_ADVERSARY, 0);
                                 //Make them unattackable
-                                pDisguised0->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                                pDisguised0->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                                 pDisguised0->SetReactState(REACT_PASSIVE);
                             }
                             JumpToNextStep(2000);
@@ -1079,7 +1079,7 @@ public:
                             for (uint32 i = 0; i< ENCOUNTER_DRACONIAN_NUMBER; ++i)
                                 if (Creature* temp = Unit::GetCreature(*me, uiInfiniteDraconianGUID[i]))
                                 {
-                                    temp->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                                    temp->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                                     temp->SetReactState(REACT_AGGRESSIVE);
                                 }
                             JumpToNextStep(5000);
@@ -1137,7 +1137,7 @@ public:
                                     if (Creature* pEpoch = Unit::GetCreature(*me, uiEpochGUID))
                                     {
                                         //Make Epoch attackable
-                                        pEpoch->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                                        pEpoch->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                                         pEpoch->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                                         pEpoch->SetReactState(REACT_AGGRESSIVE);
                                     }
@@ -1196,7 +1196,7 @@ public:
                         case 87:
                             if (Creature* pMalganis = Unit::GetCreature(*me, uiMalganisGUID))
                             {
-                                pMalganis->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_UNK_6 | UNIT_FLAG_PASSIVE | UNIT_FLAG_UNK_15);
+                                pMalganis->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_UNK_6 | UNIT_FLAG_IMMUNE_TO_NPC | UNIT_FLAG_UNK_15);
                                 pMalganis->SetReactState(REACT_AGGRESSIVE);
                             }
                             JumpToNextStep(1000);
