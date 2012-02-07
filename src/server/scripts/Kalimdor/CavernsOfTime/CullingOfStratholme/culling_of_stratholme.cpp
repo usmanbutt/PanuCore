@@ -445,7 +445,7 @@ public:
                     guidVector[i-timeRiftID-1] = temp->GetGUID();
                     if(timeRiftID != 0) // Avoid unnatackable ones at the inn
                     {
-                        temp->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                        temp->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_NPC);
                         temp->SetReactState(REACT_PASSIVE);
                     }
                     temp->GetMotionMaster()->MovePoint(0, RiftAndSpawnsLocations[i][1], RiftAndSpawnsLocations[i][2], RiftAndSpawnsLocations[i][3]);
@@ -1014,7 +1014,7 @@ public:
                             JumpToNextStep(7000);
                             break;
                         case 63:
-                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                             me->SetReactState(REACT_AGGRESSIVE);
                             DoScriptText(SAY_PHASE303, me);
                             SetHoldState(false);
