@@ -290,7 +290,7 @@ public:
                 break;
         }
         player->CLOSE_GOSSIP_MENU();
-        pAI->SetDespawnAtFar(false);
+        ai->SetDespawnAtFar(false);
         creature->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
         return true;
     }
@@ -445,7 +445,7 @@ public:
                     guidVector[i-timeRiftID-1] = temp->GetGUID();
                     if(timeRiftID != 0) // Avoid unnatackable ones at the inn
                     {
-                        temp->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                        temp->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
                         temp->SetReactState(REACT_PASSIVE);
                     }
                     temp->GetMotionMaster()->MovePoint(0, RiftAndSpawnsLocations[i][1], RiftAndSpawnsLocations[i][2], RiftAndSpawnsLocations[i][3]);
@@ -870,7 +870,7 @@ public:
                             break;
                         case 37:
                             // Let's do arthas not attackable (prevents zombies to attack
-                            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                             me->SetReactState(REACT_PASSIVE);
                             // Transform all citizens, handled on InstanceScript
                             instance->SetData(DATA_TRANSFORM_CITIZENS, IN_PROGRESS);
