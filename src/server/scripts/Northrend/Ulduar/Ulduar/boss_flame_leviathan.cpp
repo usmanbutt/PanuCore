@@ -1872,7 +1872,7 @@ class spell_systems_shutdown : public SpellScriptLoader
                 if (!owner)
                     return;
 
-                owner->ClearUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
+                owner->ClearUnitState(UNIT_STATE_STUNNED | UNIT_STATE_ROOT);
                 owner->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED);
             }
 

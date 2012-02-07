@@ -1006,7 +1006,7 @@ class boss_stormcaller_brundir : public CreatureScript
                             events.ScheduleEvent(EVENT_CHAIN_LIGHTNING, urand(3000, 5000), 1);
                             break;
                         case EVENT_OVERLOAD:
-                            if (!me->HasUnitState(UNIT_STAT_STUNNED))
+                            if (!me->HasUnitState(UNIT_STATE_STUNNED))
                                 me->MonsterTextEmote(EMOTE_OVERLOAD, 0, true);
                             DoCast(RAID_MODE(SPELL_OVERLOAD, SPELL_OVERLOAD_H));
                             events.ScheduleEvent(EVENT_OVERLOAD, urand(60000, 80000), 1);
