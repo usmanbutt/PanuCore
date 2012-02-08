@@ -140,6 +140,8 @@ struct npc_mounted_championAI : ScriptedAI
             case NPC_RUNOK:                  return 29880;
             case NPC_ZULTORE:                return 29261;
             case NPC_VISCERI:                return 10718;
+        }
+        return 0;
     }
 
     void DamageTaken(Unit* /*attacker*/, uint32 & damage)
@@ -249,10 +251,10 @@ struct npc_mounted_championAI : ScriptedAI
         // Use Thrust instead of melee attack
         if (me->isAttackReady() && me->IsWithinMeleeRange(me->getVictim()))
         {
-            me->AddUnitState(UNIT_STAT_ONVEHICLE);
+            me->AddUnitState(UNIT_STATE_ONVEHICLE);
             DoCast(me->getVictim(), SPELL_THRUST);
             me->resetAttackTimer();
-            me->ClearUnitState(UNIT_STAT_ONVEHICLE);
+            me->ClearUnitState(UNIT_STATE_ONVEHICLE);
         }
     }
 };
@@ -551,7 +553,7 @@ public:
             if(defeated)
                 return;
 
-            if(me->HasUnitState(UNIT_STAT_CASTING))
+            if(me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (polymorphTimer <= diff)
@@ -712,7 +714,7 @@ public:
             if(defeated)
                 return;
 
-            if(me->HasUnitState(UNIT_STAT_CASTING))
+            if(me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (chainLightningTimer <= diff)
@@ -898,7 +900,7 @@ public:
             if(defeated)
                 return;
 
-            if(me->HasUnitState(UNIT_STAT_CASTING))
+            if(me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if(me->GetDistance(me->getVictim()) >= 30.0f)
