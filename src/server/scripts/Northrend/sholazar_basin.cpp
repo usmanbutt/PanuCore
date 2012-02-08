@@ -1982,7 +1982,6 @@ public:
     }
 };
 
-<<<<<<< HEAD
 enum stillEvents
 {
     EVENT_BANANA_CLICK,
