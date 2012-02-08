@@ -268,7 +268,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if(defeated || me->HasUnitState(UNIT_STAT_CASTING))
+            if(defeated || me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (hammerJusticeTimer <= diff)
@@ -484,7 +484,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if(defeated || me->HasUnitState(UNIT_STAT_CASTING))
+            if(defeated || me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (holyFireTimer <= diff)
@@ -744,7 +744,7 @@ public:
             if(defeated)
                 return;
 
-            if(me->HasUnitState(UNIT_STAT_CASTING))
+            if(me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (timerBlazingLight <= diff)
@@ -826,7 +826,7 @@ public:
             if(defeated)
                 return;
 
-            if(me->HasUnitState(UNIT_STAT_CASTING))
+            if(me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (timerFountain <= diff)
