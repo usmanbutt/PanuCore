@@ -1868,7 +1868,7 @@ public:
     {
         player->CLOSE_GOSSIP_MENU();
 
-        if (!player->HasUnitState(UNIT_STAT_ONVEHICLE))
+        if (!player->HasUnitState(UNIT_STATE_ONVEHICLE))
         {
             if (Creature* pTemp = player->SummonCreature(28308, player->GetPositionX(), player->GetPositionY(), player->GetPositionZ(), 0))
             {
