@@ -107,7 +107,7 @@ public:
             if (!UpdateVictim())
                 return;
             
-            if (me->HasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
   
             if (Spell_FrostBreath_Timer <= diff)
@@ -144,7 +144,7 @@ public:
                     Bombardier2->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     Bombardier2->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                     Bombardier2->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1);
-                    Bombardier2->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                    Bombardier2->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 }
                 Pasajero_2 = true;
             }
@@ -157,7 +157,7 @@ public:
                     Bombardier3->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);                    
                     Bombardier3->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                     Bombardier3->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1);
-                    Bombardier3->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                    Bombardier3->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 }
                 Pasajero_3 = true;
             }
@@ -512,7 +512,7 @@ public:
 
         void DoMeleeAttackIfReady()
         {
-            if (me->HasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             if (me->isAttackReady())
@@ -898,7 +898,7 @@ public:
 			uint32 ShielTimer;
 	    void Reset()
 	    {
-			me->SetControlled(true,UNIT_STAT_STUNNED);//disable rotate
+			me->SetControlled(true,UNIT_STATE_STUNNED);//disable rotate
 			me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);//imune to knock aways like blast wave
 			me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_STUN, true);
 			ResetTimer = 5000;
@@ -964,8 +964,8 @@ public:
 
 		if (!UpdateVictim())
 		    return;
-		if (!me->HasUnitState(UNIT_STAT_STUNNED))
-		    me->SetControlled(true,UNIT_STAT_STUNNED);//disable rotate
+		if (!me->HasUnitState(UNIT_STATE_STUNNED))
+		    me->SetControlled(true,UNIT_STATE_STUNNED);//disable rotate
 			
 		if (Npc_Entry != NPC_ADVANCED_TARGET_DUMMY && Npc_Entry != NPC_TARGET_DUMMY)
 		{
