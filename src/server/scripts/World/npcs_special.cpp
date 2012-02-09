@@ -3737,7 +3737,6 @@ void AddSC_npcs_special()
     new npc_injured_patient();
     new npc_garments_of_quests();
     new npc_guardian();
-    new npc_spring_rabbit();
     new npc_torch_tossing_bunny();
     new npc_apple_trap_bunny();
     new npc_keg_delivery();
