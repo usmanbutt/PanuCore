@@ -25,7 +25,7 @@ enum BattlegroundDSObjectTypes
 {
     BG_DS_OBJECT_DOOR_1         = 0,
     BG_DS_OBJECT_DOOR_2         = 1,
-    BG_DS_OBJECT_WATER_1        = 2,
+    BG_DS_OBJECT_WATER_1        = 2, // Collision
     BG_DS_OBJECT_WATER_2        = 3,
     BG_DS_OBJECT_BUFF_1         = 4,
     BG_DS_OBJECT_BUFF_2         = 5,
