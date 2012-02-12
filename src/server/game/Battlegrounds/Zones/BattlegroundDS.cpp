@@ -77,7 +77,7 @@ void BattlegroundDS::PostUpdateImpl(uint32 diff)
         }
     }
     else
-        m_waterFall -= diff;
+         setWaterFallTimer(getWaterFallTimer() - diff);
 }
 
 void BattlegroundDS::StartingEventCloseDoors()
