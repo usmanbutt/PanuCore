@@ -127,10 +127,8 @@ class BattlegroundRV : public Battleground
         uint32 State;
 
         virtual void PostUpdateImpl(uint32 diff);
-        virtual void SwitchDynLos();
 
     protected:
-        uint32 m_DynLos[4];
         uint32 getTimer() { return Timer; };
         void setTimer(uint32 timer) { Timer = timer; };
 
