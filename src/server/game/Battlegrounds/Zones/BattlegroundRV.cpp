@@ -248,7 +248,7 @@ void BattlegroundRV::TogglePillarCollision(bool apply)
                     gob->EnableCollision(!apply); // Forced collision toggle
             }
  
-            for (BattlegroundPlayerMap::iterator itr = Players.begin(); itr != Players.end(); ++itr)
+            for (BattlegroundPlayerMap::iterator itr = m_Players.begin(); itr != m_Players.end(); ++itr)
                 if (Player* player = ObjectAccessor::FindPlayer(MAKE_NEW_GUID(itr->first, 0, HIGHGUID_PLAYER)))
                     gob->SendUpdateToPlayer(player);
         }
