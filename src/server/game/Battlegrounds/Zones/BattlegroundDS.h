@@ -48,14 +48,9 @@ enum BattlegroundDSData
     BG_DS_WATERFALL_TIMER_MAX                    = 60000,
     BG_DS_WATERFALL_WARNING_DURATION             = 7000,
     BG_DS_WATERFALL_DURATION                     = 10000,
-<<<<<<< HEAD
-    BG_DS_WATERFALL_RADIUS                       = 4,
-=======
-
     BG_DS_WATERFALL_STATUS_WARNING               = 1, // Water starting to fall, but no LoS Blocking nor movement blocking
     BG_DS_WATERFALL_STATUS_ON                    = 2, // LoS and Movement blocking active
     BG_DS_WATERFALL_STATUS_OFF                   = 3,
->>>>>>> upstream/master
 };
 
 class BattlegroundDSScore : public BattlegroundScore
