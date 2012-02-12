@@ -3700,7 +3700,6 @@ void AddSC_npcs_special()
     new npc_dark_iron_herald();
     new npc_dark_iron_guzzler();
     new npc_wild_turkey();
-    new npc_kingdom_of_dalaran_quests;
     new npc_mount_vendor;
     new npc_rogue_trainer;
     new npc_sayge;
