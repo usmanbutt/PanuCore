@@ -105,6 +105,8 @@ void BattlegroundRV::StartingEventOpenDoors()
 
     setState(BG_RV_STATE_OPEN_FENCES);
     setTimer(BG_RV_FIRST_TIMER);
+    
+    TogglePillarCollision(true);
 }
 
 void BattlegroundRV::AddPlayer(Player* player)
