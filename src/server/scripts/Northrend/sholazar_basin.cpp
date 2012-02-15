@@ -1317,7 +1317,7 @@ public:
                            break;
                 }
 
-                if (itr->second.CreatureOrGOcount[i] != 0)
+                if (itr->second.CreatureOrGOCount[i] != 0)
                     continue;
 
                 caster->ToPlayer()->KilledMonsterCredit(me->GetEntry(), 0);
