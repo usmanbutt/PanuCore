@@ -1549,7 +1549,7 @@ class spell_gen_luck_of_the_draw : public SpellScriptLoader
 
                 const LfgDungeonSet dungeons = sLFGMgr->GetSelectedDungeons(GetUnitOwner()->GetGUID());
                 LfgDungeonSet::const_iterator itr = dungeons.begin();
-                
+
                 if (itr == dungeons.end())
                 {
                     Remove(AURA_REMOVE_BY_DEFAULT);
@@ -1563,7 +1563,7 @@ class spell_gen_luck_of_the_draw : public SpellScriptLoader
                 if (group && group->isLFGGroup())
                     if (uint32 dungeonId = sLFGMgr->GetDungeon(group->GetGUID(), true))
                         if (LFGDungeonEntry const* dungeon = sLFGDungeonStore.LookupEntry(dungeonId))
-                            if (dungeon->map == map->GetId() && dungeon->difficulty == map->GetDifficulty())
+                            if (uint32(dungeon->map) == map->GetId() && dungeon->difficulty == map->GetDifficulty())
                                 if (randomDungeon && randomDungeon->type == LFG_TYPE_RANDOM)
                                     return; // in correct dungeon
 
@@ -1819,6 +1819,8 @@ class spell_gen_break_shield: public SpellScriptLoader
                         }
                         break;
                     }
+                    default:
+                        break;
                 }
             }
 
@@ -1907,6 +1909,7 @@ class spell_gen_mounted_charge: public SpellScriptLoader
                         {
                             case SPELL_CHARGE_TRIGGER_TRIAL_CHAMPION:
                                 spellId = SPELL_CHARGE_CHARGING_EFFECT_20K_1;
+                                break;
                             case SPELL_CHARGE_TRIGGER_FACTION_MOUNTS:
                                 spellId = SPELL_CHARGE_CHARGING_EFFECT_8K5;
                                 break;
@@ -1947,7 +1950,7 @@ class spell_gen_mounted_charge: public SpellScriptLoader
                 }
             }
 
-            void HandleChargeEffect(SpellEffIndex effIndex)
+            void HandleChargeEffect(SpellEffIndex /*effIndex*/)
             {
                 uint32 spellId;
 
@@ -2021,7 +2024,7 @@ class spell_gen_defend : public SpellScriptLoader
 
             void RefreshVisualShields(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
             {
-                if (Unit* caster = GetCaster())
+                if (GetCaster())
                 {
                     Unit* target = GetTarget();
 
@@ -2075,6 +2078,59 @@ class spell_gen_defend : public SpellScriptLoader
         AuraScript* GetAuraScript() const
         {
             return new spell_gen_defendAuraScript();
+        }
+};
+
+enum MountedDuelSpells
+{
+    SPELL_ON_TOURNAMENT_MOUNT = 63034,
+    SPELL_MOUNTED_DUEL        = 62875,
+};
+
+class spell_gen_tournament_duel : public SpellScriptLoader
+{
+    public:
+        spell_gen_tournament_duel() : SpellScriptLoader("spell_gen_tournament_duel") { }
+
+        class spell_gen_tournament_duel_SpellScript : public SpellScript
+        {
+            PrepareSpellScript(spell_gen_tournament_duel_SpellScript);
+
+            bool Validate(SpellInfo const* /*spellEntry*/)
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_ON_TOURNAMENT_MOUNT))
+                    return false;
+                if (!sSpellMgr->GetSpellInfo(SPELL_MOUNTED_DUEL))
+                    return false;
+                return true;
+            }
+
+            void HandleScriptEffect(SpellEffIndex /*effIndex*/)
+            {
+                if (Unit* rider = GetCaster()->GetCharmer())
+                {
+                    if (Player* plrTarget = GetHitPlayer())
+                    {
+                        if (plrTarget->HasAura(SPELL_ON_TOURNAMENT_MOUNT) && plrTarget->GetVehicleBase())
+                            rider->CastSpell(plrTarget, SPELL_MOUNTED_DUEL, true);
+                    }
+                    else if (Unit* unitTarget = GetHitUnit())
+                    {
+                        if (unitTarget->GetCharmer() && unitTarget->GetCharmer()->GetTypeId() == TYPEID_PLAYER && unitTarget->GetCharmer()->HasAura(SPELL_ON_TOURNAMENT_MOUNT))
+                            rider->CastSpell(unitTarget->GetCharmer(), SPELL_MOUNTED_DUEL, true);
+                    }
+                }
+            }
+
+            void Register()
+            {
+                OnEffectHitTarget += SpellEffectFn(spell_gen_tournament_duel_SpellScript::HandleScriptEffect, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
+            }
+        };
+
+        SpellScript* GetSpellScript() const
+        {
+            return new spell_gen_tournament_duel_SpellScript();
         }
 };
 
@@ -2408,68 +2464,6 @@ class spell_gen_tournament_pennant : public SpellScriptLoader
         AuraScript* GetAuraScript() const
         {
             return new spell_gen_tournament_pennantAuraScript();
-        }
-};
-
-enum MountedDuelSpells
-{
-    SPELL_ON_TOURNAMENT_MOUNT = 63034,
-    SPELL_MOUNTED_DUEL        = 62875,
-};
-
-class spell_gen_tournament_duel : public SpellScriptLoader
-{
-    public:
-        spell_gen_tournament_duel() : SpellScriptLoader("spell_gen_tournament_duel") { }
-
-        class spell_gen_tournament_duel_SpellScript : public SpellScript
-        {
-            PrepareSpellScript(spell_gen_tournament_duel_SpellScript);
-
-            bool Validate(SpellInfo const* /*spellEntry*/)
-            {
-                if (!sSpellMgr->GetSpellInfo(SPELL_ON_TOURNAMENT_MOUNT))
-                    return false;
-                if (!sSpellMgr->GetSpellInfo(SPELL_MOUNTED_DUEL))
-                    return false;
-                return true;
-            }
-
-            void HandleScriptEffect(SpellEffIndex effIndex)
-            {
-                Unit* caster = GetCaster();
-                Unit* target = GetTargetUnit();
-                Unit* player = GetCaster()->GetCharmer();
-
-                if (!caster || !target || !player)
-                    return;
-
-                if (target->GetTypeId() == TYPEID_PLAYER)
-                {
-
-                    if (!target->HasAura(SPELL_ON_TOURNAMENT_MOUNT) || !target->GetVehicleBase())
-                        return;
-
-                    player->CastSpell(target, SPELL_MOUNTED_DUEL, true);
-                }
-                else if (target->GetTypeId() == TYPEID_UNIT)
-                {
-                    if (!target->GetCharmer() || target->GetCharmer()->GetTypeId() != TYPEID_PLAYER || !target->GetCharmer()->HasAura(SPELL_ON_TOURNAMENT_MOUNT))
-                        return;
-
-                    player->CastSpell(target->GetCharmer(), SPELL_MOUNTED_DUEL, true);
-                }
-            }
-
-            void Register()
-            {
-                OnEffectHit += SpellEffectFn(spell_gen_tournament_duel_SpellScript::HandleScriptEffect, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
-            }
-        };
-
-        SpellScript* GetSpellScript() const
-        {
-            return new spell_gen_tournament_duel_SpellScript();
         }
 };
 
