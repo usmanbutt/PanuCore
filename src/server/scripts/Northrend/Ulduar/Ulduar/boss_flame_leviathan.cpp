@@ -1952,7 +1952,7 @@ class spell_freyas_ward_summon : public SpellScriptLoader
 
             void HandleSummon(SpellEffIndex effIndex)
             {
-<<<<<<< HEAD
+
                 PreventHitDefaultEffect(effIndex);
 
                 if (Unit* caster = GetCaster())
@@ -1960,20 +1960,6 @@ class spell_freyas_ward_summon : public SpellScriptLoader
                         if (Creature* leviathan = ObjectAccessor::GetCreature(*caster, instance->GetData64(BOSS_LEVIATHAN)))
                             leviathan->SummonCreature(NPC_WARD_OF_LIFE, GetTargetDest()->GetPositionX(), GetTargetDest()->GetPositionY(),
                             GetTargetDest()->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_DESPAWN, 3000);
-=======
-                targets.remove_if(FlameLeviathanPursuedTargetSelector(GetCaster()));
-                if (targets.empty())
-                {
-                    if (Creature* caster = GetCaster()->ToCreature())
-                        caster->AI()->EnterEvadeMode();
-                }
-                else
-                {
-                    //! In the end, only one target should be selected
-                    _target = SelectRandomContainerElement(targets);
-                    FilterTargetsSubsequently(targets);
-                }
->>>>>>> upstream/master
             }
 
             void Register()
@@ -2166,6 +2152,5 @@ void AddSC_boss_flame_leviathan()
     new spell_freyas_ward_summon();
     new spell_flame_leviathan_flame_vents();
     new spell_shield_generator();
-    new spell_pursue();
     new spell_vehicle_throw_passenger();
 }
