@@ -779,7 +779,7 @@ int WorldSocket::HandleAuthSession (WorldPacket& recvPacket)
     LocaleConstant locale;
     std::string account;
     bool isPremium = false;
-    SHA1Hash sha1;
+    SHA1Hash sha;
     BigNumber v, s, g, N;
     WorldPacket packet, SendAddonPacked;
 
