@@ -1,19 +1,24 @@
-# --------------------------------------------------------
-# Host:                         127.0.0.1
-# Server version:               5.5.16
-# Server OS:                    Win64
-# HeidiSQL version:             6.0.0.3603
-# Date/time:                    2011-11-01 14:17:06
-# --------------------------------------------------------
+-- MySQL dump 10.13  Distrib 5.5.19, for Win64 (x86)
+--
+-- Host: localhost    Database: auth
+-- ------------------------------------------------------
+-- Server version	5.5.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `account`
+--
 
 # Dumping structure for table auth.account
 DROP TABLE IF EXISTS `account`;
-CREATE TABLE IF NOT EXISTS `account` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `account` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Identifier',
   `username` varchar(32) NOT NULL DEFAULT '',
   `sha_pass_hash` varchar(40) NOT NULL DEFAULT '',
@@ -30,16 +35,45 @@ CREATE TABLE IF NOT EXISTS `account` (
   `expansion` tinyint(3) unsigned NOT NULL DEFAULT '2',
   `mutetime` bigint(40) NOT NULL DEFAULT '0',
   `locale` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `os` varchar(4) NOT NULL DEFAULT '',
   `recruiter` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_username` (`username`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='Account System';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 # Dumping data for table auth.account: 0 rows
 DELETE FROM `account`;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
+--
+-- Table structure for table `account_access`
+--
+
+DROP TABLE IF EXISTS `account_access`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `account_access` (
+  `id` int(11) unsigned NOT NULL,
+  `gmlevel` tinyint(3) unsigned NOT NULL,
+  `RealmID` int(11) NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`,`RealmID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account_access`
+--
+
+LOCK TABLES `account_access` WRITE;
+/*!40000 ALTER TABLE `account_access` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account_access` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `account_banned`
+--
 
 # Dumping structure for table auth.account_access
 DROP TABLE IF EXISTS `account_access`;
@@ -58,7 +92,13 @@ DELETE FROM `account_access`;
 
 # Dumping structure for table auth.account_banned
 DROP TABLE IF EXISTS `account_banned`;
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS `account_banned` (
+=======
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `account_banned` (
+>>>>>>> upstream/master
   `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Account id',
   `bandate` bigint(40) NOT NULL DEFAULT '0',
   `unbandate` bigint(40) NOT NULL DEFAULT '0',
@@ -93,7 +133,13 @@ DELETE FROM `account_premium`;
 
 # Dumping structure for table auth.ip_banned
 DROP TABLE IF EXISTS `ip_banned`;
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS `ip_banned` (
+=======
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ip_banned` (
+>>>>>>> upstream/master
   `ip` varchar(32) NOT NULL DEFAULT '127.0.0.1',
   `bandate` bigint(40) NOT NULL,
   `unbandate` bigint(40) NOT NULL,
@@ -125,7 +171,9 @@ DELETE FROM `logs`;
 
 # Dumping structure for table auth.realmcharacters
 DROP TABLE IF EXISTS `realmcharacters`;
-CREATE TABLE IF NOT EXISTS `realmcharacters` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `realmcharacters` (
   `realmid` int(11) unsigned NOT NULL DEFAULT '0',
   `acctid` bigint(20) unsigned NOT NULL,
   `numchars` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -141,7 +189,9 @@ DELETE FROM `realmcharacters`;
 
 # Dumping structure for table auth.realmlist
 DROP TABLE IF EXISTS `realmlist`;
-CREATE TABLE IF NOT EXISTS `realmlist` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `realmlist` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '',
   `address` varchar(32) NOT NULL DEFAULT '127.0.0.1',
@@ -159,8 +209,7 @@ CREATE TABLE IF NOT EXISTS `realmlist` (
 # Dumping data for table auth.realmlist: 1 rows
 DELETE FROM `realmlist`;
 /*!40000 ALTER TABLE `realmlist` DISABLE KEYS */;
-INSERT INTO `realmlist` (`id`, `name`, `address`, `port`, `icon`, `color`, `timezone`, `allowedSecurityLevel`, `population`, `gamebuild`) VALUES
-	(1, 'Trinity', '127.0.0.1', 8085, 1, 0, 1, 0, 0, 12340);
+INSERT INTO `realmlist` VALUES (1,'Trinity','127.0.0.1',8085,1,0,1,0,0,12340);
 /*!40000 ALTER TABLE `realmlist` ENABLE KEYS */;
 
 
@@ -183,3 +232,8 @@ DELETE FROM `uptime`;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-02-19 13:18:35

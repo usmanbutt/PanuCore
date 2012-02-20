@@ -21,6 +21,10 @@
  * Scriptnames of files in this file should be prefixed with "spell_item_".
  */
 
+#include "ScriptMgr.h"
+#include "ScriptedCreature.h"
+#include "SpellScript.h"
+#include "SpellAuraEffects.h"
 #include "SkillDiscovery.h"
 
 // Generic script for handling item dummy effects which trigger another spell.
@@ -1504,7 +1508,8 @@ class spell_item_complete_raptor_capture : public SpellScriptLoader
 
 enum ImpaleLeviroth
 {
-    NPC_LEVIROTH    = 26452,
+    NPC_LEVIROTH                = 26452,
+    SPELL_LEVIROTH_SELF_IMPALE  = 49882
 };
 
 class spell_item_impale_leviroth : public SpellScriptLoader
@@ -1516,11 +1521,6 @@ class spell_item_impale_leviroth : public SpellScriptLoader
         {
             PrepareSpellScript(spell_item_impale_leviroth_SpellScript);
 
-            bool Load()
-            {
-                return GetHitCreature()->GetEntry() == NPC_LEVIROTH;
-            }
-
             bool Validate(SpellInfo const* /*spell*/)
             {
                 if (!sObjectMgr->GetCreatureTemplate(NPC_LEVIROTH))
@@ -1530,10 +1530,11 @@ class spell_item_impale_leviroth : public SpellScriptLoader
 
             void HandleDummy(SpellEffIndex /* effIndex */)
             {
-                Unit* caster = GetCaster();
-                if (Unit* target = GetHitCreature())
-                    if (target->HealthBelowPct(95))
-                        caster->DealDamage(target, target->CountPctFromMaxHealth(93));
+                Unit* target = GetHitCreature();
+                if (!target || target->GetEntry() != NPC_LEVIROTH || !target->HealthBelowPct(95))
+                    return;
+
+                target->CastSpell(target, SPELL_LEVIROTH_SELF_IMPALE, true);
             }
 
             void Register()

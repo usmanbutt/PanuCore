@@ -22,6 +22,13 @@
 #include <map>
 #include "Cryptography/BigNumber.h"
 
+enum WardenActions
+{
+    WARDEN_ACTION_LOG,
+    WARDEN_ACTION_KICK,
+    WARDEN_ACTION_BAN
+};
+
 struct WardenCheck
 {
     uint8 Type;
@@ -29,6 +36,7 @@ struct WardenCheck
     uint32 Address;                                         // PROC_CHECK, MEM_CHECK, PAGE_CHECK
     uint8 Length;                                           // PROC_CHECK, MEM_CHECK, PAGE_CHECK
     std::string Str;                                        // LUA, MPQ, DRIVER
+    enum WardenActions Action;
 };
 
 struct WardenCheckResult
@@ -51,8 +59,8 @@ class WardenCheckMgr
         WardenCheckResult* GetWardenResultById(uint32 Id);
 
         uint32 InternalDataID;
-        std::vector<uint32> MemChecksIdPool;
-        std::vector<uint32> OtherChecksIdPool;
+        std::vector<uint16> MemChecksIdPool;
+        std::vector<uint16> OtherChecksIdPool;
 
         void LoadWardenChecks();
 

@@ -1692,12 +1692,19 @@ DELETE FROM `lag_reports`;
 
 # Dumping structure for table characters.lfg_data
 DROP TABLE IF EXISTS `lfg_data`;
-CREATE TABLE IF NOT EXISTS `lfg_data` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lfg_data` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `dungeon` int(10) unsigned NOT NULL DEFAULT '0',
   `state` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='LFG Data';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lfg_data`
+--
 
 # Dumping data for table characters.lfg_data: ~0 rows (approximately)
 DELETE FROM `lfg_data`;
@@ -1929,6 +1936,32 @@ DELETE FROM `reserved_name`;
 /*!40000 ALTER TABLE `reserved_name` DISABLE KEYS */;
 /*!40000 ALTER TABLE `reserved_name` ENABLE KEYS */;
 
+--
+-- Table structure for table `warden_action`
+--
+
+DROP TABLE IF EXISTS `warden_action`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `warden_action` (
+  `wardenId` smallint(5) unsigned NOT NULL,
+  `action` tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (`wardenId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `warden_action`
+--
+
+LOCK TABLES `warden_action` WRITE;
+/*!40000 ALTER TABLE `warden_action` DISABLE KEYS */;
+/*!40000 ALTER TABLE `warden_action` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `worldstates`
+--
 
 # Dumping structure for table characters.worldstates
 DROP TABLE IF EXISTS `worldstates`;
