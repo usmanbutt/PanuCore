@@ -723,13 +723,9 @@ public:
                         case 18:
                             if (Creature* pJaina = Unit::GetCreature(*me, uiJainaGUID))
                             {
-<<<<<<< HEAD
-                                me->SetUInt64Value(UNIT_FIELD_TARGET, uiJainaGUID);
-                                pJaina->AddUnitMovementFlag(MOVEMENTFLAG_WALKING);
-=======
+
                                 me->SetTarget(uiJainaGUID);
                                 pJaina->SetWalk(true);
->>>>>>> upstream/master
                                 pJaina->GetMotionMaster()->MovePoint(0, 1794.357f, 1272.183f, 140.558f);
                             }
                             JumpToNextStep(1000);
@@ -794,13 +790,9 @@ public:
                             me->SetUInt64Value(UNIT_FIELD_TARGET, uiCitymenGUID[0]);
                             if (Creature* pCityman = Unit::GetCreature(*me, uiCitymenGUID[0]))
                             {
-<<<<<<< HEAD
-                                pCityman->SetUInt64Value(UNIT_FIELD_TARGET, me->GetGUID());
-                                pCityman->AddUnitMovementFlag(MOVEMENTFLAG_WALKING);
-=======
+
                                 pCityman->SetTarget(me->GetGUID());
                                 pCityman->SetWalk(true);
->>>>>>> upstream/master
                                 pCityman->GetMotionMaster()->MovePoint(0, 2088.625f, 1279.191f, 140.743f);
                             }
                             JumpToNextStep(2000);
