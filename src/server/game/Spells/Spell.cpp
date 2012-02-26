@@ -1700,8 +1700,10 @@ void Spell::SelectImplicitTrajTargets()
                 DEBUG_TRAJ(sLog->outError("Initial %f %f %f %f %f", x, y, z, distSq, sizeSq);)
             }
         }
+        Position trajDst;
+        trajDst.Relocate(x, y, z, m_caster->GetOrientation());
+        m_targets.ModDst(trajDst);
 
-<<<<<<< HEAD
         caster->DealSpellDamage(&damageInfo, true);
 
         // Haunt
@@ -1735,11 +1737,7 @@ void Spell::SelectImplicitTrajTargets()
             if (unitTarget->ToCreature()->IsAIEnabled)
                 unitTarget->ToCreature()->AI()->AttackStart(m_caster);
         }
-=======
-        Position trajDst;
-        trajDst.Relocate(x, y, z, m_caster->GetOrientation());
-        m_targets.ModDst(trajDst);
->>>>>>> upstream/master
+
     }
 }
 
