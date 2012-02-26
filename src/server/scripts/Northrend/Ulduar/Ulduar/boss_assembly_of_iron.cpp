@@ -809,24 +809,11 @@ class boss_stormcaller_brundir : public CreatureScript
                 _forceLand = false;
                 _couldNotDoThat = true;
                 me->RemoveAllAuras();
-<<<<<<< HEAD
                 me->RemoveLootMode(LOOT_MODE_DEFAULT);
-                me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_STUN, false);
-                if (instance)
-                    RespawnEncounter(instance, me);
-
-                me->SetSpeed(MOVE_RUN, 1.42857f);
-                if (me->HasUnitMovementFlag(MOVEMENTFLAG_LEVITATING))
-                {
-                    me->RemoveUnitMovementFlag(MOVEMENTFLAG_LEVITATING);
-                    me->SendMovementFlagUpdate();
-                }
-=======
                 me->SetLevitate(false);
                 me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_INTERRUPT, false);  // Should be interruptable unless overridden by spell (Overload)
                 me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_STUN, false);   // Reset immumity, Brundir should be stunnable by default
                 RespawnEncounter(instance, me);
->>>>>>> upstream/master
             }
 
             void EnterCombat(Unit* who)
@@ -1019,10 +1006,7 @@ class boss_stormcaller_brundir : public CreatureScript
                             events.ScheduleEvent(EVENT_OVERLOAD, urand(60000, 80000), 1);
                             break;
                         case EVENT_LIGHTNING_WHIRL:
-<<<<<<< HEAD
-                            DoCast(RAID_MODE(SPELL_LIGHTNING_WHIRL, SPELL_LIGHTNING_WHIRL_H));
-                            events.ScheduleEvent(EVENT_LIGHTNING_WHIRL, urand(20000, 40000), 1);
-=======
+
                             DoCast(SPELL_LIGHTNING_WHIRL);
                             events.ScheduleEvent(EVENT_LIGHTNING_WHIRL, urand(15000, 20000));
                             break;
@@ -1038,13 +1022,10 @@ class boss_stormcaller_brundir : public CreatureScript
                             events.ScheduleEvent(EVENT_FLIGHT, 2500);
                             events.ScheduleEvent(EVENT_ENDFLIGHT, 32500);
                             events.ScheduleEvent(EVENT_LIGHTNING_TENDRILS, 90000);
->>>>>>> upstream/master
                             break;
                         case EVENT_THREAT_WIPE:
                             DoResetThreat();
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
-<<<<<<< HEAD
-=======
                                 me->GetMotionMaster()->MovePoint(0, target->GetPositionX(), target->GetPositionY(), FINAL_FLIGHT_Z);
                             events.ScheduleEvent(EVENT_FLIGHT, 6000);
                             break;
@@ -1071,7 +1052,6 @@ class boss_stormcaller_brundir : public CreatureScript
                             break;
                         case EVENT_MOVE_POSITION:
                             if (me->IsWithinMeleeRange(me->getVictim()))
->>>>>>> upstream/master
                             {
                                 me->AddThreat(target, 99999.9f);
                                 me->GetMotionMaster()->MovePoint(POINT_CHASE, target->GetPositionX(), target->GetPositionY(), 435.0f);
