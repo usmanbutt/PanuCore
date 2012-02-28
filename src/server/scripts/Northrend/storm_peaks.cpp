@@ -1216,7 +1216,6 @@ void AddSC_storm_peaks()
     new npc_agnetta_tyrsdottar();
     new npc_frostborn_scout();
     new npc_thorim();
-    new npc_goblin_prisoner();
     new npc_victorious_challenger();
     new npc_loklira_crone();
     new npc_injured_goblin();
@@ -1231,5 +1230,4 @@ void AddSC_storm_peaks()
     new npc_dead_irongiant();
     new npc_snowblind_follower();
     new npc_exhausted_vrykul;
-    new npc_icefang;
 }
