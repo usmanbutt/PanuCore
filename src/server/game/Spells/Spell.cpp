@@ -1705,6 +1705,7 @@ void Spell::SelectImplicitTrajTargets()
         m_targets.ModDst(trajDst);
 
        }
+}
 
 void Spell::SelectEffectTypeImplicitTargets(uint8 effIndex)
 {
