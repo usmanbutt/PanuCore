@@ -592,10 +592,6 @@ class npc_flame_leviathan_defense_cannon : public CreatureScript
         {
             npc_flame_leviathan_defense_cannonAI(Creature* creature) : ScriptedAI(creature)
             {
-                ASSERT(vehicle);
-                me->SetReactState(REACT_PASSIVE);
-                me->SetDisplayId(me->GetCreatureTemplate()->Modelid2);
-                instance = creature->GetInstanceScript();
             }
 
             void Reset()
